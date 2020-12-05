@@ -1,4 +1,11 @@
+/*  GIFOS Stylesheet  */
 /* Hecho Mobile First */
+
+/* Imports */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;700;900&display=swap");
+
+/* Variables */
 
 $col-pri: #572ee5;
 $col-sec: #50e3c2;
@@ -7,6 +14,8 @@ $gris: #f3f5f8;
 
 $interlineado: 1.7;
 
+/* Mixins */
+
 @mixin centrarFlex($direccion, $centradojus, $centradoali) {
   display: flex;
   flex-direction: $direccion;
@@ -14,112 +23,115 @@ $interlineado: 1.7;
   align-items: $centradoali;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;700;900&display=swap");
+/* Responsive */
 
 * {
   margin: 0;
   padding: 0;
+}
 
-  body {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-      font-family: Montserrat;
-      font-weight: 700;
-      color: $col-pri;
+/*  MOBILE   */
+/* Max 480px */
+
+body {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: Montserrat;
+    font-weight: 700;
+    color: $col-pri;
+  }
+
+  h1 {
+    font-size: 25px;
+
+    em {
+      font-style: inherit;
+      color: $col-sec;
     }
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  p,
+  span,
+  a {
+    font-size: 16px;
+    font-family: Roboto;
+    font-weight: 400;
+    color: $negro;
+  }
+
+  nav {
+    border-top: 5px solid $col-pri;
+    @include centrarFlex(row, space-between, stretch);
+    padding: 30px 20px;
+
+    #nav-elem {
+      display: none;
+    }
+  }
+
+  header {
+    padding: 15px 0;
 
     h1 {
-      font-size: 25px;
-
-      em {
-        font-style: inherit;
-        color: $col-sec;
-      }
-    }
-
-    h2 {
-      font-size: 20px;
-    }
-
-    h3 {
-      font-size: 16px;
-    }
-
-    h4 {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    p,
-    span,
-    a {
-      font-size: 16px;
-      font-family: Roboto;
-      font-weight: 400;
-      color: $negro;
-    }
-
-    nav {
-      border-top: 5px solid $col-pri;
-      @include centrarFlex(row, space-between, stretch);
-      padding: 30px 20px;
-
-      #nav-elem {
-        display: none;
-      }
-    }
-
-    header {
-      padding: 15px 0;
-
-      h1 {
-        text-align: center;
-        padding: 0 35px;
-      }
-
-      #header-bus {
-        @include centrarFlex(column, center, center);
-
-        img {
-          max-width: 230px;
-        }
-
-        padding: 30px 0 15px 0;
-      }
-
-      #header-tre {
-        text-align: center;
-        padding: 20px 70px;
-        line-height: $interlineado;
-      }
-    }
-
-    section {
-      background-color: $gris;
       text-align: center;
-      padding: 30px 0;
-
-      #section-tit {
-        line-height: $interlineado;
-        padding: 0 70px 30px 70px;
-      }
+      padding: 0 35px;
     }
 
-    footer {
-      border-bottom: 5px solid $col-pri;
-      @include centrarFlex(column, stretch, stretch);
+    #header-bus {
+      @include centrarFlex(column, center, center);
+
+      img {
+        max-width: 230px;
+      }
+
+      padding: 30px 0 15px 0;
+    }
+
+    #header-tre {
       text-align: center;
-      padding: 30px 20px;
+      padding: 20px 70px;
+      line-height: $interlineado;
+    }
+  }
 
-      #footer-com {
-        padding: 20px 0 50px 0;
+  section {
+    background-color: $gris;
+    text-align: center;
+    padding: 30px 0;
 
-        img {
-          padding: 0 7px;
-        }
+    #section-tit {
+      line-height: $interlineado;
+      padding: 0 70px 30px 70px;
+    }
+  }
+
+  footer {
+    border-bottom: 5px solid $col-pri;
+    @include centrarFlex(column, stretch, stretch);
+    text-align: center;
+    padding: 30px 20px;
+
+    #footer-com {
+      padding: 20px 0 50px 0;
+
+      img {
+        padding: 0 7px;
       }
     }
   }
