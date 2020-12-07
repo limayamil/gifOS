@@ -204,6 +204,10 @@ body footer #footer-com-ico img {
   body header #header-bus img {
     max-width: 390px;
   }
+  body section #section-tre-car img {
+    width: 360px;
+    height: 275px;
+  }
   body footer {
     display: -webkit-box;
     display: -ms-flexbox;

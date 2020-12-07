@@ -206,6 +206,15 @@ body {
       }
     }
 
+    section {
+      #section-tre-car {
+        img {
+          width: 360px;
+          height: 275px;
+        }
+      }
+    }
+
     footer {
       @include centrarFlex(row, space-between, stretch);
       max-width: 90vw;
