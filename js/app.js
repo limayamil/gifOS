@@ -12,6 +12,7 @@ let searchSuggestionsList = document.getElementById("search-sug-list");
 let searchResults = document.getElementById("section-res");
 let searchResultsGallery = document.getElementById("section-res-gal");
 let searchResultsTitle = document.getElementById("section-res-tit");
+let searchResultsInfo = document.getElementById("section-res-info");
 
 const fetchTrendingGIFs = (giphyAPI) => {
     fetch(giphyAPI)
@@ -86,16 +87,46 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
         })
         .then((json) => {
             console.log(json);
-            searchSuggestionsList.innerHTML = "";
-            searchResults.classList.remove("hide");
-            for (i = 0; i < 12; i++){
-                let divGif = document.createElement("div");
-                let gif = document.createElement("img");
-                divGif.classList.add('fetched-gif');
-                gif.src = json.data[i].images.downsized.url;
-                console.log(gif);
-                divGif.appendChild(gif);
-                searchResultsGallery.appendChild(divGif);
+            searchResultsGallery.innerHTML = "";
+            searchResultsGallery.classList.add("hide");
+            searchResultsInfo.classList.add("hide");
+            searchResults.classList.add("hide");
+                if (json.data.length > 0) {
+                    searchSuggestionsList.innerHTML = "";
+                    searchResults.classList.remove("hide");
+                    searchResultsGallery.classList.remove("hide");
+                    for (i = 0; i < 12; i++){
+                        let divGif = document.createElement("div");
+                        let divOverlay = document.createElement("div");
+
+                        let usuario = json.data[i].username;
+                        let titulo = json.data[i].title
+                        if (usuario === "") {
+                            usuario = "Anónimo";
+                        }
+
+                        if (titulo === "") {
+                            titulo = "Sin título";
+                        }
+
+                        divGif.classList.add('fetched-gif');
+                        divOverlay.classList.add('fetched-gif-overlay');
+                        divOverlay.innerHTML = "<div class='fetched-gif-info'><p class='fetched-gif-user'>" + usuario +"</p><p class='fetched-gif-title'>" + titulo + "</p></div>"
+                        divGif.style.backgroundImage = "url(" + json.data[i].images.downsized.url + ")";
+                        divGif.appendChild(divOverlay);
+                        searchResultsGallery.appendChild(divGif);
+                    }
+            } else if (json.data.length === 0) {
+                searchResults.classList.remove("hide");
+                searchResultsInfo.classList.remove("hide");
+                searchResultsGallery.innerHTML = "";
+                let imgSinResultados = document.createElement("img");
+                imgSinResultados.src = "img/icon-busqueda-sin-resultado.svg"
+                let titSinResultados = document.createElement("h3");
+                titSinResultados.classList.add("section-res-info-tit");
+                titSinResultados.textContent = "Intenta con otra búsqueda";
+                searchResultsInfo.appendChild(imgSinResultados);
+                searchResultsInfo.appendChild(titSinResultados);
             }
     });
 }

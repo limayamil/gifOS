@@ -110,7 +110,7 @@ body {
   }
 
   .hide {
-    display: none;
+    display: none !important;
   }
 
   nav {
@@ -202,17 +202,30 @@ body {
   }
 
   section {
-    background-color: $gris;
     text-align: center;
     padding: 30px 0;
 
-    #section-tit {
-      line-height: $interlineado;
-      padding: 0 70px 30px 70px;
+    &#section-tre {
+      background-color: $gris;
+
+      #section-tit {
+        line-height: $interlineado;
+        padding: 0 70px 30px 70px;
+      }
     }
 
     #section-res-tit {
       font-size: 36px;
+      margin-bottom: 60px;
+    }
+
+    #section-res-info {
+      margin: 95px 0;
+      h3 {
+        text-align: center;
+        color: $col-sec;
+        margin-top: 25px;
+      }
     }
 
     #section-res-gal {
@@ -224,6 +237,48 @@ body {
       gap: 25px;
       justify-content: center;
       align-content: center;
+
+      .fetched-gif {
+        width: 260px;
+        height: 200px;
+        background-size: cover;
+        overflow: hidden;
+        position: relative;
+
+        &:hover .fetched-gif-overlay {
+          top: 0;
+        }
+
+        .fetched-gif-overlay {
+          background-color: rgba(87, 46, 229, 0.7);
+          height: 100%;
+          width: 100%;
+          top: -100%;
+          position: absolute;
+          transition: 0.5s ease;
+          @include centrarFlex(column, flex-end, flex-start);
+
+          .fetched-gif-info {
+            @include centrarFlex(column, flex-end, flex-start);
+            padding: 14px;
+            height: 100%;
+
+            .fetched-gif-user {
+              font-size: 14px;
+            }
+
+            .fetched-gif-title {
+              font-size: 16px;
+              font-weight: bold;
+              text-align: left;
+            }
+          }
+
+          p {
+            color: #fff;
+          }
+        }
+      }
 
       img {
         width: 260px;
