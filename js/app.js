@@ -50,7 +50,9 @@ const fetchTrendingSearchTerms = (giphyAPI) => {
 }
 
 const searchSuggestion = searchTerm => {
-    alert(searchTerm);
+    fetchSearchGIFs(giphySearchGIFs, searchTerm);
+    searchBar.value = searchTerm;
+    searchResultsTitle.textContent = searchTerm;
 }
 
 const fetchSearchSuggestions = (giphyAPI, searchTerm) => {
