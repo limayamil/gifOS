@@ -3,7 +3,7 @@
 
 /* Imports */
 
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Roboto:wght@400;700;900&display=swap");
 
 /* Variables */
 
@@ -31,9 +31,11 @@ $interlineado: 1.7;
 }
 
 /*  MOBILE   */
-/* Max 480px */
+/* max 480px */
 
 body {
+  border-top: 5px solid $col-pri;
+  border-bottom: 5px solid $col-pri;
   h1,
   h2,
   h3,
@@ -76,12 +78,15 @@ body {
   }
 
   nav {
-    border-top: 5px solid $col-pri;
     @include centrarFlex(row, space-between, stretch);
     padding: 30px 20px;
 
     #nav-elem {
       display: none;
+
+      a {
+        font-family: Montserrat, sans-serif;
+      }
     }
   }
 
@@ -122,16 +127,96 @@ body {
   }
 
   footer {
-    border-bottom: 5px solid $col-pri;
     @include centrarFlex(column, stretch, stretch);
     text-align: center;
     padding: 30px 20px;
 
-    #footer-com {
+    #footer-com-ico {
       padding: 20px 0 50px 0;
 
       img {
         padding: 0 7px;
+      }
+    }
+  }
+}
+
+/*  DESKTOP  */
+
+@media all and (min-width: 1024px) {
+  body {
+    h1 {
+      font-size: 34px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    h4 {
+      font-size: 16px;
+    }
+
+    nav {
+      max-width: 90vw;
+      margin: 0 auto;
+      #nav-ham {
+        display: none;
+      }
+
+      #nav-elem {
+        @include centrarFlex(row, center, center);
+
+        a {
+          text-decoration: none;
+          color: $col-pri;
+          font-weight: bold;
+          font-size: 14px;
+          margin: 0 25px;
+          text-transform: uppercase;
+        }
+
+        #nav-elem-agr {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 300;
+          font-size: 32px;
+          border: 1px solid $col-pri;
+          border-radius: 50%;
+          width: 54px;
+          height: 54px;
+          padding: 0px;
+          margin-right: 0;
+        }
+      }
+    }
+
+    header {
+      #header-bus {
+        img {
+          max-width: 390px;
+        }
+      }
+    }
+
+    footer {
+      @include centrarFlex(row, space-between, stretch);
+      max-width: 90vw;
+      margin: 0 auto;
+
+      #footer-com {
+        @include centrarFlex(row, stretch, stretch);
+
+        #footer-com-ico {
+          padding: 0 0 0 20px;
+        }
       }
     }
   }
