@@ -13,6 +13,27 @@
   outline: none;
 }
 
+/* Elimina la X de la barra en IE */
+input[type=search]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+input[type=search]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Elimina la X de la barra en Webkit */
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration {
+  display: none;
+}
+
 /*  MOBILE   */
 /* max 480px */
 body {
@@ -115,10 +136,27 @@ body header #search-div {
   border-radius: 25px;
   border: 1px solid #572ee5;
   font-size: 16px;
-  padding: 10px 25px;
+  padding: 15px 20px;
   width: 520px;
 }
-body header #search-div input {
+body header #search-div .search-bar-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+body header #search-div .search-bar-div .hide {
+  display: none;
+}
+body header #search-div .search-bar-div i {
+  color: #572ee5;
+}
+body header #search-div .search-bar-div i:first-child {
+  padding-right: 10px;
+}
+body header #search-div .search-bar-div i:last-child {
+  padding-left: 10px;
+}
+body header #search-div .search-bar-div input {
   border: none;
   background-color: rgba(0, 0, 0, 0);
   width: 100%;
@@ -129,6 +167,9 @@ body header #search-div #search-sug-list {
 }
 body header #search-div #search-sug-list li {
   padding: 7px 0;
+}
+body header #search-div #search-sug-list li i {
+  padding-right: 10px;
 }
 body header #search-div #search-sug-list li:first-child {
   border-top: 1px solid #9cafc3;

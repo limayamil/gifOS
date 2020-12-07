@@ -5,6 +5,7 @@ const giphySearchSuggestions = "https://api.giphy.com/v1/gifs/search/tags?api_ke
 let trendingGIFsDiv = document.getElementById("section-tre-car");
 let trendingTopicsDiv = document.getElementById("header-tre-top");
 let searchBar = document.getElementById("search-bar");
+let searchBarCross = document.getElementById("search-bar-cross");
 let searchSuggestionsList = document.getElementById("search-sug-list");
 
 const fetchTrendingGIFs = (giphyAPI) => {
@@ -54,7 +55,7 @@ const fetchSearchSuggestions = (giphyAPI, searchTerm) => {
         searchSuggestionsList.innerHTML = "";
         for (i = 0; i < json.data.length; i++){
             let suggestionItem = document.createElement("li");
-            suggestionItem.textContent = json.data[i].name;
+            suggestionItem.innerHTML = '<i class="fas fa-search"></i>' + json.data[i].name;
             searchSuggestionsList.appendChild(suggestionItem);
         }
     });
@@ -63,9 +64,22 @@ const fetchSearchSuggestions = (giphyAPI, searchTerm) => {
 fetchTrendingGIFs(giphyTrendingGIFsAPI);
 fetchTrendingSearchTerms(giphyTrendingSearchTerms);
 
-const updateAutocomplete = () => {
+const changeSearchBar = () => {
     let searchTerm = searchBar.value;
     fetchSearchSuggestions(giphySearchSuggestions, searchTerm);
+
+    if (searchTerm.length > 0){
+        searchBarCross.classList.remove('hide');
+    } else {
+        searchBarCross.classList.add('hide');
+    }
 }
 
-searchBar.addEventListener('input', updateAutocomplete);
+const clearSearchBar = () => {
+    searchBar.value = "";
+    searchBarCross.classList.add('hide');
+    searchSuggestionsList.innerHTML = "";
+}
+
+searchBar.addEventListener('input', changeSearchBar);
+searchBarCross.addEventListener('click', clearSearchBar);

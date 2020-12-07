@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GIFOS</title>
     <link rel="stylesheet" href="style/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <nav>
@@ -25,7 +31,11 @@
           alt="Buscá en GIFOS en el campo siguiente"
         />
         <div id="search-div">
-          <input type="search" name="" id="search-bar" />
+          <div class="search-bar-div">
+            <i class="fas fa-search"></i>
+            <input type="search" name="" id="search-bar" />
+            <i class="fas fa-times hide" id="search-bar-cross"></i>
+          </div>
           <ul id="search-sug-list"></ul>
         </div>
       </div>
