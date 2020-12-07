@@ -14,6 +14,7 @@ $gris: #f3f5f8;
 $gris-oscuro: #9cafc3;
 
 $interlineado: 1.7;
+$anchomax: 70vw;
 
 /* Mixins */
 
@@ -82,6 +83,7 @@ body {
 
   h2 {
     font-size: 20px;
+    text-transform: capitalize;
   }
 
   h3 {
@@ -105,6 +107,10 @@ body {
     font-family: Roboto;
     font-weight: 400;
     color: $negro;
+  }
+
+  .hide {
+    display: none;
   }
 
   nav {
@@ -154,26 +160,24 @@ body {
       .search-bar-div {
         display: flex;
 
-        .hide {
-          display: none;
-        }
-
         i {
-          color: $col-pri;
-
           &:first-child {
             padding-right: 10px;
+            color: $gris-oscuro;
           }
 
           &:last-child {
             padding-left: 10px;
+            color: $col-pri;
           }
         }
-
-        input {
-          border: none;
-          background-color: rgba(0, 0, 0, 0);
+        form {
           width: 100%;
+          input {
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            width: 100%;
+          }
         }
       }
 
@@ -205,6 +209,26 @@ body {
     #section-tit {
       line-height: $interlineado;
       padding: 0 70px 30px 70px;
+    }
+
+    #section-res-tit {
+      font-size: 36px;
+    }
+
+    #section-res-gal {
+      max-width: $anchomax;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 25px;
+      justify-content: center;
+      align-content: center;
+
+      img {
+        width: 260px;
+        height: 200px;
+      }
     }
   }
 
@@ -246,7 +270,7 @@ body {
     }
 
     nav {
-      max-width: 90vw;
+      max-width: $anchomax;
       margin: 0 auto;
       #nav-ham {
         display: none;
@@ -299,7 +323,7 @@ body {
 
     footer {
       @include centrarFlex(row, space-between, stretch);
-      max-width: 90vw;
+      max-width: $anchomax;
       margin: 0 auto;
 
       #footer-com {

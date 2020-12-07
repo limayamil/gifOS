@@ -58,6 +58,7 @@ body h1 em {
 }
 body h2 {
   font-size: 20px;
+  text-transform: capitalize;
 }
 body h3 {
   font-size: 16px;
@@ -78,6 +79,9 @@ body input {
   font-family: Roboto;
   font-weight: 400;
   color: #000000;
+}
+body .hide {
+  display: none;
 }
 body nav {
   display: -webkit-box;
@@ -144,19 +148,18 @@ body header #search-div .search-bar-div {
   display: -ms-flexbox;
   display: flex;
 }
-body header #search-div .search-bar-div .hide {
-  display: none;
-}
-body header #search-div .search-bar-div i {
-  color: #572ee5;
-}
 body header #search-div .search-bar-div i:first-child {
   padding-right: 10px;
+  color: #9cafc3;
 }
 body header #search-div .search-bar-div i:last-child {
   padding-left: 10px;
+  color: #572ee5;
 }
-body header #search-div .search-bar-div input {
+body header #search-div .search-bar-div form {
+  width: 100%;
+}
+body header #search-div .search-bar-div form input {
   border: none;
   background-color: rgba(0, 0, 0, 0);
   width: 100%;
@@ -183,6 +186,26 @@ body section {
 body section #section-tit {
   line-height: 1.7;
   padding: 0 70px 30px 70px;
+}
+body section #section-res-tit {
+  font-size: 36px;
+}
+body section #section-res-gal {
+  max-width: 70vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 25px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+body section #section-res-gal img {
+  width: 260px;
+  height: 200px;
 }
 body footer {
   display: -webkit-box;
@@ -225,7 +248,7 @@ body footer #footer-com-ico img {
     font-size: 16px;
   }
   body nav {
-    max-width: 90vw;
+    max-width: 70vw;
     margin: 0 auto;
   }
   body nav #nav-ham {
@@ -294,7 +317,7 @@ body footer #footer-com-ico img {
     -webkit-box-align: stretch;
         -ms-flex-align: stretch;
             align-items: stretch;
-    max-width: 90vw;
+    max-width: 70vw;
     margin: 0 auto;
   }
   body footer #footer-com {
