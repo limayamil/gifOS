@@ -9,6 +9,9 @@
   margin: 0;
   padding: 0;
 }
+*:focus {
+  outline: none;
+}
 
 /*  MOBILE   */
 /* max 480px */
@@ -41,10 +44,15 @@ body h3 {
 body h4 {
   font-size: 14px;
   font-weight: 500;
+  display: inline-block;
+  padding-right: 5px;
+  text-transform: capitalize;
 }
 body p,
 body span,
-body a {
+body a,
+body ul,
+body input {
   font-size: 16px;
   font-family: Roboto;
   font-weight: 400;
@@ -102,6 +110,29 @@ body header #header-tre {
   text-align: center;
   padding: 20px 70px;
   line-height: 1.7;
+}
+body header #search-div {
+  border-radius: 25px;
+  border: 1px solid #572ee5;
+  font-size: 16px;
+  padding: 10px 25px;
+  width: 520px;
+}
+body header #search-div input {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  width: 100%;
+}
+body header #search-div #search-sug-list {
+  list-style-type: none;
+  color: #9cafc3;
+}
+body header #search-div #search-sug-list li {
+  padding: 7px 0;
+}
+body header #search-div #search-sug-list li:first-child {
+  border-top: 1px solid #9cafc3;
+  margin-top: 10px;
 }
 body section {
   background-color: #f3f5f8;
