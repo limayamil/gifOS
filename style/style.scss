@@ -60,8 +60,6 @@ input[type="search"]::-webkit-search-results-decoration {
 /* max 480px */
 
 body {
-  border-top: 5px solid $col-pri;
-  border-bottom: 5px solid $col-pri;
   h1,
   h2,
   h3,
@@ -124,7 +122,18 @@ body {
     display: none !important;
   }
 
+  div#overlay {
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    @include centrarFlex(column, center, center);
+  }
+
   nav {
+    border-top: 5px solid $col-pri;
+
     @include centrarFlex(row, space-between, stretch);
     padding: 30px 20px;
 
@@ -314,6 +323,7 @@ body {
   }
 
   footer {
+    border-bottom: 5px solid $col-pri;
     @include centrarFlex(column, stretch, stretch);
     text-align: center;
     padding: 30px 20px;

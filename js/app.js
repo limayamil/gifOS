@@ -13,7 +13,7 @@ const giphySearchGIFs = "https://api.giphy.com/v1/gifs/search?api_key=" + key + 
 // Trending
 const trendingGIFsDiv = document.getElementById("section-tre-car");
 const trendingTopicsDiv = document.getElementById("header-tre-top");
-// Búsqueda
+// Búsqueda y resultados
 const formSearch = document.getElementById("form-search");
 const searchBar = document.getElementById("search-bar");
 const searchBarCross = document.getElementById("search-bar-cross");
@@ -25,6 +25,8 @@ const searchResultsInfo = document.getElementById("section-res-info");
 const searchViewMore = document.getElementById("section-res-gal-more");
 const searchPagination = document.getElementById("section-res-gal-pag");
 const searchPaginationList = document.getElementById("section-res-gal-pag-list");
+// Overlay
+
 
 // FUNCIONES DE GIPHY
 
@@ -147,6 +149,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                     for (i = desde; i < hasta; i++){
                         let divGif = document.createElement("div");
                         let divOverlay = document.createElement("div");
+                        let gifURL = json.data[i].images.downsized.url;
     
                         let usuario = json.data[i].username;
                         let titulo = json.data[i].title
@@ -161,9 +164,43 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                         divGif.classList.add('fetched-gif');
                         divOverlay.classList.add('fetched-gif-overlay');
                         divOverlay.innerHTML = "<div class='fetched-gif-info'><p class='fetched-gif-user'>" + usuario +"</p><p class='fetched-gif-title'>" + titulo + "</p></div>"
-                        divGif.style.backgroundImage = "url(" + json.data[i].images.downsized.url + ")";
+                        divGif.style.backgroundImage = "url(" + gifURL + ")";
                         divGif.appendChild(divOverlay);
                         searchResultsGallery.appendChild(divGif);
+
+                        const expandGif = () => {
+                            //expandedOverlay.classList.remove("hide");
+                            let overlayDiv = document.createElement("div");
+                            overlayDiv.id = "overlay";
+                            let overlayGIFdiv = document.createElement("div");
+                            overlayGIFdiv.id = "overlay-gif-div";
+                            let overlayGIF = document.createElement("img");
+                            overlayGIF.src = gifURL;
+                            overlayGIFdiv.appendChild(overlayGIF);
+
+                            let overlayInfo = document.createElement("div");
+                            overlayInfo.id = "overlay-info";
+                            let overlayInfoDetails = document.createElement("div");
+                            overlayInfoDetails.id = "overlay-info-det";
+                            let overlayInfoDetailsUser = document.createElement("p");
+                            overlayInfoDetailsUser.id = "overlay-info-det-user";
+                            let overlayInfoDetailsTitle = document.createElement("p");
+                            overlayInfoDetailsTitle.id = "overlay-info-det-title";
+                            overlayInfoDetailsUser.textContent = usuario;
+                            overlayInfoDetailsTitle.textContent = titulo;
+                            overlayInfoDetails.appendChild(overlayInfoDetailsUser);
+                            overlayInfoDetails.appendChild(overlayInfoDetailsTitle);
+                            overlayInfo.appendChild(overlayInfoDetails);
+
+                            // Faltan las opciones de agregar
+
+                            overlayDiv.appendChild(overlayGIFdiv);
+                            overlayDiv.appendChild(overlayInfo);
+                            document.body.insertBefore(overlayDiv, document.body.firstChild);
+
+                        }
+
+                        divGif.addEventListener("click", expandGif);
                     }
 
                     if (cantidadResultados > paginaActual * resultadosAMostrar) {
