@@ -128,7 +128,40 @@ body {
     height: 100%;
     position: fixed;
     z-index: 1;
-    @include centrarFlex(column, center, center);
+    @include centrarFlex(row, center, center);
+
+    #overlay-gif-middle-div {
+      @include centrarFlex(column, center, center);
+      margin: 0 25px;
+
+      #overlay-info {
+        width: 100%;
+
+        #overlay-info-det-user {
+          margin-top: 25px;
+          font-size: 15px;
+        }
+
+        #overlay-info-det-title {
+          font-weight: bold;
+          margin-top: 7px;
+          font-size: 18px;
+        }
+      }
+    }
+
+    #overlay-gif-left-div,
+    #overlay-gif-right-div {
+      @include centrarFlex(column, center, center);
+      height: 70%;
+      position: relative;
+    }
+
+    #overlay-close {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
 
   nav {

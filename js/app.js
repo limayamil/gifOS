@@ -8,7 +8,9 @@ const giphyTrendingSearchTerms = "https://api.giphy.com/v1/trending/searches?api
 const giphySearchSuggestions = "https://api.giphy.com/v1/gifs/search/tags?api_key=" + key + "&q=";
 const giphySearchGIFs = "https://api.giphy.com/v1/gifs/search?api_key=" + key + "&q=";
 
-// APUNTADORES
+let resultadosMemoria;
+
+// REFERENCIAS
 
 // Trending
 const trendingGIFsDiv = document.getElementById("section-tre-car");
@@ -108,6 +110,97 @@ const fetchSearchSuggestions = (giphyAPI, searchTerm) => {
     });
 }
 
+
+
+// Expande un gif a pantalla completa
+
+const expandGif = (index, gifURL, usuario, titulo) => {
+    
+    let overlayDiv = document.createElement("div");
+    overlayDiv.id = "overlay";
+
+    let overlayDivColLeft = document.createElement("div");
+    overlayDivColLeft.id = "overlay-gif-left-div";
+    let overlayDivColMid = document.createElement("div");
+    overlayDivColMid.id = "overlay-gif-middle-div";
+    let overlayDivColRight = document.createElement("div");
+    overlayDivColRight.id = "overlay-gif-right-div";
+    let overlayDivSlideRight = document.createElement("img");
+    overlayDivSlideRight.src = "img/button-slider-right.svg";
+    let overlayDivSlideLeft = document.createElement("img");
+    overlayDivSlideLeft.src = "img/button-slider-left.svg";
+    let overlayDivClose = document.createElement("img");
+    overlayDivClose.id = "overlay-close";
+    overlayDivClose.src = "img/close.svg";
+
+    let overlayGIF = document.createElement("img");
+    overlayGIF.src = gifURL;
+
+    let overlayInfo = document.createElement("div");
+    overlayInfo.id = "overlay-info";
+    let overlayInfoDetails = document.createElement("div");
+    overlayInfoDetails.id = "overlay-info-det";
+    let overlayInfoDetailsUser = document.createElement("p");
+    overlayInfoDetailsUser.id = "overlay-info-det-user";
+    let overlayInfoDetailsTitle = document.createElement("p");
+    overlayInfoDetailsTitle.id = "overlay-info-det-title";
+    overlayInfoDetailsUser.textContent = usuario;
+    overlayInfoDetailsTitle.textContent = titulo;
+    overlayInfoDetails.appendChild(overlayInfoDetailsUser);
+    overlayInfoDetails.appendChild(overlayInfoDetailsTitle);
+    overlayInfo.appendChild(overlayInfoDetails);
+
+    // Faltan las opciones de agregar
+
+    const closeOverlay = () => {
+        overlayDiv.remove();
+        overlayDivClose.removeEventListener("click", closeOverlay);
+    }
+
+    const slideLeft = () => {
+        prevIndex = index - 1;
+        prevURL = resultadosMemoria.data[prevIndex].images.downsized.url;
+        prevUser = resultadosMemoria.data[prevIndex].username;
+        prevTitle = resultadosMemoria.data[prevIndex].title;
+        overlayDivSlideLeft.removeEventListener("click", slideRight);
+        overlayDiv.remove();
+        expandGif(prevIndex,prevURL,prevUser,prevTitle);
+    }
+
+    const slideRight = () => {
+        nextIndex = index + 1;
+        nextURL = resultadosMemoria.data[nextIndex].images.downsized.url;
+        nextUser = resultadosMemoria.data[nextIndex].username;
+        nextTitle = resultadosMemoria.data[nextIndex].title;
+        overlayDivSlideRight.removeEventListener("click", slideRight);
+        overlayDiv.remove();
+        expandGif(nextIndex,nextURL,nextUser,nextTitle);
+    }
+
+    overlayDivClose.addEventListener("click", closeOverlay);
+    overlayDivColRight.appendChild(overlayDivClose);
+    overlayDivColMid.appendChild(overlayGIF);
+    overlayDivColMid.appendChild(overlayInfo);
+
+    if (index === 0 && resultadosMemoria.data.length > 1){
+        overlayDivColRight.appendChild(overlayDivSlideRight);
+        overlayDivSlideRight.addEventListener("click", slideRight);
+    } else if (index === resultadosMemoria.data.length && resultadosMemoria.data.length > 1) {
+        overlayDivColLeft.appendChild(overlayDivSlideLeft);
+        overlayDivSlideLeft.addEventListener("click", slideLeft);
+    } else if (index < resultadosMemoria.data.length && index > 0) {
+        overlayDivColRight.appendChild(overlayDivSlideRight);
+        overlayDivSlideRight.addEventListener("click", slideRight);
+        overlayDivColLeft.appendChild(overlayDivSlideLeft);
+        overlayDivSlideLeft.addEventListener("click", slideLeft);
+    }
+
+    overlayDiv.appendChild(overlayDivColLeft);
+    overlayDiv.appendChild(overlayDivColMid);
+    overlayDiv.appendChild(overlayDivColRight);
+    document.body.insertBefore(overlayDiv, document.body.firstChild);
+}
+
 // Trae GIFs cuyo término se haya búsqueda
 
 const fetchSearchGIFs = (giphyAPI, searchTerm) => {
@@ -116,13 +209,14 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
             return response.json();
         })
         .then((json) => {
-            console.log(json);
+            resultadosMemoria = json;
+            console.log(resultadosMemoria);
             searchResultsGallery.innerHTML = "";
             searchResultsGallery.classList.add("hide");
             searchResultsInfo.classList.add("hide");
             searchResults.classList.add("hide");
 
-            let cantidadResultados = json.data.length;
+            let cantidadResultados = resultadosMemoria.data.length;
             let resultadosAMostrar = 12;
             let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
             let paginaActual = 1;
@@ -149,10 +243,12 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                     for (i = desde; i < hasta; i++){
                         let divGif = document.createElement("div");
                         let divOverlay = document.createElement("div");
-                        let gifURL = json.data[i].images.downsized.url;
+                        let gifURL = resultadosMemoria.data[i].images.downsized.url;
     
-                        let usuario = json.data[i].username;
-                        let titulo = json.data[i].title
+                        let usuario = resultadosMemoria.data[i].username;
+                        let titulo = resultadosMemoria.data[i].title
+                        let index = i;
+
                         if (usuario === "") {
                             usuario = "Anónimo";
                         }
@@ -168,39 +264,11 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                         divGif.appendChild(divOverlay);
                         searchResultsGallery.appendChild(divGif);
 
-                        const expandGif = () => {
-                            //expandedOverlay.classList.remove("hide");
-                            let overlayDiv = document.createElement("div");
-                            overlayDiv.id = "overlay";
-                            let overlayGIFdiv = document.createElement("div");
-                            overlayGIFdiv.id = "overlay-gif-div";
-                            let overlayGIF = document.createElement("img");
-                            overlayGIF.src = gifURL;
-                            overlayGIFdiv.appendChild(overlayGIF);
-
-                            let overlayInfo = document.createElement("div");
-                            overlayInfo.id = "overlay-info";
-                            let overlayInfoDetails = document.createElement("div");
-                            overlayInfoDetails.id = "overlay-info-det";
-                            let overlayInfoDetailsUser = document.createElement("p");
-                            overlayInfoDetailsUser.id = "overlay-info-det-user";
-                            let overlayInfoDetailsTitle = document.createElement("p");
-                            overlayInfoDetailsTitle.id = "overlay-info-det-title";
-                            overlayInfoDetailsUser.textContent = usuario;
-                            overlayInfoDetailsTitle.textContent = titulo;
-                            overlayInfoDetails.appendChild(overlayInfoDetailsUser);
-                            overlayInfoDetails.appendChild(overlayInfoDetailsTitle);
-                            overlayInfo.appendChild(overlayInfoDetails);
-
-                            // Faltan las opciones de agregar
-
-                            overlayDiv.appendChild(overlayGIFdiv);
-                            overlayDiv.appendChild(overlayInfo);
-                            document.body.insertBefore(overlayDiv, document.body.firstChild);
-
+                        const expandGifCallback = () => {
+                            expandGif(index, gifURL, usuario, titulo);
                         }
 
-                        divGif.addEventListener("click", expandGif);
+                        divGif.addEventListener("click", expandGifCallback);
                     }
 
                     if (cantidadResultados > paginaActual * resultadosAMostrar) {
