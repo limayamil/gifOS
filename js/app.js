@@ -20,6 +20,7 @@ const formSearch = document.getElementById("form-search");
 const searchBar = document.getElementById("search-bar");
 const searchBarCross = document.getElementById("search-bar-cross");
 const searchSuggestionsList = document.getElementById("search-sug-list");
+
 const searchResults = document.getElementById("section-res");
 const searchResultsGallery = document.getElementById("section-res-gal");
 const searchResultsTitle = document.getElementById("section-res-tit");
@@ -27,6 +28,7 @@ const searchResultsInfo = document.getElementById("section-res-info");
 const searchViewMore = document.getElementById("section-res-gal-more");
 const searchPagination = document.getElementById("section-res-gal-pag");
 const searchPaginationList = document.getElementById("section-res-gal-pag-list");
+
 // Overlay
 
 
@@ -110,8 +112,6 @@ const fetchSearchSuggestions = (giphyAPI, searchTerm) => {
     });
 }
 
-
-
 // Expande un gif a pantalla completa
 
 const expandGif = (index, gifURL, usuario, titulo) => {
@@ -125,10 +125,12 @@ const expandGif = (index, gifURL, usuario, titulo) => {
     overlayDivColMid.id = "overlay-gif-middle-div";
     let overlayDivColRight = document.createElement("div");
     overlayDivColRight.id = "overlay-gif-right-div";
-    let overlayDivSlideRight = document.createElement("img");
-    overlayDivSlideRight.src = "img/button-slider-right.svg";
-    let overlayDivSlideLeft = document.createElement("img");
-    overlayDivSlideLeft.src = "img/button-slider-left.svg";
+    let overlayDivSlideRight = document.createElement("div");
+    //overlayDivSlideRight.src = "img/button-slider-right.svg";
+    overlayDivSlideRight.id = "overlay-gif-slide-right";
+    let overlayDivSlideLeft = document.createElement("div");
+    //overlayDivSlideLeft.src = "img/button-slider-left.svg";
+    overlayDivSlideLeft.id = "overlay-gif-slide-left";
     let overlayDivClose = document.createElement("img");
     overlayDivClose.id = "overlay-close";
     overlayDivClose.src = "img/close.svg";
@@ -270,6 +272,12 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
 
                         divGif.addEventListener("click", expandGifCallback);
                     }
+
+                    for (l = 0; l < searchPaginationList.children.length; l++){
+                        searchPaginationList.children[l].classList.remove("activo");
+                    }
+
+                    searchPaginationList.children[paginaIndex].classList.add("activo");
 
                     if (cantidadResultados > paginaActual * resultadosAMostrar) {
                         searchViewMore.classList.remove('hide');
