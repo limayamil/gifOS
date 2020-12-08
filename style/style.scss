@@ -109,6 +109,17 @@ body {
     color: $negro;
   }
 
+  button {
+    font-family: "Montserrat";
+    text-transform: uppercase;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid $col-pri;
+    border-radius: 25px;
+    padding: 15px 30px;
+    color: $col-pri;
+  }
+
   .hide {
     display: none !important;
   }
@@ -230,7 +241,7 @@ body {
 
     #section-res-gal {
       max-width: $anchomax;
-      margin: 0 auto;
+      margin: 50px auto;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;

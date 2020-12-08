@@ -80,6 +80,16 @@ body input {
   font-weight: 400;
   color: #000000;
 }
+body button {
+  font-family: "Montserrat";
+  text-transform: uppercase;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid #572ee5;
+  border-radius: 25px;
+  padding: 15px 30px;
+  color: #572ee5;
+}
 body .hide {
   display: none !important;
 }
@@ -203,7 +213,7 @@ body section #section-res-info h3 {
 }
 body section #section-res-gal {
   max-width: 70vw;
-  margin: 0 auto;
+  margin: 50px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;

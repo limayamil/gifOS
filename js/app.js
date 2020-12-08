@@ -22,6 +22,7 @@ const searchResults = document.getElementById("section-res");
 const searchResultsGallery = document.getElementById("section-res-gal");
 const searchResultsTitle = document.getElementById("section-res-tit");
 const searchResultsInfo = document.getElementById("section-res-info");
+const searchViewMore = document.getElementById("section-res-gal-more");
 
 // FUNCIONES DE GIPHY
 
@@ -116,24 +117,50 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
             searchResultsGallery.classList.add("hide");
             searchResultsInfo.classList.add("hide");
             searchResults.classList.add("hide");
-                if (json.data.length > 0) {
-                    searchSuggestionsList.innerHTML = "";
-                    searchResults.classList.remove("hide");
-                    searchResultsGallery.classList.remove("hide");
-                    for (i = 0; i < 12; i++){
+
+            let cantidadResultados = json.data.length;
+            let resultadosAMostrar = 12;
+            let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
+            let paginaActual = 1;
+            let paginaIndex = paginaActual - 1;
+
+            console.log(cantidadResultados);
+            console.log(cantidadPaginas);
+
+            if (cantidadResultados > 0) {
+                searchSuggestionsList.innerHTML = "";
+                searchResults.classList.remove("hide");
+                searchResultsGallery.classList.remove("hide");
+
+                const mostrarMas = () => {
+                    let indexDesde = paginaIndex * resultadosAMostrar;
+                    let indexHasta = (paginaIndex * resultadosAMostrar) + resultadosAMostrar;
+
+                    if (cantidadResultados < indexHasta) {
+                        indexHasta = cantidadResultados;
+                    }
+
+                    listarResultados(indexDesde, indexHasta);
+                }
+
+                const listarResultados = (desde, hasta) => {
+                    searchResultsGallery.innerHTML = "";
+                    console.log("Desde: " + desde);
+                    console.log("Hasta: " + hasta);
+                    for (i = desde; i < hasta; i++){
                         let divGif = document.createElement("div");
                         let divOverlay = document.createElement("div");
-
+    
                         let usuario = json.data[i].username;
                         let titulo = json.data[i].title
                         if (usuario === "") {
                             usuario = "Anónimo";
                         }
-
+    
                         if (titulo === "") {
                             titulo = "Sin título";
                         }
-
+    
                         divGif.classList.add('fetched-gif');
                         divOverlay.classList.add('fetched-gif-overlay');
                         divOverlay.innerHTML = "<div class='fetched-gif-info'><p class='fetched-gif-user'>" + usuario +"</p><p class='fetched-gif-title'>" + titulo + "</p></div>"
@@ -141,7 +168,27 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                         divGif.appendChild(divOverlay);
                         searchResultsGallery.appendChild(divGif);
                     }
-            } else if (json.data.length === 0) {
+
+                    if (cantidadResultados > paginaActual * resultadosAMostrar) {
+                        console.log("Veamos: " + cantidadResultados + " y " + paginaActual * resultadosAMostrar)
+                        // 50 > 0 (1)
+                        // 50 > 12 (2)
+                        // 50 > 24 (3)
+                        // 50 > 36 (4)
+                        // 50 > 48 (5)
+                        // 50 > 60 (6)
+                        searchViewMore.classList.remove('hide');
+                        searchViewMore.addEventListener('click', mostrarMas);
+                        paginaActual++;
+                        paginaIndex++;
+                    } else {
+                        searchViewMore.classList.add('hide');
+                    }
+                }
+
+                listarResultados(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar);
+
+            } else if (cantidadResultados === 0) {
                 searchResults.classList.remove("hide");
                 searchResultsInfo.classList.remove("hide");
                 searchResultsGallery.innerHTML = "";
