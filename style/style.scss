@@ -134,14 +134,16 @@ body {
   nav {
     border-top: 5px solid $col-pri;
 
-    @include centrarFlex(row, space-between, stretch);
-    padding: 30px 20px;
+    #nav-div {
+      @include centrarFlex(row, space-between, stretch);
+      padding: 30px 20px;
 
-    #nav-elem {
-      display: none;
+      #nav-elem {
+        display: none;
 
-      a {
-        font-family: Montserrat, sans-serif;
+        a {
+          font-family: Montserrat, sans-serif;
+        }
       }
     }
   }
@@ -324,15 +326,17 @@ body {
 
   footer {
     border-bottom: 5px solid $col-pri;
-    @include centrarFlex(column, stretch, stretch);
-    text-align: center;
-    padding: 30px 20px;
+    #footer-div {
+      @include centrarFlex(column, stretch, stretch);
+      text-align: center;
+      padding: 30px 20px;
 
-    #footer-com-ico {
-      padding: 20px 0 50px 0;
+      #footer-com-ico {
+        padding: 20px 0 50px 0;
 
-      img {
-        padding: 0 7px;
+        img {
+          padding: 0 7px;
+        }
       }
     }
   }
@@ -361,36 +365,38 @@ body {
     }
 
     nav {
-      max-width: $anchomax;
-      margin: 0 auto;
-      #nav-ham {
-        display: none;
-      }
-
-      #nav-elem {
-        @include centrarFlex(row, center, center);
-
-        a {
-          text-decoration: none;
-          color: $col-pri;
-          font-weight: bold;
-          font-size: 14px;
-          margin: 0 25px;
-          text-transform: uppercase;
+      #nav-div {
+        max-width: $anchomax;
+        margin: 0 auto;
+        #nav-ham {
+          display: none;
         }
 
-        #nav-elem-agr {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-weight: 300;
-          font-size: 32px;
-          border: 1px solid $col-pri;
-          border-radius: 50%;
-          width: 54px;
-          height: 54px;
-          padding: 0px;
-          margin-right: 0;
+        #nav-elem {
+          @include centrarFlex(row, center, center);
+
+          a {
+            text-decoration: none;
+            color: $col-pri;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 0 25px;
+            text-transform: uppercase;
+          }
+
+          #nav-elem-agr {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 300;
+            font-size: 32px;
+            border: 1px solid $col-pri;
+            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            padding: 0px;
+            margin-right: 0;
+          }
         }
       }
     }
@@ -413,15 +419,17 @@ body {
     }
 
     footer {
-      @include centrarFlex(row, space-between, stretch);
-      max-width: $anchomax;
-      margin: 0 auto;
+      #footer-div {
+        @include centrarFlex(row, space-between, stretch);
+        max-width: $anchomax;
+        margin: 0 auto;
 
-      #footer-com {
-        @include centrarFlex(row, stretch, stretch);
+        #footer-com {
+          @include centrarFlex(row, stretch, stretch);
 
-        #footer-com-ico {
-          padding: 0 0 0 20px;
+          #footer-com-ico {
+            padding: 0 0 0 20px;
+          }
         }
       }
     }

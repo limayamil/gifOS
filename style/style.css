@@ -111,6 +111,8 @@ body div#overlay {
 }
 body nav {
   border-top: 5px solid #572ee5;
+}
+body nav #nav-div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -126,10 +128,10 @@ body nav {
           align-items: stretch;
   padding: 30px 20px;
 }
-body nav #nav-elem {
+body nav #nav-div #nav-elem {
   display: none;
 }
-body nav #nav-elem a {
+body nav #nav-div #nav-elem a {
   font-family: Montserrat, sans-serif;
 }
 body header {
@@ -330,6 +332,8 @@ body section #section-res-gal-pag ul li {
 }
 body footer {
   border-bottom: 5px solid #572ee5;
+}
+body footer #footer-div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -346,10 +350,10 @@ body footer {
   text-align: center;
   padding: 30px 20px;
 }
-body footer #footer-com-ico {
+body footer #footer-div #footer-com-ico {
   padding: 20px 0 50px 0;
 }
-body footer #footer-com-ico img {
+body footer #footer-div #footer-com-ico img {
   padding: 0 7px;
 }
 
@@ -369,14 +373,14 @@ body footer #footer-com-ico img {
   body h4 {
     font-size: 16px;
   }
-  body nav {
+  body nav #nav-div {
     max-width: 70vw;
     margin: 0 auto;
   }
-  body nav #nav-ham {
+  body nav #nav-div #nav-ham {
     display: none;
   }
-  body nav #nav-elem {
+  body nav #nav-div #nav-elem {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -391,7 +395,7 @@ body footer #footer-com-ico img {
         -ms-flex-align: center;
             align-items: center;
   }
-  body nav #nav-elem a {
+  body nav #nav-div #nav-elem a {
     text-decoration: none;
     color: #572ee5;
     font-weight: bold;
@@ -399,7 +403,7 @@ body footer #footer-com-ico img {
     margin: 0 25px;
     text-transform: uppercase;
   }
-  body nav #nav-elem #nav-elem-agr {
+  body nav #nav-div #nav-elem #nav-elem-agr {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -425,7 +429,7 @@ body footer #footer-com-ico img {
     width: 360px;
     height: 275px;
   }
-  body footer {
+  body footer #footer-div {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -442,7 +446,7 @@ body footer #footer-com-ico img {
     max-width: 70vw;
     margin: 0 auto;
   }
-  body footer #footer-com {
+  body footer #footer-div #footer-com {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -457,7 +461,7 @@ body footer #footer-com-ico img {
         -ms-flex-align: stretch;
             align-items: stretch;
   }
-  body footer #footer-com #footer-com-ico {
+  body footer #footer-div #footer-com #footer-com-ico {
     padding: 0 0 0 20px;
   }
 }
