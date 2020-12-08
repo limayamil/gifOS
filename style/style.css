@@ -288,6 +288,29 @@ body section #section-res-gal img {
   width: 260px;
   height: 200px;
 }
+body section #section-res-gal-pag ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  list-style-type: none;
+  margin-bottom: 25px;
+}
+body section #section-res-gal-pag ul li {
+  color: #572ee5;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 12px;
+}
 body footer {
   display: -webkit-box;
   display: -ms-flexbox;

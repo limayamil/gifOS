@@ -296,6 +296,21 @@ body {
         height: 200px;
       }
     }
+
+    #section-res-gal-pag {
+      ul {
+        @include centrarFlex(row, center, stretch);
+        list-style-type: none;
+        margin-bottom: 25px;
+
+        li {
+          color: $col-pri;
+          font-weight: bold;
+          cursor: pointer;
+          padding: 0 12px;
+        }
+      }
+    }
   }
 
   footer {

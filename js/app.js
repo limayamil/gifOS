@@ -23,6 +23,8 @@ const searchResultsGallery = document.getElementById("section-res-gal");
 const searchResultsTitle = document.getElementById("section-res-tit");
 const searchResultsInfo = document.getElementById("section-res-info");
 const searchViewMore = document.getElementById("section-res-gal-more");
+const searchPagination = document.getElementById("section-res-gal-pag");
+const searchPaginationList = document.getElementById("section-res-gal-pag-list");
 
 // FUNCIONES DE GIPHY
 
@@ -124,9 +126,6 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
             let paginaActual = 1;
             let paginaIndex = paginaActual - 1;
 
-            console.log(cantidadResultados);
-            console.log(cantidadPaginas);
-
             if (cantidadResultados > 0) {
                 searchSuggestionsList.innerHTML = "";
                 searchResults.classList.remove("hide");
@@ -145,8 +144,6 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
 
                 const listarResultados = (desde, hasta) => {
                     searchResultsGallery.innerHTML = "";
-                    console.log("Desde: " + desde);
-                    console.log("Hasta: " + hasta);
                     for (i = desde; i < hasta; i++){
                         let divGif = document.createElement("div");
                         let divOverlay = document.createElement("div");
@@ -170,19 +167,35 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                     }
 
                     if (cantidadResultados > paginaActual * resultadosAMostrar) {
-                        console.log("Veamos: " + cantidadResultados + " y " + paginaActual * resultadosAMostrar)
-                        // 50 > 0 (1)
-                        // 50 > 12 (2)
-                        // 50 > 24 (3)
-                        // 50 > 36 (4)
-                        // 50 > 48 (5)
-                        // 50 > 60 (6)
                         searchViewMore.classList.remove('hide');
                         searchViewMore.addEventListener('click', mostrarMas);
                         paginaActual++;
                         paginaIndex++;
                     } else {
                         searchViewMore.classList.add('hide');
+                    }
+                }
+
+                if (cantidadPaginas > 0) {
+                    searchPagination.classList.remove('hide');
+                    for (i = 0; i < cantidadPaginas; i++){
+                        let linkPagina = document.createElement("li");
+                        linkPagina.textContent = i + 1;
+                        let indice = i;
+
+                        const clickLinkPagina = () => {
+                            let indexDesde = indice * resultadosAMostrar;
+                            let indexHasta = (indice * resultadosAMostrar) + resultadosAMostrar;
+                            if (cantidadResultados < indexHasta) {
+                                indexHasta = cantidadResultados;
+                            }
+                            paginaActual = indice + 1;
+                            paginaIndex = indice;
+                            listarResultados(indexDesde, indexHasta);
+                        }
+
+                        linkPagina.addEventListener('click', clickLinkPagina);
+                        searchPaginationList.appendChild(linkPagina);
                     }
                 }
 
