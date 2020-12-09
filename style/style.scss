@@ -344,8 +344,8 @@ body {
       max-width: $anchomax;
       margin: 50px auto;
       display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
       gap: 25px;
       justify-content: center;
       align-content: center;
@@ -552,14 +552,9 @@ body {
           width: 360px;
           height: 275px;
         }
-      }
 
-      #section-res {
-        #section-res-gal {
+        #section-res {
           #section-res-gal {
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 25px;
           }
         }
       }

@@ -328,8 +328,8 @@ body section #section-res-gal {
   max-width: 70vw;
   margin: 50px auto;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   gap: 25px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -568,11 +568,6 @@ body footer #footer-div #footer-com-ico #footer-com-ico-tw:hover {
   body section #section-tre-car img {
     width: 360px;
     height: 275px;
-  }
-  body section #section-res #section-res-gal #section-res-gal {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 25px;
   }
   body footer #footer-div {
     display: -webkit-box;
