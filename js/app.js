@@ -38,42 +38,42 @@ const searchPaginationList = document.getElementById("section-res-gal-pag-list")
 
 // Traer los GIFs Trending
 
-const fetchTrendingGIFs = (giphyAPI) => {
-    fetch(giphyAPI)
-        .then((response) => {
-        return response.json();
-        })
-        .then((json) => {
-        //console.log(json);
-        for (i = 0; i < 3; i++){
-            let gifImg = document.createElement("img");
-            gifImg.src = json.data[i].images.downsized.url;
-            trendingGIFsDiv.appendChild(gifImg);
-        }
-    });
+async function fetchTrendingGIFs(giphyAPI) {
+    const resp = await fetch(giphyAPI);
+    const data = await resp.json();
+    return data;
 }
+
+(async () => {
+    let json = await fetchTrendingGIFs(giphyTrendingGIFs);
+    for (i = 0; i < 3; i++){
+        let gifImg = document.createElement("img");
+        gifImg.src = json.data[i].images.downsized.url;
+        trendingGIFsDiv.appendChild(gifImg);
+    }
+})();
 
 // Traer los tópicos en Trending
 
-const fetchTrendingSearchTerms = (giphyAPI) => {
+function fetchTrendingSearchTerms(giphyAPI) {
     fetch(giphyAPI)
         .then((response) => {
-        return response.json();
+            return response.json();
         })
         .then((json) => {
-        //console.log(json);
-        for (i = 0; i < 5; i++){
-            if (i === 4) {
-                let trendH4 = document.createElement("h4");
-                trendH4.innerHTML = json.data[i];
-                trendingTopicsDiv.appendChild(trendH4);
-            } else {
-                let trendH4 = document.createElement("h4");
-                trendH4.innerHTML = json.data[i] + ",";
-                trendingTopicsDiv.appendChild(trendH4);
+            //console.log(json);
+            for (i = 0; i < 5; i++) {
+                if (i === 4) {
+                    let trendH4 = document.createElement("h4");
+                    trendH4.innerHTML = json.data[i];
+                    trendingTopicsDiv.appendChild(trendH4);
+                } else {
+                    let trendH4 = document.createElement("h4");
+                    trendH4.innerHTML = json.data[i] + ",";
+                    trendingTopicsDiv.appendChild(trendH4);
+                }
             }
-        }
-    });
+        });
 }
 
 // BÚSQUEDA
@@ -373,5 +373,5 @@ formSearch.addEventListener('submit', e => {
 
 // Funciones para el inicio de la página
 
-fetchTrendingGIFs(giphyTrendingGIFs);
+//fetchTrendingGIFs(giphyTrendingGIFs);
 fetchTrendingSearchTerms(giphyTrendingSearchTerms);
