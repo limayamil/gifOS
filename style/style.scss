@@ -369,11 +369,52 @@ body {
           top: -100%;
           position: absolute;
           transition: 0.5s ease;
+          box-sizing: border-box;
+          padding: 15px;
           @include centrarFlex(column, flex-end, flex-start);
+
+          .fetched-gif-options {
+            @include centrarFlex(row, flex-end, center);
+            width: 100%;
+
+            div {
+              margin-left: 10px;
+            }
+
+            .fetched-gif-option-fav,
+            .fetched-gif-option-down,
+            .fetched-gif-option-view {
+              height: 32px;
+              width: 32px;
+            }
+
+            .fetched-gif-option-fav {
+              background-image: url("../img/icon-fav-normal.svg");
+
+              &:hover {
+                background-image: url("../img/icon-fav-hover.svg");
+              }
+            }
+
+            .fetched-gif-option-down {
+              background-image: url("../img/icon-download-normal.svg");
+
+              &:hover {
+                background-image: url("../img/icon-download-hover.svg");
+              }
+            }
+
+            .fetched-gif-option-view {
+              background-image: url("../img/icon-max-normal.svg");
+
+              &:hover {
+                background-image: url("../img/icon-max-hover.svg");
+              }
+            }
+          }
 
           .fetched-gif-info {
             @include centrarFlex(column, flex-end, flex-start);
-            padding: 14px;
             height: 100%;
 
             .fetched-gif-user {

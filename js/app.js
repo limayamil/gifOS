@@ -126,10 +126,8 @@ const expandGif = (index, gifURL, usuario, titulo) => {
     let overlayDivColRight = document.createElement("div");
     overlayDivColRight.id = "overlay-gif-right-div";
     let overlayDivSlideRight = document.createElement("div");
-    //overlayDivSlideRight.src = "img/button-slider-right.svg";
     overlayDivSlideRight.id = "overlay-gif-slide-right";
     let overlayDivSlideLeft = document.createElement("div");
-    //overlayDivSlideLeft.src = "img/button-slider-left.svg";
     overlayDivSlideLeft.id = "overlay-gif-slide-left";
     let overlayDivClose = document.createElement("img");
     overlayDivClose.id = "overlay-close";
@@ -203,6 +201,19 @@ const expandGif = (index, gifURL, usuario, titulo) => {
     document.body.insertBefore(overlayDiv, document.body.firstChild);
 }
 
+// Descarga un gif
+
+async function downloadGif(index) {
+    let a = document.createElement('a');
+    let resp = await fetch(resultadosMemoria.data[index].images.downsized.url);
+    let file = await resp.blob();
+    
+    a.download = resultadosMemoria.data[index].title + ".gif";
+    a.href = window.URL.createObjectURL(file);
+    a.click();
+    a.remove();
+}
+
 // Trae GIFs cuyo término se haya búsqueda
 
 const fetchSearchGIFs = (giphyAPI, searchTerm) => {
@@ -245,8 +256,21 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                     for (i = desde; i < hasta; i++){
                         let divGif = document.createElement("div");
                         let divOverlay = document.createElement("div");
+                        let divFetchedGifOptions = document.createElement("div");
+                        divFetchedGifOptions.classList.add('fetched-gif-options');
+                        let divFetchedGifInfo = document.createElement("div");
+                        divFetchedGifInfo.classList.add('fetched-gif-info');
+                        let fetchedGifOptionFavorite = document.createElement("div");
+                        fetchedGifOptionFavorite.classList.add("fetched-gif-option-fav");
+                        let fetchedGifOptionDownload = document.createElement("div");
+                        fetchedGifOptionDownload.classList.add("fetched-gif-option-down");
+                        let fetchedGifOptionView = document.createElement("div");
+                        fetchedGifOptionView.classList.add("fetched-gif-option-view");
+                        let fetchedGifUser = document.createElement("p");
+                        fetchedGifUser.classList.add('fetched-gif-user');
+                        let fetchedGifTitle = document.createElement("p");
+                        fetchedGifTitle.classList.add('fetched-gif-title');
                         let gifURL = resultadosMemoria.data[i].images.downsized.url;
-    
                         let usuario = resultadosMemoria.data[i].username;
                         let titulo = resultadosMemoria.data[i].title
                         let index = i;
@@ -261,16 +285,38 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
     
                         divGif.classList.add('fetched-gif');
                         divOverlay.classList.add('fetched-gif-overlay');
-                        divOverlay.innerHTML = "<div class='fetched-gif-info'><p class='fetched-gif-user'>" + usuario +"</p><p class='fetched-gif-title'>" + titulo + "</p></div>"
+
+                        divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
+                        divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
+                        divFetchedGifOptions.appendChild(fetchedGifOptionView);
+                        divOverlay.appendChild(divFetchedGifOptions);
+
+                        fetchedGifUser.textContent = usuario;
+                        fetchedGifTitle.textContent = titulo;
+                        divFetchedGifInfo.appendChild(fetchedGifUser);
+                        divFetchedGifInfo.appendChild(fetchedGifTitle);
+                        divOverlay.appendChild(divFetchedGifInfo);
+
                         divGif.style.backgroundImage = "url(" + gifURL + ")";
                         divGif.appendChild(divOverlay);
                         searchResultsGallery.appendChild(divGif);
+
+                        const favoriteGifCallback = () => {
+                            favoriteGif(index);
+                        }
+
+                        const downloadGifCallback = () => {
+                            downloadGif(index);
+                        }
 
                         const expandGifCallback = () => {
                             expandGif(index, gifURL, usuario, titulo);
                         }
 
-                        divGif.addEventListener("click", expandGifCallback);
+                        //divGif.addEventListener("click", expandGifCallback);
+                        fetchedGifOptionFavorite.addEventListener("click", favoriteGifCallback);
+                        fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
+                        fetchedGifOptionView.addEventListener("click", expandGifCallback);
                     }
 
                     for (l = 0; l < searchPaginationList.children.length; l++){

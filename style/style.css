@@ -356,6 +356,9 @@ body section #section-res-gal .fetched-gif .fetched-gif-overlay {
   position: absolute;
   -webkit-transition: 0.5s ease;
   transition: 0.5s ease;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -369,6 +372,49 @@ body section #section-res-gal .fetched-gif .fetched-gif-overlay {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options div {
+  margin-left: 10px;
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
+  height: 32px;
+  width: 32px;
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav {
+  background-image: url("../img/icon-fav-normal.svg");
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover {
+  background-image: url("../img/icon-fav-hover.svg");
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down {
+  background-image: url("../img/icon-download-normal.svg");
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down:hover {
+  background-image: url("../img/icon-download-hover.svg");
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
+  background-image: url("../img/icon-max-normal.svg");
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover {
+  background-image: url("../img/icon-max-hover.svg");
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info {
   display: -webkit-box;
@@ -384,7 +430,6 @@ body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-inf
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  padding: 14px;
   height: 100%;
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-user {
