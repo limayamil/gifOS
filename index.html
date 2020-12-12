@@ -15,7 +15,8 @@
   <body>
     <nav>
       <div id="nav-div">
-        <img src="img/logo-nav.svg" id="logo" alt="Logo de GIFOS" />
+        <div id="logo"></div>
+        <!-- <img src="img/logo-nav.svg" id="logo" alt="Logo de GIFOS" /> -->
         <div id="nav-ham"><span>H</span></div>
         <div id="nav-elem">
           <a href="#" id="nav-elem-noc">Modo Nocturno</a>
@@ -36,7 +37,12 @@
         <div id="search-div">
           <div class="search-bar-div">
             <i class="fas fa-search"></i>
-            <form action="#" id="form-search" autocomplete="off">
+            <form
+              action="#"
+              id="form-search"
+              autocomplete="off"
+              onsubmit="return false"
+            >
               <input
                 type="search"
                 name=""

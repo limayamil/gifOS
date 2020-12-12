@@ -227,11 +227,27 @@ body {
       @include centrarFlex(row, center, stretch);
       padding: 30px 20px;
 
+      #logo {
+        width: 62px;
+        height: 59px;
+        background-image: url("../img/logo-desktop.svg");
+      }
+
       #nav-elem {
         display: none;
 
         a {
           font-family: Montserrat, sans-serif;
+          text-decoration: none;
+          color: $light-col-pri;
+          font-weight: bold;
+          font-size: 14px;
+          margin-right: 50px;
+          text-transform: uppercase;
+
+          &.active {
+            color: $light-gris-oscuro;
+          }
         }
       }
     }
@@ -564,6 +580,18 @@ body.dark-mode {
 
   nav {
     border-top-color: $dark-negro;
+
+    #nav-div {
+      #logo {
+        background-image: url("../img/logo-desktop-nocturno.svg");
+      }
+
+      #nav-elem {
+        a {
+          color: $dark-col-pri;
+        }
+      }
+    }
   }
 
   footer {
@@ -614,19 +642,6 @@ body.dark-mode {
 
         #nav-elem {
           @include centrarFlex(row, center, center);
-
-          a {
-            text-decoration: none;
-            color: $light-col-pri;
-            font-weight: bold;
-            font-size: 14px;
-            margin-right: 50px;
-            text-transform: uppercase;
-
-            &.active {
-              color: $light-gris-oscuro;
-            }
-          }
 
           #nav-elem-agr {
             width: 54px;

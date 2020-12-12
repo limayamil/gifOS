@@ -80,16 +80,27 @@ async function fetchTrendingSearchTerms(giphyAPI) {
 
 (async () => {
     let json = await fetchTrendingGIFs(giphyTrendingSearchTerms);
+    console.log(json);
     for (i = 0; i < 5; i++) {
-        if (i === 4) {
-            let trendH4 = document.createElement("h4");
-            trendH4.innerHTML = json.data[i];
-            trendingTopicsDiv.appendChild(trendH4);
-        } else {
-            let trendH4 = document.createElement("h4");
-            trendH4.innerHTML = json.data[i] + ",";
-            trendingTopicsDiv.appendChild(trendH4);
+        let trendA = document.createElement("a");
+        let trendH4 = document.createElement("h4");
+        let topic = json.data[i];
+
+        const searchTrendingTopicCallback = () => {
+            console.log(topic);
+            searchBar.value = topic;
+            showResults();
         }
+        
+        if (i === 4) {
+            trendH4.innerHTML = topic;
+        } else {
+            trendH4.innerHTML = topic + ",";
+        }
+
+        trendA.appendChild(trendH4);
+        trendingTopicsDiv.appendChild(trendA);
+        trendA.addEventListener('click', searchTrendingTopicCallback);
     }
 })();
 
@@ -626,16 +637,14 @@ aMisFavoritos.addEventListener('click', e => {
 });
 //Activar modo nocturno
 aModoNocturno.addEventListener('click', e => {
+    e.preventDefault;
+    e.stopPropagation;
     if (modoNocturno === false){
-        e.preventDefault;
-        e.stopPropagation;
         aModoNocturno.classList.add('active');
         body.classList.add('dark-mode');
         aModoNocturno.textContent = 'Modo Diurno';
         modoNocturno = true;
     } else {
-        e.preventDefault;
-        e.stopPropagation;
         aModoNocturno.classList.remove('active');
         body.classList.remove('dark-mode');
         aModoNocturno.textContent = 'Modo Nocturno';
