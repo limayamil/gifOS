@@ -392,6 +392,10 @@ body {
               &:hover {
                 background-image: url("../img/icon-fav-hover.svg");
               }
+
+              &.active {
+                background-image: url("../img/icon-fav-active.svg");
+              }
             }
 
             .fetched-gif-option-down {

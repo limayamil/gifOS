@@ -414,6 +414,10 @@ body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-opt
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover {
   background-image: url("../img/icon-fav-hover.svg");
 }
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav.active,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav.active {
+  background-image: url("../img/icon-fav-active.svg");
+}
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down {
   background-image: url("../img/icon-download-normal.svg");
