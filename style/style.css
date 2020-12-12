@@ -86,9 +86,6 @@ body button {
   padding: 15px 30px;
   color: #572ee5;
 }
-body a:active {
-  color: #9cafc3;
-}
 body a:hover {
   border-bottom: 2px solid #50e3c2;
   -webkit-transition: border-width 0.1s linear;
@@ -316,15 +313,18 @@ body section #section-res-gal-more {
 body section #section-res-gal-more:hover {
   background-image: url("../img/cta-ver-mas-hover.svg");
 }
-body section #section-res-info {
+body section #section-res-info,
+body section #section-fav-info {
   margin: 95px 0;
 }
-body section #section-res-info h3 {
+body section #section-res-info h3,
+body section #section-fav-info h3 {
   text-align: center;
   color: #50e3c2;
   margin-top: 25px;
 }
-body section #section-res-gal {
+body section #section-res-gal,
+body section #section-fav-gal {
   max-width: 70vw;
   margin: 50px auto;
   display: grid;
@@ -337,7 +337,8 @@ body section #section-res-gal {
   -ms-flex-line-pack: center;
       align-content: center;
 }
-body section #section-res-gal .fetched-gif {
+body section #section-res-gal .fetched-gif,
+body section #section-fav-gal .fetched-gif {
   width: 260px;
   height: 200px;
   background-size: cover;
@@ -345,10 +346,12 @@ body section #section-res-gal .fetched-gif {
   position: relative;
   margin: 0 auto;
 }
-body section #section-res-gal .fetched-gif:hover .fetched-gif-overlay {
+body section #section-res-gal .fetched-gif:hover .fetched-gif-overlay,
+body section #section-fav-gal .fetched-gif:hover .fetched-gif-overlay {
   top: 0;
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay {
   background-color: rgba(87, 46, 229, 0.7);
   height: 100%;
   width: 100%;
@@ -373,7 +376,8 @@ body section #section-res-gal .fetched-gif .fetched-gif-overlay {
       -ms-flex-align: start;
           align-items: flex-start;
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -389,34 +393,45 @@ body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-opt
           align-items: center;
   width: 100%;
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options div {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options div,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options div {
   margin-left: 10px;
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
   height: 32px;
   width: 32px;
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav {
   background-image: url("../img/icon-fav-normal.svg");
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover {
   background-image: url("../img/icon-fav-hover.svg");
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down {
   background-image: url("../img/icon-download-normal.svg");
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down:hover {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down:hover,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down:hover {
   background-image: url("../img/icon-download-hover.svg");
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
   background-image: url("../img/icon-max-normal.svg");
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover {
   background-image: url("../img/icon-max-hover.svg");
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -432,22 +447,27 @@ body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-inf
           align-items: flex-start;
   height: 100%;
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-user {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-user,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-user {
   font-size: 14px;
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-title {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-title,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-title {
   font-size: 16px;
   font-weight: bold;
   text-align: left;
 }
-body section #section-res-gal .fetched-gif .fetched-gif-overlay p {
+body section #section-res-gal .fetched-gif .fetched-gif-overlay p,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay p {
   color: #fff;
 }
-body section #section-res-gal img {
+body section #section-res-gal img,
+body section #section-fav-gal img {
   width: 260px;
   height: 200px;
 }
-body section #section-res-gal-pag ul {
+body section #section-res-gal-pag ul,
+body section #section-fav-gal-pag ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -464,7 +484,8 @@ body section #section-res-gal-pag ul {
   list-style-type: none;
   margin-bottom: 25px;
 }
-body section #section-res-gal-pag ul li {
+body section #section-res-gal-pag ul li,
+body section #section-fav-gal-pag ul li {
   color: #9cafc3;
   font-weight: bold;
   cursor: pointer;
@@ -485,7 +506,8 @@ body section #section-res-gal-pag ul li {
   width: 35px;
   height: 35px;
 }
-body section #section-res-gal-pag ul li.activo {
+body section #section-res-gal-pag ul li.activo,
+body section #section-fav-gal-pag ul li.activo {
   color: #ffffff;
   background-color: #572ee5;
   border-radius: 50%;
@@ -593,6 +615,9 @@ body footer #footer-div #footer-com-ico #footer-com-ico-tw:hover {
     font-size: 14px;
     margin-right: 50px;
     text-transform: uppercase;
+  }
+  body nav #nav-div #nav-elem a.active {
+    color: #9cafc3;
   }
   body nav #nav-div #nav-elem #nav-elem-agr {
     width: 54px;

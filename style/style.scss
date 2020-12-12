@@ -119,10 +119,6 @@ body {
   }
 
   a {
-    &:active {
-      color: $gris-oscuro;
-    }
-
     &:hover {
       border-bottom: 2px solid $col-sec;
       transition: border-width 0.1s linear;
@@ -331,7 +327,8 @@ body {
       }
     }
 
-    #section-res-info {
+    #section-res-info,
+    #section-fav-info {
       margin: 95px 0;
       h3 {
         text-align: center;
@@ -340,7 +337,8 @@ body {
       }
     }
 
-    #section-res-gal {
+    #section-res-gal,
+    #section-fav-gal {
       max-width: $anchomax;
       margin: 50px auto;
       display: grid;
@@ -440,7 +438,8 @@ body {
       }
     }
 
-    #section-res-gal-pag {
+    #section-res-gal-pag,
+    #section-fav-gal-pag {
       ul {
         @include centrarFlex(row, center, stretch);
         list-style-type: none;
@@ -558,6 +557,10 @@ body {
             font-size: 14px;
             margin-right: 50px;
             text-transform: uppercase;
+
+            &.active {
+              color: $gris-oscuro;
+            }
           }
 
           #nav-elem-agr {

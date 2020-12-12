@@ -8,10 +8,20 @@ const giphyTrendingSearchTerms = "https://api.giphy.com/v1/trending/searches?api
 const giphySearchSuggestions = "https://api.giphy.com/v1/gifs/search/tags?api_key=" + key + "&q=";
 const giphySearchGIFs = "https://api.giphy.com/v1/gifs/search?api_key=" + key + "&q=";
 
+// Memoria temporal de la búsqueda
 let resultadosMemoria;
+
+// Favoritos en memoria
+let gifsFavoritos = [];
 
 // REFERENCIAS
 
+//En general
+const header = document.getElementById("header");
+//Menú
+const aModoNocturno = document.getElementById("nav-elem-noc");
+const aMisFavoritos = document.getElementById("nav-elem-fav");
+const aMisGIFOS = document.getElementById("nav-elem-mis");
 // Trending
 const trendingGIFsDiv = document.getElementById("section-tre-car");
 const trendingTopicsDiv = document.getElementById("header-tre-top");
@@ -19,8 +29,7 @@ const trendingTopicsDiv = document.getElementById("header-tre-top");
 const formSearch = document.getElementById("form-search");
 const searchBar = document.getElementById("search-bar");
 const searchBarCross = document.getElementById("search-bar-cross");
-const searchSuggestionsList = document.getElementById("search-sug-list");
-
+const searchSuggestionsList = document.getElementById("search-sug-list")
 const searchResults = document.getElementById("section-res");
 const searchResultsGallery = document.getElementById("section-res-gal");
 const searchResultsTitle = document.getElementById("section-res-tit");
@@ -28,9 +37,13 @@ const searchResultsInfo = document.getElementById("section-res-info");
 const searchViewMore = document.getElementById("section-res-gal-more");
 const searchPagination = document.getElementById("section-res-gal-pag");
 const searchPaginationList = document.getElementById("section-res-gal-pag-list");
-
-// Overlay
-
+// Mis favoritos
+const misFavoritos = document.getElementById("section-fav");
+const favoritosResultsGallery = document.getElementById("section-fav-gal");
+const favoritosResultsInfo = document.getElementById("section-fav-info");
+const favoritosViewMore = document.getElementById("section-fav-gal-more");
+const favoritosPagination = document.getElementById("section-fav-gal-pag");
+const favoritosPaginationList = document.getElementById("section-fav-gal-pag-list");
 
 // FUNCIONES DE GIPHY
 
@@ -214,9 +227,330 @@ async function downloadGif(index) {
     a.remove();
 }
 
+// Favoritea un gif
+
+const favoriteGif = (gifURL, usuario, titulo) => {
+    //gifsFavoritos.push([gifURL, usuario, titulo]);
+    gifsFavoritos.push({url: gifURL, usuario: usuario, titulo: titulo});
+    localStorage.setItem("gifsFavoritos", JSON.stringify(gifsFavoritos));
+    alert("Se añadió un gif a favoritos");
+}
+
 // Trae GIFs cuyo término se haya búsqueda
 
 const fetchSearchGIFs = (giphyAPI, searchTerm) => {
+    fetch(giphyAPI + searchTerm)
+        .then((response) => {
+            return response.json();
+        })
+        .then((json) => {
+            resultadosMemoria = json;
+            console.log(resultadosMemoria);
+            searchResultsGallery.innerHTML = "";
+            searchResultsGallery.classList.add("hide");
+            searchResultsInfo.classList.add("hide");
+            searchResults.classList.add("hide");
+
+            let cantidadResultados = resultadosMemoria.data.length;
+            let resultadosAMostrar = 12;
+            let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
+            let paginaActual = 1;
+            let paginaIndex = paginaActual - 1;
+
+            if (cantidadResultados > 0) {
+                searchSuggestionsList.innerHTML = "";
+                searchResults.classList.remove("hide");
+                searchResultsGallery.classList.remove("hide");
+
+                const mostrarMas = () => {
+                    let indexDesde = paginaIndex * resultadosAMostrar;
+                    let indexHasta = (paginaIndex * resultadosAMostrar) + resultadosAMostrar;
+
+                    if (cantidadResultados < indexHasta) {
+                        indexHasta = cantidadResultados;
+                    }
+
+                    listarResultados(indexDesde, indexHasta);
+                }
+
+                const listarResultados = (desde, hasta) => {
+                    searchResultsGallery.innerHTML = "";
+                    for (i = desde; i < hasta; i++){
+                        let divGif = document.createElement("div");
+                        let divOverlay = document.createElement("div");
+                        let divFetchedGifOptions = document.createElement("div");
+                        divFetchedGifOptions.classList.add('fetched-gif-options');
+                        let divFetchedGifInfo = document.createElement("div");
+                        divFetchedGifInfo.classList.add('fetched-gif-info');
+                        let fetchedGifOptionFavorite = document.createElement("div");
+                        fetchedGifOptionFavorite.classList.add("fetched-gif-option-fav");
+                        let fetchedGifOptionDownload = document.createElement("div");
+                        fetchedGifOptionDownload.classList.add("fetched-gif-option-down");
+                        let fetchedGifOptionView = document.createElement("div");
+                        fetchedGifOptionView.classList.add("fetched-gif-option-view");
+                        let fetchedGifUser = document.createElement("p");
+                        fetchedGifUser.classList.add('fetched-gif-user');
+                        let fetchedGifTitle = document.createElement("p");
+                        fetchedGifTitle.classList.add('fetched-gif-title');
+                        let gifURL = resultadosMemoria.data[i].images.downsized.url;
+                        let usuario = resultadosMemoria.data[i].username;
+                        let titulo = resultadosMemoria.data[i].title
+                        let index = i;
+
+                        if (usuario === "") {
+                            usuario = "Anónimo";
+                        }
+    
+                        if (titulo === "") {
+                            titulo = "Sin título";
+                        }
+    
+                        divGif.classList.add('fetched-gif');
+                        divOverlay.classList.add('fetched-gif-overlay');
+
+                        divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
+                        divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
+                        divFetchedGifOptions.appendChild(fetchedGifOptionView);
+                        divOverlay.appendChild(divFetchedGifOptions);
+
+                        fetchedGifUser.textContent = usuario;
+                        fetchedGifTitle.textContent = titulo;
+                        divFetchedGifInfo.appendChild(fetchedGifUser);
+                        divFetchedGifInfo.appendChild(fetchedGifTitle);
+                        divOverlay.appendChild(divFetchedGifInfo);
+
+                        divGif.style.backgroundImage = "url(" + gifURL + ")";
+                        divGif.appendChild(divOverlay);
+                        searchResultsGallery.appendChild(divGif);
+
+                        const favoriteGifCallback = () => {
+                            favoriteGif(gifURL, usuario, titulo);
+                        }
+
+                        const downloadGifCallback = () => {
+                            downloadGif(index);
+                        }
+
+                        const expandGifCallback = () => {
+                            expandGif(index, gifURL, usuario, titulo);
+                        }
+
+                        fetchedGifOptionFavorite.addEventListener("click", favoriteGifCallback);
+                        fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
+                        fetchedGifOptionView.addEventListener("click", expandGifCallback);
+                    }
+
+                    for (l = 0; l < searchPaginationList.children.length; l++){
+                        searchPaginationList.children[l].classList.remove("activo");
+                    }
+
+                    searchPaginationList.children[paginaIndex].classList.add("activo");
+
+                    if (cantidadResultados > paginaActual * resultadosAMostrar) {
+                        searchViewMore.classList.remove('hide');
+                        searchViewMore.addEventListener('click', mostrarMas);
+                        paginaActual++;
+                        paginaIndex++;
+                    } else {
+                        searchViewMore.classList.add('hide');
+                    }
+                }
+
+                if (cantidadPaginas > 0) {
+                    searchPagination.classList.remove('hide');
+                    for (i = 0; i < cantidadPaginas; i++){
+                        let linkPagina = document.createElement("li");
+                        linkPagina.textContent = i + 1;
+                        let indice = i;
+
+                        const clickLinkPagina = () => {
+                            let indexDesde = indice * resultadosAMostrar;
+                            let indexHasta = (indice * resultadosAMostrar) + resultadosAMostrar;
+                            if (cantidadResultados < indexHasta) {
+                                indexHasta = cantidadResultados;
+                            }
+                            paginaActual = indice + 1;
+                            paginaIndex = indice;
+                            listarResultados(indexDesde, indexHasta);
+                        }
+
+                        linkPagina.addEventListener('click', clickLinkPagina);
+                        searchPaginationList.appendChild(linkPagina);
+                    }
+                }
+
+                listarResultados(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar);
+
+            } else if (cantidadResultados === 0) {
+                searchResults.classList.remove("hide");
+                searchResultsInfo.classList.remove("hide");
+                searchResultsGallery.innerHTML = "";
+                let imgSinResultados = document.createElement("img");
+                imgSinResultados.src = "img/icon-busqueda-sin-resultado.svg"
+                let titSinResultados = document.createElement("h3");
+                titSinResultados.classList.add("section-res-info-tit");
+                titSinResultados.textContent = "Intenta con otra búsqueda";
+                searchResultsInfo.appendChild(imgSinResultados);
+                searchResultsInfo.appendChild(titSinResultados);
+            }
+    });
+}
+
+// Muestra los GIFs favoritos
+
+const fetchFavoriteGIFs = () => {
+
+    if (gifsFavoritos.length != 0){
+        let cantidadResultados = gifsFavoritos.length;
+        let resultadosAMostrar = 12;
+        let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
+        let paginaActual = 1;
+        let paginaIndex = paginaActual - 1;
+
+        const mostrarMas = () => {
+            let indexDesde = paginaIndex * resultadosAMostrar;
+            let indexHasta = (paginaIndex * resultadosAMostrar) + resultadosAMostrar;
+
+            if (cantidadResultados < indexHasta) {
+                indexHasta = cantidadResultados;
+            }
+
+            listarResultados(indexDesde, indexHasta);
+        }
+
+        const listarResultados = (desde, hasta) => {
+            favoritosResultsGallery.innerHTML = "";
+            console.log("Desde: " + desde);
+            console.log("Hasta: " + hasta);
+            for (i = desde; i < hasta; i++) {
+                try {
+                    let divGif = document.createElement("div");
+                    let divOverlay = document.createElement("div");
+                    let divFetchedGifOptions = document.createElement("div");
+                    divFetchedGifOptions.classList.add('fetched-gif-options');
+                    let divFetchedGifInfo = document.createElement("div");
+                    divFetchedGifInfo.classList.add('fetched-gif-info');
+                    let fetchedGifOptionFavorite = document.createElement("div");
+                    fetchedGifOptionFavorite.classList.add("fetched-gif-option-fav");
+                    let fetchedGifOptionDownload = document.createElement("div");
+                    fetchedGifOptionDownload.classList.add("fetched-gif-option-down");
+                    let fetchedGifOptionView = document.createElement("div");
+                    fetchedGifOptionView.classList.add("fetched-gif-option-view");
+                    let fetchedGifUser = document.createElement("p");
+                    fetchedGifUser.classList.add('fetched-gif-user');
+                    let fetchedGifTitle = document.createElement("p");
+                    fetchedGifTitle.classList.add('fetched-gif-title');
+                    
+                    console.log(gifsFavoritos[i].url);
+                    let gifURL = gifsFavoritos[i].url;
+                    let usuario = gifsFavoritos[i].usuario;
+                    let titulo = gifsFavoritos[i].titulo;
+    
+                    if (usuario === "") {
+                        usuario = "Anónimo";
+                    }
+    
+                    if (titulo === "") {
+                        titulo = "Sin título";
+                    }
+    
+                    divGif.classList.add('fetched-gif');
+                    divOverlay.classList.add('fetched-gif-overlay');
+    
+                    // divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
+                    // Se podría hacer que el botón elimine de favoritos?
+                    divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
+                    //divFetchedGifOptions.appendChild(fetchedGifOptionView);
+                    divOverlay.appendChild(divFetchedGifOptions);
+    
+                    fetchedGifUser.textContent = usuario;
+                    fetchedGifTitle.textContent = titulo;
+                    divFetchedGifInfo.appendChild(fetchedGifUser);
+                    divFetchedGifInfo.appendChild(fetchedGifTitle);
+                    divOverlay.appendChild(divFetchedGifInfo);
+    
+                    divGif.style.backgroundImage = "url(" + gifURL + ")";
+                    divGif.appendChild(divOverlay);
+                    favoritosResultsGallery.appendChild(divGif);
+    
+                    const favoriteGifCallback = () => {
+                        favoriteGif(index);
+                    };
+    
+                    const downloadGifCallback = () => {
+                        downloadGif(index);
+                    };
+    
+                    const expandGifCallback = () => {
+                        expandGif(index, gifURL, usuario, titulo);
+                    };
+    
+                    //divGif.addEventListener("click", expandGifCallback);
+                    //fetchedGifOptionFavorite.addEventListener("click", favoriteGifCallback);
+                    fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
+                    //fetchedGifOptionView.addEventListener("click", expandGifCallback);
+                } catch(e) {
+                    console.log("Pog");
+                    break;
+                }
+                
+            }
+
+            for (l = 0; l < favoritosPaginationList.children.length; l++) {
+                favoritosPaginationList.children[l].classList.remove("activo");
+            }
+
+            favoritosPaginationList.children[paginaIndex].classList.add("activo");
+
+            if (cantidadResultados > paginaActual * resultadosAMostrar) {
+                favoritosViewMore.classList.remove('hide');
+                favoritosViewMore.addEventListener('click', mostrarMas);
+                paginaActual++;
+                paginaIndex++;
+            } else {
+                favoritosViewMore.classList.add('hide');
+            }
+        }
+
+        if (cantidadPaginas > 0) {
+            favoritosPagination.classList.remove('hide');
+            for (i = 0; i < cantidadPaginas; i++){
+                let linkPagina = document.createElement("li");
+                linkPagina.textContent = i + 1;
+                let indice = i;
+
+                const clickLinkPagina = () => {
+                    let indexDesde = indice * resultadosAMostrar;
+                    let indexHasta = (indice * resultadosAMostrar) + resultadosAMostrar;
+                    if (cantidadResultados < indexHasta) {
+                        indexHasta = cantidadResultados;
+                    }
+                    paginaActual = indice + 1;
+                    paginaIndex = indice;
+                    listarResultados(indexDesde, indexHasta);
+                }
+
+                linkPagina.addEventListener('click', clickLinkPagina);
+                favoritosPaginationList.appendChild(linkPagina);
+            }
+        }
+
+        listarResultados(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar);
+
+    } else {
+        misFavoritos.classList.remove("hide");
+        favoritosResultsInfo.classList.remove("hide");
+        favoritosResultsGallery.innerHTML = "";
+        let imgSinResultados = document.createElement("img");
+        imgSinResultados.src = "img/icon-fav-sin-contenido.svg"
+        let titSinResultados = document.createElement("h3");
+        titSinResultados.classList.add("section-fav-info-tit");
+        titSinResultados.textContent = "¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!";
+        favoritosResultsInfo.appendChild(imgSinResultados);
+        favoritosResultsInfo.appendChild(titSinResultados);
+    }
+
+    /*
     fetch(giphyAPI + searchTerm)
         .then((response) => {
             return response.json();
@@ -373,6 +707,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                 searchResultsInfo.appendChild(titSinResultados);
             }
     });
+    */
 }
 
 // Cuando detecta un cambio en la barra de búsqueda, trae las sugerencias
@@ -415,4 +750,15 @@ formSearch.addEventListener('submit', e => {
     e.preventDefault;
     e.stopPropagation;
     showResults();
+});
+//Ingresar a Favoritos
+aMisFavoritos.addEventListener('click', e => {
+    aMisFavoritos.classList.add('active');
+    e.preventDefault;
+    e.stopPropagation;
+    header.classList.add('hide');
+    searchResults.classList.add('hide');
+    misFavoritos.classList.remove('hide');
+    favoritosResultsGallery.classList.remove('hide');
+    fetchFavoriteGIFs();
 });
