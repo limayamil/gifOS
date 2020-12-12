@@ -3,6 +3,8 @@
 /* Imports */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Roboto:wght@400;700;900&display=swap");
 /* Variables */
+/* Modo diurno */
+/* Modo nocturno */
 /* Mixins */
 /* Responsive */
 * {
@@ -75,6 +77,32 @@ body input {
   font-family: Roboto;
   font-weight: 400;
   color: #000000;
+}
+body ::-webkit-input-placeholder {
+  color: #9cafc3;
+  opacity: 1;
+}
+body ::-moz-placeholder {
+  color: #9cafc3;
+  opacity: 1;
+}
+body :-ms-input-placeholder {
+  color: #9cafc3;
+  opacity: 1;
+}
+body ::-ms-input-placeholder {
+  color: #9cafc3;
+  opacity: 1;
+}
+body ::placeholder {
+  color: #9cafc3;
+  opacity: 1;
+}
+body :-ms-input-placeholder {
+  color: #9cafc3;
+}
+body ::-ms-input-placeholder {
+  color: #9cafc3;
 }
 body button {
   font-family: "Montserrat";
@@ -287,8 +315,6 @@ body header #search-div #search-sug-list li:first-child {
 body section {
   text-align: center;
   padding: 30px 0;
-}
-body section#section-tre {
   background-color: #f3f5f8;
 }
 body section#section-tre #section-tit {
@@ -569,6 +595,36 @@ body footer #footer-div #footer-com-ico #footer-com-ico-tw {
 }
 body footer #footer-div #footer-com-ico #footer-com-ico-tw:hover {
   background-image: url("../img/icon_twitter_hover.svg");
+}
+
+body.dark-mode {
+  background-color: #37383c;
+}
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5 {
+  color: #ffffff;
+}
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode a,
+body.dark-mode ul,
+body.dark-mode input {
+  color: #ffffff;
+}
+body.dark-mode nav {
+  border-top-color: #000000;
+}
+body.dark-mode footer {
+  border-bottom-color: #000000;
+}
+body.dark-mode header #search-div {
+  border: 1px solid #ffffff;
+}
+body.dark-mode section {
+  background-color: #222326;
 }
 
 /*  DESKTOP  */

@@ -6,12 +6,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Roboto:wght@400;700;900&display=swap");
 
 /* Variables */
+/* Modo diurno */
 
-$col-pri: #572ee5;
-$col-sec: #50e3c2;
-$negro: #000000;
-$gris: #f3f5f8;
-$gris-oscuro: #9cafc3;
+$light-col-pri: #572ee5;
+$light-col-sec: #50e3c2;
+$light-negro: #000000;
+$light-gris: #f3f5f8;
+$light-gris-oscuro: #9cafc3;
+
+/* Modo nocturno */
+
+$dark-col-pri: #ffffff;
+$dark-col-sec: #50e3c2;
+$dark-negro: #000000;
+$dark-gris: #37383c;
+$dark-gris-oscuro: #222326;
 
 $interlineado: 1.7;
 $anchomax: 70vw;
@@ -67,7 +76,7 @@ body {
   h5 {
     font-family: Montserrat;
     font-weight: 700;
-    color: $col-pri;
+    color: $light-col-pri;
   }
 
   h1 {
@@ -75,7 +84,7 @@ body {
 
     em {
       font-style: inherit;
-      color: $col-sec;
+      color: $light-col-sec;
     }
   }
 
@@ -104,7 +113,20 @@ body {
     font-size: 16px;
     font-family: Roboto;
     font-weight: 400;
-    color: $negro;
+    color: $light-negro;
+  }
+
+  ::placeholder {
+    color: $light-gris-oscuro;
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: $light-gris-oscuro;
+  }
+
+  ::-ms-input-placeholder {
+    color: $light-gris-oscuro;
   }
 
   button {
@@ -112,15 +134,15 @@ body {
     text-transform: uppercase;
     font-weight: 700;
     background: rgba(0, 0, 0, 0);
-    border: 1px solid $col-pri;
+    border: 1px solid $light-col-pri;
     border-radius: 25px;
     padding: 15px 30px;
-    color: $col-pri;
+    color: $light-col-pri;
   }
 
   a {
     &:hover {
-      border-bottom: 2px solid $col-sec;
+      border-bottom: 2px solid $light-col-sec;
       transition: border-width 0.1s linear;
     }
   }
@@ -195,7 +217,7 @@ body {
   }
 
   nav {
-    border-top: 5px solid $col-pri;
+    border-top: 5px solid $light-col-pri;
 
     #nav-ham {
       display: none;
@@ -241,7 +263,7 @@ body {
 
     #search-div {
       border-radius: 25px;
-      border: 1px solid $col-pri;
+      border: 1px solid $light-col-pri;
       font-size: 16px;
       padding: 15px 20px;
       width: 80%;
@@ -252,12 +274,12 @@ body {
         i {
           &:first-child {
             padding-right: 10px;
-            color: $gris-oscuro;
+            color: $light-gris-oscuro;
           }
 
           &:last-child {
             padding-left: 10px;
-            color: $col-pri;
+            color: $light-col-pri;
           }
         }
         form {
@@ -272,7 +294,7 @@ body {
 
       #search-sug-list {
         list-style-type: none;
-        color: $gris-oscuro;
+        color: $light-gris-oscuro;
 
         li {
           i {
@@ -280,7 +302,7 @@ body {
           }
 
           &:first-child {
-            border-top: 1px solid $gris-oscuro;
+            border-top: 1px solid $light-gris-oscuro;
             margin-top: 10px;
           }
 
@@ -293,9 +315,10 @@ body {
   section {
     text-align: center;
     padding: 30px 0;
+    background-color: $light-gris;
 
     &#section-tre {
-      background-color: $gris;
+      //background-color: $light-gris;
 
       #section-tit {
         line-height: $interlineado;
@@ -332,7 +355,7 @@ body {
       margin: 95px 0;
       h3 {
         text-align: center;
-        color: $col-sec;
+        color: $light-col-sec;
         margin-top: 25px;
       }
     }
@@ -450,7 +473,7 @@ body {
         margin-bottom: 25px;
 
         li {
-          color: $gris-oscuro;
+          color: $light-gris-oscuro;
           font-weight: bold;
           cursor: pointer;
           margin: 0 5px;
@@ -460,7 +483,7 @@ body {
 
           &.activo {
             color: #ffffff;
-            background-color: $col-pri;
+            background-color: $light-col-pri;
             border-radius: 50%;
           }
         }
@@ -469,7 +492,7 @@ body {
   }
 
   footer {
-    border-bottom: 5px solid $col-pri;
+    border-bottom: 5px solid $light-col-pri;
     #footer-div {
       @include centrarFlex(column, stretch, stretch);
       text-align: center;
@@ -520,6 +543,44 @@ body {
   }
 }
 
+body.dark-mode {
+  background-color: $dark-gris;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: $dark-col-pri;
+  }
+
+  p,
+  span,
+  a,
+  ul,
+  input {
+    color: $dark-col-pri;
+  }
+
+  nav {
+    border-top-color: $dark-negro;
+  }
+
+  footer {
+    border-bottom-color: $dark-negro;
+  }
+
+  header {
+    #search-div {
+      border: 1px solid $dark-col-pri;
+    }
+  }
+
+  section {
+    background-color: $dark-gris-oscuro;
+  }
+}
+
 /*  DESKTOP  */
 
 @media all and (min-width: 1024px) {
@@ -556,14 +617,14 @@ body {
 
           a {
             text-decoration: none;
-            color: $col-pri;
+            color: $light-col-pri;
             font-weight: bold;
             font-size: 14px;
             margin-right: 50px;
             text-transform: uppercase;
 
             &.active {
-              color: $gris-oscuro;
+              color: $light-gris-oscuro;
             }
           }
 

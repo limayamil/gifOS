@@ -14,9 +14,13 @@ let resultadosMemoria;
 // Favoritos en memoria
 let gifsFavoritos = [];
 
+// Booleano del modo nocturno
+let modoNocturno = false;
+
 // REFERENCIAS
 
 //En general
+const body = document.body;
 const header = document.getElementById("header");
 //Menú
 const aModoNocturno = document.getElementById("nav-elem-noc");
@@ -490,8 +494,8 @@ const fetchFavoriteGIFs = () => {
                     divGif.appendChild(divOverlay);
                     favoritosResultsGallery.appendChild(divGif);
     
-                    const favoriteGifCallback = () => {
-                        favoriteGif(index);
+                    const unfavoriteGifCallback = () => {
+                        unfavoriteGif(gifURL);
                     };
     
                     const downloadGifCallback = () => {
@@ -503,7 +507,7 @@ const fetchFavoriteGIFs = () => {
                     };
     
                     //divGif.addEventListener("click", expandGifCallback);
-                    //fetchedGifOptionFavorite.addEventListener("click", favoriteGifCallback);
+                    //fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
                     fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
                     //fetchedGifOptionView.addEventListener("click", expandGifCallback);
                 } catch(e) {
@@ -619,4 +623,22 @@ aMisFavoritos.addEventListener('click', e => {
     misFavoritos.classList.remove('hide');
     favoritosResultsGallery.classList.remove('hide');
     fetchFavoriteGIFs();
+});
+//Activar modo nocturno
+aModoNocturno.addEventListener('click', e => {
+    if (modoNocturno === false){
+        e.preventDefault;
+        e.stopPropagation;
+        aModoNocturno.classList.add('active');
+        body.classList.add('dark-mode');
+        aModoNocturno.textContent = 'Modo Diurno';
+        modoNocturno = true;
+    } else {
+        e.preventDefault;
+        e.stopPropagation;
+        aModoNocturno.classList.remove('active');
+        body.classList.remove('dark-mode');
+        aModoNocturno.textContent = 'Modo Nocturno';
+        modoNocturno = false;
+    }
 });
