@@ -227,10 +227,17 @@ async function downloadGif(index) {
     a.remove();
 }
 
+// Desfavoritea un gif
+const unfavoriteGif = (gifURL) => {
+    let index = gifsFavoritos.findIndex(x => x.url == gifURL);
+    gifsFavoritos.splice(index, 1);
+    alert("Se borró un gif de favoritos");
+    console.log(gifsFavoritos);
+}
+
 // Favoritea un gif
 
 const favoriteGif = (gifURL, usuario, titulo) => {
-    //gifsFavoritos.push([gifURL, usuario, titulo]);
     gifsFavoritos.push({url: gifURL, usuario: usuario, titulo: titulo});
     localStorage.setItem("gifsFavoritos", JSON.stringify(gifsFavoritos));
     alert("Se añadió un gif a favoritos");
@@ -323,10 +330,18 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                         divGif.appendChild(divOverlay);
                         searchResultsGallery.appendChild(divGif);
 
+                        const unfavoriteGifCallback = () => {
+                            fetchedGifOptionFavorite.classList.remove('active');
+                            unfavoriteGif(gifURL);
+                            fetchedGifOptionFavorite.removeEventListener("click", unfavoriteGifCallback);
+                            fetchedGifOptionFavorite.addEventListener("click", favoriteGifCallback);
+                        }
+
                         const favoriteGifCallback = () => {
                             fetchedGifOptionFavorite.classList.add('active');
                             favoriteGif(gifURL, usuario, titulo);
                             fetchedGifOptionFavorite.removeEventListener("click", favoriteGifCallback);
+                            fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
                         }
 
                         const downloadGifCallback = () => {
