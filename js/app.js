@@ -55,26 +55,26 @@ async function fetchTrendingGIFs(giphyAPI) {
 
 // Traer los tópicos en Trending
 
-function fetchTrendingSearchTerms(giphyAPI) {
-    fetch(giphyAPI)
-        .then((response) => {
-            return response.json();
-        })
-        .then((json) => {
-            //console.log(json);
-            for (i = 0; i < 5; i++) {
-                if (i === 4) {
-                    let trendH4 = document.createElement("h4");
-                    trendH4.innerHTML = json.data[i];
-                    trendingTopicsDiv.appendChild(trendH4);
-                } else {
-                    let trendH4 = document.createElement("h4");
-                    trendH4.innerHTML = json.data[i] + ",";
-                    trendingTopicsDiv.appendChild(trendH4);
-                }
-            }
-        });
+async function fetchTrendingSearchTerms(giphyAPI) {
+    const resp = await fetch(giphyAPI);
+    const data = await resp.json();
+    return data;
 }
+
+(async () => {
+    let json = await fetchTrendingGIFs(giphyTrendingSearchTerms);
+    for (i = 0; i < 5; i++) {
+        if (i === 4) {
+            let trendH4 = document.createElement("h4");
+            trendH4.innerHTML = json.data[i];
+            trendingTopicsDiv.appendChild(trendH4);
+        } else {
+            let trendH4 = document.createElement("h4");
+            trendH4.innerHTML = json.data[i] + ",";
+            trendingTopicsDiv.appendChild(trendH4);
+        }
+    }
+})();
 
 // BÚSQUEDA
 
@@ -370,8 +370,3 @@ formSearch.addEventListener('submit', e => {
     e.stopPropagation;
     showResults();
 });
-
-// Funciones para el inicio de la página
-
-//fetchTrendingGIFs(giphyTrendingGIFs);
-fetchTrendingSearchTerms(giphyTrendingSearchTerms);
