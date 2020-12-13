@@ -33,6 +33,8 @@ const trendingTopicsDiv = document.getElementById("header-tre-top");
 const formSearch = document.getElementById("form-search");
 const searchBar = document.getElementById("search-bar");
 const searchBarCross = document.getElementById("search-bar-cross");
+const searchBarLupaPlaceholder = document.getElementById("search-bar-lupa-placeholder");
+const searchBarLupaSearch = document.getElementById("search-bar-lupa-search");
 const searchSuggestionsList = document.getElementById("search-sug-list")
 const searchResults = document.getElementById("section-res");
 const searchResultsGallery = document.getElementById("section-res-gal");
@@ -62,11 +64,55 @@ async function fetchTrendingGIFs(giphyAPI) {
 }
 
 (async () => {
+
     let json = await fetchTrendingGIFs(giphyTrendingGIFs);
     for (i = 0; i < 3; i++){
-        let gifImg = document.createElement("img");
-        gifImg.src = json.data[i].images.downsized.url;
-        trendingGIFsDiv.appendChild(gifImg);
+        let divGif = document.createElement("div");
+        divGif.classList.add('fetched-gif');
+        let divOverlay = document.createElement("div");
+        let divFetchedGifOptions = document.createElement("div");
+        divFetchedGifOptions.classList.add('fetched-gif-options');
+        let divFetchedGifInfo = document.createElement("div");
+        divFetchedGifInfo.classList.add('fetched-gif-info');
+        let fetchedGifOptionFavorite = document.createElement("div");
+        fetchedGifOptionFavorite.classList.add("fetched-gif-option-fav");
+        let fetchedGifOptionDownload = document.createElement("div");
+        fetchedGifOptionDownload.classList.add("fetched-gif-option-down");
+        let fetchedGifOptionView = document.createElement("div");
+        fetchedGifOptionView.classList.add("fetched-gif-option-view");
+        let fetchedGifUser = document.createElement("p");
+        fetchedGifUser.classList.add('fetched-gif-user');
+        let fetchedGifTitle = document.createElement("p");
+        fetchedGifTitle.classList.add('fetched-gif-title');
+        let gifURL = json.data[i].images.downsized.url;
+        let usuario = json.data[i].username;
+        let titulo = json.data[i].title;
+        
+        if (usuario === "") {
+            usuario = "Anónimo";
+        }
+
+        if (titulo === "") {
+            titulo = "Sin título";
+        }
+
+        divGif.classList.add('fetched-gif');
+        divOverlay.classList.add('fetched-gif-overlay');
+
+        divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
+        divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
+        divFetchedGifOptions.appendChild(fetchedGifOptionView);
+        divOverlay.appendChild(divFetchedGifOptions);
+
+        fetchedGifUser.textContent = usuario;
+        fetchedGifTitle.textContent = titulo;
+        divFetchedGifInfo.appendChild(fetchedGifUser);
+        divFetchedGifInfo.appendChild(fetchedGifTitle);
+        divOverlay.appendChild(divFetchedGifInfo);
+
+        divGif.style.background = "url(" + gifURL + ") no-repeat center / cover, url('img/loading.gif') no-repeat center";
+        divGif.appendChild(divOverlay);
+        trendingGIFsDiv.appendChild(divGif);
     }
 })();
 
@@ -127,7 +173,7 @@ const fetchSearchSuggestions = (giphyAPI, searchTerm) => {
         for (i = 0; i < json.data.length; i++){
             let suggestionItem = document.createElement("li");
             let searchSuggestionFetched = json.data[i].name;
-            suggestionItem.innerHTML = '<i class="fas fa-search"></i>' + searchSuggestionFetched;
+            suggestionItem.innerHTML = '<div class="search-bar-lupa-search"></div>' + searchSuggestionFetched;
             searchSuggestionsList.appendChild(suggestionItem);
 
             const clickSearchSuggestion = () => {
@@ -342,7 +388,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                         divFetchedGifInfo.appendChild(fetchedGifTitle);
                         divOverlay.appendChild(divFetchedGifInfo);
 
-                        divGif.style.backgroundImage = "url(" + gifURL + ")";
+                        divGif.style.background = "url(" + gifURL + ") no-repeat center / cover, url('img/loading.gif') no-repeat center";
                         divGif.appendChild(divOverlay);
                         searchResultsGallery.appendChild(divGif);
 
@@ -592,8 +638,12 @@ const changeSearchBar = () => {
 
     if (searchTerm.length > 0){
         searchBarCross.classList.remove('hide');
+        searchBarLupaPlaceholder.classList.add('hide');
+        searchBarLupaSearch.classList.remove('hide');
     } else {
         searchBarCross.classList.add('hide');
+        searchBarLupaPlaceholder.classList.remove('hide');
+        searchBarLupaSearch.classList.add('hide');
     }
 }
 
@@ -625,6 +675,8 @@ formSearch.addEventListener('submit', e => {
     e.stopPropagation;
     showResults();
 });
+//Al hacer click en la lupa al tener el campo de búsqueda con algo de texto
+searchBarLupaSearch.addEventListener('click', showResults);
 //Ingresar a Favoritos
 aMisFavoritos.addEventListener('click', e => {
     aMisFavoritos.classList.add('active');

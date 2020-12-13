@@ -141,6 +141,7 @@ body {
   }
 
   a {
+    cursor: pointer;
     &:hover {
       border-bottom: 2px solid $light-col-sec;
       transition: border-width 0.1s linear;
@@ -287,6 +288,12 @@ body {
       text-align: center;
       padding: 20px 70px;
       line-height: $interlineado;
+
+      li {
+        a {
+          cursor: pointer;
+        }
+      }
     }
 
     #search-div {
@@ -295,6 +302,19 @@ body {
       font-size: 16px;
       padding: 15px 20px;
       width: 80%;
+
+      ul {
+        li {
+          .search-bar-lupa-search {
+            background-image: url("../img/icon-search-gris.svg");
+            width: 17px;
+            height: 15px;
+            display: inline-block;
+            background-repeat: no-repeat;
+            margin-right: 8px;
+          }
+        }
+      }
 
       .search-bar-div {
         display: flex;
@@ -318,6 +338,22 @@ body {
             width: 100%;
           }
         }
+
+        #search-bar-lupa-placeholder,
+        #search-bar-lupa-search {
+          width: 22px;
+          height: 20px;
+          background-repeat: no-repeat;
+        }
+
+        #search-bar-lupa-placeholder {
+          background-image: url("../img/icon-search.svg");
+        }
+
+        #search-bar-lupa-search {
+          background-image: url("../img/icon-search-gris.svg");
+          margin-right: 6px;
+        }
       }
 
       #search-sug-list {
@@ -325,12 +361,14 @@ body {
         color: $light-gris-oscuro;
 
         li {
+          cursor: pointer;
           i {
             padding-right: 10px;
           }
 
           &:first-child {
             border-top: 1px solid $light-gris-oscuro;
+            padding-top: 15px;
             margin-top: 10px;
           }
 
@@ -389,7 +427,8 @@ body {
     }
 
     #section-res-gal,
-    #section-fav-gal {
+    #section-fav-gal,
+    #section-tre-car {
       max-width: $anchomax;
       margin: 50px auto;
       display: grid;
@@ -491,6 +530,12 @@ body {
         width: 260px;
         height: 200px;
       }
+    }
+
+    #section-tre-car {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr;
+      max-width: 50vw;
     }
 
     #section-res-gal-pag,
