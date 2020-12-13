@@ -55,6 +55,83 @@ const favoritosPaginationList = document.getElementById("section-fav-gal-pag-lis
 
 // TRENDING
 
+// Función principal de fetchear GIFs y agregarlos a la galería que se especifique.
+
+async function fetchGif(json, divToPlace, index) {
+    let divGif = document.createElement("div");
+    divGif.classList.add('fetched-gif');
+    let divOverlay = document.createElement("div");
+    let divFetchedGifOptions = document.createElement("div");
+    divFetchedGifOptions.classList.add('fetched-gif-options');
+    let divFetchedGifInfo = document.createElement("div");
+    divFetchedGifInfo.classList.add('fetched-gif-info');
+    let fetchedGifOptionFavorite = document.createElement("div");
+    fetchedGifOptionFavorite.classList.add("fetched-gif-option-fav");
+    let fetchedGifOptionDownload = document.createElement("div");
+    fetchedGifOptionDownload.classList.add("fetched-gif-option-down");
+    let fetchedGifOptionView = document.createElement("div");
+    fetchedGifOptionView.classList.add("fetched-gif-option-view");
+    let fetchedGifUser = document.createElement("p");
+    fetchedGifUser.classList.add('fetched-gif-user');
+    let fetchedGifTitle = document.createElement("p");
+    fetchedGifTitle.classList.add('fetched-gif-title');
+    let gifURL = json.data[i].images.downsized.url;
+    let usuario = json.data[i].username;
+    let titulo = json.data[i].title;
+    
+    if (usuario === "") {
+        usuario = "Anónimo";
+    }
+
+    if (titulo === "") {
+        titulo = "Sin título";
+    }
+
+    divGif.classList.add('fetched-gif');
+    divOverlay.classList.add('fetched-gif-overlay');
+
+    divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
+    divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
+    divFetchedGifOptions.appendChild(fetchedGifOptionView);
+    divOverlay.appendChild(divFetchedGifOptions);
+
+    fetchedGifUser.textContent = usuario;
+    fetchedGifTitle.textContent = titulo;
+    divFetchedGifInfo.appendChild(fetchedGifUser);
+    divFetchedGifInfo.appendChild(fetchedGifTitle);
+    divOverlay.appendChild(divFetchedGifInfo);
+
+    divGif.style.background = "url(" + gifURL + ") no-repeat center / cover, url('img/loading.gif') no-repeat center";
+    divGif.appendChild(divOverlay);
+    divToPlace.appendChild(divGif);
+
+    const unfavoriteGifCallback = () => {
+        fetchedGifOptionFavorite.classList.remove('active');
+        unfavoriteGif(gifURL);
+        fetchedGifOptionFavorite.removeEventListener("click", unfavoriteGifCallback);
+        fetchedGifOptionFavorite.addEventListener("click", favoriteGifCallback);
+    }
+
+    const favoriteGifCallback = () => {
+        fetchedGifOptionFavorite.classList.add('active');
+        favoriteGif(gifURL, usuario, titulo);
+        fetchedGifOptionFavorite.removeEventListener("click", favoriteGifCallback);
+        fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
+    }
+
+    const downloadGifCallback = () => {
+        downloadGif(index, json);
+    }
+
+    const expandGifCallback = () => {
+        expandGif(index, gifURL, usuario, titulo);
+    }
+
+    fetchedGifOptionFavorite.addEventListener("click", favoriteGifCallback);
+    fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
+    fetchedGifOptionView.addEventListener("click", expandGifCallback);
+}
+
 // Traer los GIFs Trending
 
 async function fetchTrendingGIFs(giphyAPI) {
@@ -64,55 +141,9 @@ async function fetchTrendingGIFs(giphyAPI) {
 }
 
 (async () => {
-
     let json = await fetchTrendingGIFs(giphyTrendingGIFs);
     for (i = 0; i < 3; i++){
-        let divGif = document.createElement("div");
-        divGif.classList.add('fetched-gif');
-        let divOverlay = document.createElement("div");
-        let divFetchedGifOptions = document.createElement("div");
-        divFetchedGifOptions.classList.add('fetched-gif-options');
-        let divFetchedGifInfo = document.createElement("div");
-        divFetchedGifInfo.classList.add('fetched-gif-info');
-        let fetchedGifOptionFavorite = document.createElement("div");
-        fetchedGifOptionFavorite.classList.add("fetched-gif-option-fav");
-        let fetchedGifOptionDownload = document.createElement("div");
-        fetchedGifOptionDownload.classList.add("fetched-gif-option-down");
-        let fetchedGifOptionView = document.createElement("div");
-        fetchedGifOptionView.classList.add("fetched-gif-option-view");
-        let fetchedGifUser = document.createElement("p");
-        fetchedGifUser.classList.add('fetched-gif-user');
-        let fetchedGifTitle = document.createElement("p");
-        fetchedGifTitle.classList.add('fetched-gif-title');
-        let gifURL = json.data[i].images.downsized.url;
-        let usuario = json.data[i].username;
-        let titulo = json.data[i].title;
-        
-        if (usuario === "") {
-            usuario = "Anónimo";
-        }
-
-        if (titulo === "") {
-            titulo = "Sin título";
-        }
-
-        divGif.classList.add('fetched-gif');
-        divOverlay.classList.add('fetched-gif-overlay');
-
-        divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
-        divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
-        divFetchedGifOptions.appendChild(fetchedGifOptionView);
-        divOverlay.appendChild(divFetchedGifOptions);
-
-        fetchedGifUser.textContent = usuario;
-        fetchedGifTitle.textContent = titulo;
-        divFetchedGifInfo.appendChild(fetchedGifUser);
-        divFetchedGifInfo.appendChild(fetchedGifTitle);
-        divOverlay.appendChild(divFetchedGifInfo);
-
-        divGif.style.background = "url(" + gifURL + ") no-repeat center / cover, url('img/loading.gif') no-repeat center";
-        divGif.appendChild(divOverlay);
-        trendingGIFsDiv.appendChild(divGif);
+        fetchGif(json, trendingGIFsDiv, i);
     }
 })();
 
@@ -168,7 +199,6 @@ const fetchSearchSuggestions = (giphyAPI, searchTerm) => {
         return response.json();
         })
         .then((json) => {
-        //console.log(json);
         searchSuggestionsList.innerHTML = "";
         for (i = 0; i < json.data.length; i++){
             let suggestionItem = document.createElement("li");
@@ -277,12 +307,12 @@ const expandGif = (index, gifURL, usuario, titulo) => {
 
 // Descarga un gif
 
-async function downloadGif(index) {
+async function downloadGif(index, json) {
     let a = document.createElement('a');
-    let resp = await fetch(resultadosMemoria.data[index].images.downsized.url);
+    let resp = await fetch(json.data[index].images.downsized.url);
     let file = await resp.blob();
     
-    a.download = resultadosMemoria.data[index].title + ".gif";
+    a.download = json.data[index].title + ".gif";
     a.href = window.URL.createObjectURL(file);
     a.click();
     a.remove();
@@ -313,7 +343,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
         })
         .then((json) => {
             resultadosMemoria = json;
-            console.log(resultadosMemoria);
+            
             searchResultsGallery.innerHTML = "";
             searchPaginationList.innerHTML = "";
             searchResultsGallery.classList.add("hide");
@@ -345,78 +375,9 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                 const listarResultados = (desde, hasta) => {
                     searchResultsGallery.innerHTML = "";
                     for (i = desde; i < hasta; i++){
-                        let divGif = document.createElement("div");
-                        let divOverlay = document.createElement("div");
-                        let divFetchedGifOptions = document.createElement("div");
-                        divFetchedGifOptions.classList.add('fetched-gif-options');
-                        let divFetchedGifInfo = document.createElement("div");
-                        divFetchedGifInfo.classList.add('fetched-gif-info');
-                        let fetchedGifOptionFavorite = document.createElement("div");
-                        fetchedGifOptionFavorite.classList.add("fetched-gif-option-fav");
-                        let fetchedGifOptionDownload = document.createElement("div");
-                        fetchedGifOptionDownload.classList.add("fetched-gif-option-down");
-                        let fetchedGifOptionView = document.createElement("div");
-                        fetchedGifOptionView.classList.add("fetched-gif-option-view");
-                        let fetchedGifUser = document.createElement("p");
-                        fetchedGifUser.classList.add('fetched-gif-user');
-                        let fetchedGifTitle = document.createElement("p");
-                        fetchedGifTitle.classList.add('fetched-gif-title');
-                        let gifURL = resultadosMemoria.data[i].images.downsized.url;
-                        let usuario = resultadosMemoria.data[i].username;
-                        let titulo = resultadosMemoria.data[i].title
-                        let index = i;
+                        fetchGif(resultadosMemoria, searchResultsGallery, i);
 
-                        if (usuario === "") {
-                            usuario = "Anónimo";
-                        }
-    
-                        if (titulo === "") {
-                            titulo = "Sin título";
-                        }
-    
-                        divGif.classList.add('fetched-gif');
-                        divOverlay.classList.add('fetched-gif-overlay');
-
-                        divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
-                        divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
-                        divFetchedGifOptions.appendChild(fetchedGifOptionView);
-                        divOverlay.appendChild(divFetchedGifOptions);
-
-                        fetchedGifUser.textContent = usuario;
-                        fetchedGifTitle.textContent = titulo;
-                        divFetchedGifInfo.appendChild(fetchedGifUser);
-                        divFetchedGifInfo.appendChild(fetchedGifTitle);
-                        divOverlay.appendChild(divFetchedGifInfo);
-
-                        divGif.style.background = "url(" + gifURL + ") no-repeat center / cover, url('img/loading.gif') no-repeat center";
-                        divGif.appendChild(divOverlay);
-                        searchResultsGallery.appendChild(divGif);
-
-                        const unfavoriteGifCallback = () => {
-                            fetchedGifOptionFavorite.classList.remove('active');
-                            unfavoriteGif(gifURL);
-                            fetchedGifOptionFavorite.removeEventListener("click", unfavoriteGifCallback);
-                            fetchedGifOptionFavorite.addEventListener("click", favoriteGifCallback);
-                        }
-
-                        const favoriteGifCallback = () => {
-                            fetchedGifOptionFavorite.classList.add('active');
-                            favoriteGif(gifURL, usuario, titulo);
-                            fetchedGifOptionFavorite.removeEventListener("click", favoriteGifCallback);
-                            fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
-                        }
-
-                        const downloadGifCallback = () => {
-                            downloadGif(index);
-                        }
-
-                        const expandGifCallback = () => {
-                            expandGif(index, gifURL, usuario, titulo);
-                        }
-
-                        fetchedGifOptionFavorite.addEventListener("click", favoriteGifCallback);
-                        fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
-                        fetchedGifOptionView.addEventListener("click", expandGifCallback);
+                        
                     }
 
                     for (l = 0; l < searchPaginationList.children.length; l++){
