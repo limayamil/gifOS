@@ -352,7 +352,14 @@ body {
 
         #search-bar-lupa-search {
           background-image: url("../img/icon-search-gris.svg");
-          margin-right: 6px;
+          margin-right: 8px;
+        }
+
+        #search-bar-cross {
+          width: 15px;
+          height: 14px;
+          background-image: url("../img/close.svg");
+          background-repeat: no-repeat;
         }
       }
 
@@ -363,7 +370,7 @@ body {
         li {
           cursor: pointer;
           i {
-            padding-right: 10px;
+            padding-right: 18px;
           }
 
           &:first-child {
@@ -670,6 +677,17 @@ body.dark-mode {
   header {
     #search-div {
       border: 1px solid $dark-col-pri;
+    }
+
+    #search-div {
+      .search-bar-div {
+        #search-bar-lupa-placeholder {
+          background-image: url("../img/icon-search-noc.svg");
+        }
+        #search-bar-cross {
+          background-image: url("../img/close-noc.svg");
+        }
+      }
     }
   }
 

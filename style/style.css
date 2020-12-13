@@ -347,7 +347,13 @@ body header #search-div .search-bar-div #search-bar-lupa-placeholder {
 }
 body header #search-div .search-bar-div #search-bar-lupa-search {
   background-image: url("../img/icon-search-gris.svg");
-  margin-right: 6px;
+  margin-right: 8px;
+}
+body header #search-div .search-bar-div #search-bar-cross {
+  width: 15px;
+  height: 14px;
+  background-image: url("../img/close.svg");
+  background-repeat: no-repeat;
 }
 body header #search-div #search-sug-list {
   list-style-type: none;
@@ -358,7 +364,7 @@ body header #search-div #search-sug-list li {
   padding: 7px 0;
 }
 body header #search-div #search-sug-list li i {
-  padding-right: 10px;
+  padding-right: 18px;
 }
 body header #search-div #search-sug-list li:first-child {
   border-top: 1px solid #9cafc3;
@@ -717,6 +723,12 @@ body.dark-mode footer {
 }
 body.dark-mode header #search-div {
   border: 1px solid #ffffff;
+}
+body.dark-mode header #search-div .search-bar-div #search-bar-lupa-placeholder {
+  background-image: url("../img/icon-search-noc.svg");
+}
+body.dark-mode header #search-div .search-bar-div #search-bar-cross {
+  background-image: url("../img/close-noc.svg");
 }
 body.dark-mode section {
   background-color: #222326;
