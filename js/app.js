@@ -269,6 +269,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
             resultadosMemoria = json;
             console.log(resultadosMemoria);
             searchResultsGallery.innerHTML = "";
+            searchPaginationList.innerHTML = "";
             searchResultsGallery.classList.add("hide");
             searchResultsInfo.classList.add("hide");
             searchResults.classList.add("hide");
