@@ -249,6 +249,18 @@ body {
             color: $light-gris-oscuro;
           }
         }
+
+        #nav-elem-agr {
+          width: 54px;
+          height: 54px;
+          display: inline-block;
+          background-image: url("../img/button-crear-gifo.svg");
+          cursor: pointer;
+
+          &:hover {
+            background-image: url("../img/button-crear-gifo_hover.svg");
+          }
+        }
       }
     }
   }
@@ -590,6 +602,18 @@ body.dark-mode {
         a {
           color: $dark-col-pri;
         }
+
+        #nav-elem-agr {
+          width: 54px;
+          height: 54px;
+          display: inline-block;
+          background-image: url("../img/button-crear-gifo-noc.svg");
+          cursor: pointer;
+
+          &:hover {
+            background-image: url("../img/button-crear-gifo-hover-noc.svg");
+          }
+        }
       }
     }
   }
@@ -606,6 +630,25 @@ body.dark-mode {
 
   section {
     background-color: $dark-gris-oscuro;
+
+    #section-res-gal-pag {
+      ul {
+        li {
+          &.activo {
+            background-color: $dark-col-pri;
+            color: $dark-negro;
+          }
+        }
+      }
+    }
+
+    #section-res-gal-more {
+      background-image: url("../img/cta-ver-mas-noc.svg");
+
+      &:hover {
+        background-image: url("../img/cta-ver-mas-hover-noc.svg");
+      }
+    }
   }
 }
 
@@ -642,18 +685,6 @@ body.dark-mode {
 
         #nav-elem {
           @include centrarFlex(row, center, center);
-
-          #nav-elem-agr {
-            width: 54px;
-            height: 54px;
-            display: inline-block;
-            background-image: url("../img/button-crear-gifo.svg");
-            cursor: pointer;
-
-            &:hover {
-              background-image: url("../img/button-crear-gifo_hover.svg");
-            }
-          }
         }
       }
     }
