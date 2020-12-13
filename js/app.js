@@ -22,6 +22,7 @@ let modoNocturno = false;
 //En general
 const body = document.body;
 const header = document.getElementById("header");
+const logo = document.getElementById("logo");
 //Menú
 const aModoNocturno = document.getElementById("nav-elem-noc");
 const aMisFavoritos = document.getElementById("nav-elem-fav");
@@ -53,7 +54,46 @@ const favoritosPaginationList = document.getElementById("section-fav-gal-pag-lis
 
 // FUNCIONES DE GIPHY
 
-// TRENDING
+// GENERALES
+
+// Cambiar de sección
+const changeSection = (section) => {
+
+    const resetHome = () => {
+        searchBar.value = "";
+        searchResultsGallery.innerHTML = "";
+        searchResultsGallery.classList.add('hide');
+        searchPagination.innerHTML = "";
+        searchViewMore.classList.add('hide');
+        searchResultsInfo.classList.add('hide');
+    }
+
+    const resetFavorites = () => {
+        misFavoritos.classList.add('hide');
+        favoritosViewMore.classList.add('hide');
+        favoritosResultsInfo.classList.add('hide');
+        favoritosResultsGallery.innerHTML = "";
+        favoritosPagination.innerHTML = "";
+    }
+
+    const resetAll = () => {
+        resetHome();
+        resetFavorites();
+        aMisFavoritos.classList.remove('active');
+    }
+
+    resetAll();
+    switch (section) {
+        case 'home':
+            header.classList.remove('hide');
+            misFavoritos.classList.add('hide');
+            break;
+        case 'favoritos':
+            aMisFavoritos.classList.add('active');
+            header.classList.add('hide');
+            misFavoritos.classList.remove('hide');
+    }
+}
 
 // Función principal de fetchear GIFs y agregarlos a la galería que se especifique.
 
@@ -131,6 +171,8 @@ async function fetchGif(json, divToPlace, index) {
     fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
     fetchedGifOptionView.addEventListener("click", expandGifCallback);
 }
+
+// TRENDING
 
 // Traer los GIFs Trending
 
@@ -439,6 +481,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
 // Muestra los GIFs favoritos
 
 const fetchFavoriteGIFs = () => {
+    favoritosResultsInfo.innerHTML = "";
 
     if (gifsFavoritos.length != 0){
         let cantidadResultados = gifsFavoritos.length;
@@ -638,15 +681,15 @@ formSearch.addEventListener('submit', e => {
 });
 //Al hacer click en la lupa al tener el campo de búsqueda con algo de texto
 searchBarLupaSearch.addEventListener('click', showResults);
+//Ingresar a Home
+logo.addEventListener('click', e => {
+    changeSection('home');
+});
 //Ingresar a Favoritos
 aMisFavoritos.addEventListener('click', e => {
-    aMisFavoritos.classList.add('active');
     e.preventDefault;
     e.stopPropagation;
-    header.classList.add('hide');
-    searchResults.classList.add('hide');
-    misFavoritos.classList.remove('hide');
-    favoritosResultsGallery.classList.remove('hide');
+    changeSection('favoritos');
     fetchFavoriteGIFs();
 });
 //Activar modo nocturno
