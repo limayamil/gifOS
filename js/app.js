@@ -92,6 +92,8 @@ const changeSection = (section) => {
             aMisFavoritos.classList.add('active');
             header.classList.add('hide');
             misFavoritos.classList.remove('hide');
+            favoritosResultsGallery.classList.remove('hide');
+            favoritosPaginationList.classList.remove('hide');
     }
 }
 

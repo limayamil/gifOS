@@ -237,6 +237,7 @@ body nav #nav-div {
   padding: 30px 20px;
 }
 body nav #nav-div #logo {
+  cursor: pointer;
   width: 62px;
   height: 59px;
   background-image: url("../img/logo-desktop.svg");
