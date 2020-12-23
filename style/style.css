@@ -582,6 +582,30 @@ body section #section-tre-car {
   grid-template-rows: 1fr;
   max-width: 50vw;
 }
+body section #section-res-gal-pag #arrow-left,
+body section #section-res-gal-pag #arrow-right,
+body section #section-fav-gal-pag #arrow-left,
+body section #section-fav-gal-pag #arrow-right {
+  width: 8px;
+  height: 14px;
+  display: inline-block;
+}
+body section #section-res-gal-pag #arrow-left,
+body section #section-fav-gal-pag #arrow-left {
+  background-image: url("../img/arrow-left-gris.svg");
+}
+body section #section-res-gal-pag #arrow-left.active,
+body section #section-fav-gal-pag #arrow-left.active {
+  background-image: url("../img/arrow-left-active.svg");
+}
+body section #section-res-gal-pag #arrow-right,
+body section #section-fav-gal-pag #arrow-right {
+  background-image: url("../img/arrow-right-gris.svg");
+}
+body section #section-res-gal-pag #arrow-right.active,
+body section #section-fav-gal-pag #arrow-right.active {
+  background-image: url("../img/arrow-right-active.svg");
+}
 body section #section-res-gal-pag ul,
 body section #section-fav-gal-pag ul {
   display: -webkit-box;
@@ -599,6 +623,8 @@ body section #section-fav-gal-pag ul {
           align-items: stretch;
   list-style-type: none;
   margin-bottom: 25px;
+  display: inline-block;
+  padding: 0 30px;
 }
 body section #section-res-gal-pag ul li,
 body section #section-fav-gal-pag ul li {
@@ -619,6 +645,9 @@ body section #section-fav-gal-pag ul li {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
   width: 35px;
   height: 35px;
 }

@@ -548,10 +548,35 @@ body {
 
     #section-res-gal-pag,
     #section-fav-gal-pag {
+      #arrow-left,
+      #arrow-right {
+        width: 8px;
+        height: 14px;
+        display: inline-block;
+      }
+
+      #arrow-left {
+        background-image: url("../img/arrow-left-gris.svg");
+
+        &.active {
+          background-image: url("../img/arrow-left-active.svg");
+        }
+      }
+
+      #arrow-right {
+        background-image: url("../img/arrow-right-gris.svg");
+
+        &.active {
+          background-image: url("../img/arrow-right-active.svg");
+        }
+      }
+
       ul {
         @include centrarFlex(row, center, stretch);
         list-style-type: none;
         margin-bottom: 25px;
+        display: inline-block;
+        padding: 0 30px;
 
         li {
           color: $light-gris-oscuro;
@@ -559,6 +584,7 @@ body {
           cursor: pointer;
           margin: 0 5px;
           @include centrarFlex(row, center, center);
+          display: inline-flex;
           width: 35px;
           height: 35px;
 

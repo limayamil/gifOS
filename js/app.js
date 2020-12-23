@@ -43,7 +43,7 @@ const searchResultsTitle = document.getElementById("section-res-tit");
 const searchResultsInfo = document.getElementById("section-res-info");
 const searchViewMore = document.getElementById("section-res-gal-more");
 const searchPagination = document.getElementById("section-res-gal-pag");
-const searchPaginationList = document.getElementById("section-res-gal-pag-list");
+//const searchPaginationList = document.getElementById("section-res-gal-pag-list");
 // Mis favoritos
 const misFavoritos = document.getElementById("section-fav");
 const favoritosResultsGallery = document.getElementById("section-fav-gal");
@@ -387,12 +387,17 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
         })
         .then((json) => {
             resultadosMemoria = json;
-            
             searchResultsGallery.innerHTML = "";
-            searchPaginationList.innerHTML = "";
+            searchPagination.innerHTML = "";
             searchResultsGallery.classList.add("hide");
             searchResultsInfo.classList.add("hide");
             searchResults.classList.add("hide");
+
+            let divArrowLeft = document.createElement('div');
+            divArrowLeft.id = "arrow-left";
+            let divArrowRight = document.createElement('div');
+            divArrowRight.id = "arrow-right";
+            let searchPaginationList = document.createElement('ul');
 
             let cantidadResultados = resultadosMemoria.data.length;
             let resultadosAMostrar = 12;
@@ -420,8 +425,6 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                     searchResultsGallery.innerHTML = "";
                     for (i = desde; i < hasta; i++){
                         fetchGif(resultadosMemoria, searchResultsGallery, i);
-
-                        
                     }
 
                     for (l = 0; l < searchPaginationList.children.length; l++){
@@ -429,6 +432,24 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                     }
 
                     searchPaginationList.children[paginaIndex].classList.add("activo");
+                    console.log("Pagina index: " + paginaIndex);
+                    console.log("Cantidad de páginas: " + cantidadPaginas);
+
+                    if (cantidadPaginas > 1) {
+                        switch(paginaIndex) {
+                            case 0:
+                                divArrowLeft.classList.remove('active');
+                                divArrowRight.classList.add('active');
+                                break;
+                            case cantidadPaginas - 1:
+                                divArrowRight.classList.remove('active');
+                                break;
+                            default:
+                                divArrowLeft.classList.add('active');
+                                divArrowRight.classList.add('active');
+                                break;
+                        }
+                    }
 
                     if (cantidadResultados > paginaActual * resultadosAMostrar) {
                         searchViewMore.classList.remove('hide');
@@ -437,6 +458,26 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                         paginaIndex++;
                     } else {
                         searchViewMore.classList.add('hide');
+                    }
+
+                    const clickLinkPaginaAnterior = () => {
+                        let indexDesde = (paginaIndex - 1) * resultadosAMostrar;
+                        let indexHasta = ((paginaIndex - 1) * resultadosAMostrar) + resultadosAMostrar;
+                        listarResultados(indexDesde, indexHasta);
+                    }
+
+                    const clickLinkPaginaSiguiente = () => {
+                        let indexDesde = paginaIndex * resultadosAMostrar;
+                        let indexHasta = indexDesde + resultadosAMostrar;
+                        listarResultados(indexDesde, indexHasta);
+                    }
+
+                    if (divArrowLeft.classList.contains('active')){
+                        divArrowLeft.addEventListener('click', clickLinkPaginaAnterior);
+                    }
+
+                    if (divArrowRight.classList.contains('active')){
+                        divArrowRight.addEventListener('click', clickLinkPaginaSiguiente);
                     }
                 }
 
@@ -459,8 +500,13 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                         }
 
                         linkPagina.addEventListener('click', clickLinkPagina);
-                        searchPaginationList.appendChild(linkPagina);
+                        
+                        searchPaginationList.appendChild(linkPagina);   
                     }
+
+                    searchPagination.appendChild(searchPaginationList);
+                    searchPagination.appendChild(divArrowRight);
+                    searchPagination.insertBefore(divArrowLeft, searchPaginationList);
                 }
 
                 listarResultados(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar);
@@ -575,7 +621,6 @@ const fetchFavoriteGIFs = () => {
                     fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
                     //fetchedGifOptionView.addEventListener("click", expandGifCallback);
                 } catch(e) {
-                    console.log("Pog");
                     break;
                 }
                 
