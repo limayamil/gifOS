@@ -540,14 +540,40 @@ body {
       }
     }
 
-    #section-tre-car {
-      white-space: nowrap;
-      overflow-x: auto;
-      overflow-y: hidden;
-      grid-template-columns: repeat(9, 1fr);
-      grid-template-rows: 1fr;
-      max-width: 50vw;
-      justify-content: initial;
+    #section-tre-div {
+      @include centrarFlex(row, center, center);
+      #section-tre-car {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        margin: 50px 20px;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-rows: 1fr;
+        max-width: 830px;
+        justify-content: initial;
+      }
+
+      #trending-gif-slide-right,
+      #trending-gif-slide-left {
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+      }
+
+      #trending-gif-slide-right {
+        background-image: url("../img/button-slider-right.svg");
+
+        &:hover {
+          background-image: url("../img/button-slider-right_hover.svg");
+        }
+      }
+
+      #trending-gif-slide-left {
+        background-image: url("../img/button-slider-left.svg");
+
+        &:hover {
+          background-image: url("../img/button-slider-left_hover.svg");
+        }
+      }
     }
 
     #section-res-gal-pag,

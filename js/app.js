@@ -30,6 +30,8 @@ const aMisGIFOS = document.getElementById("nav-elem-mis");
 // Trending
 const trendingGIFsDiv = document.getElementById("section-tre-car");
 const trendingTopicsDiv = document.getElementById("header-tre-top");
+const trendingSlideLeft = document.getElementById("trending-gif-slide-left");
+const trendingSlideRight = document.getElementById("trending-gif-slide-right");
 // Búsqueda y resultados
 const formSearch = document.getElementById("form-search");
 const searchBar = document.getElementById("search-bar");
@@ -229,6 +231,31 @@ async function fetchTrendingSearchTerms(giphyAPI) {
         trendA.addEventListener('click', searchTrendingTopicCallback);
     }
 })();
+
+const sideScroll = (element,direction,speed,distance,step) => {
+    scrollAmount = 0;
+    var slideTimer = setInterval(function(){
+        if(direction == 'left'){
+            element.scrollLeft -= step;
+        } else {
+            element.scrollLeft += step;
+        }
+        scrollAmount += step;
+        if(scrollAmount >= distance){
+            window.clearInterval(slideTimer);
+        }
+    }, speed);
+}
+
+
+// Scroleo horizontal el carrusel de trending
+trendingSlideRight.addEventListener('click', e => {
+    sideScroll(trendingGIFsDiv,'right',10,260,10)
+});
+
+trendingSlideLeft.addEventListener('click', e => {
+    sideScroll(trendingGIFsDiv,'left',10,260,10)
+});
 
 // BÚSQUEDA
 

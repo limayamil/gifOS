@@ -577,16 +577,49 @@ body section #section-tre-car img {
   width: 260px;
   height: 200px;
 }
-body section #section-tre-car {
-  white-space: nowrap;
-  overflow-x: auto;
+body section #section-tre-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+body section #section-tre-div #section-tre-car {
+  overflow-x: hidden;
   overflow-y: hidden;
+  margin: 50px 20px;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: 1fr;
-  max-width: 50vw;
+  max-width: 830px;
   -webkit-box-pack: initial;
       -ms-flex-pack: initial;
           justify-content: initial;
+}
+body section #section-tre-div #trending-gif-slide-right,
+body section #section-tre-div #trending-gif-slide-left {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+}
+body section #section-tre-div #trending-gif-slide-right {
+  background-image: url("../img/button-slider-right.svg");
+}
+body section #section-tre-div #trending-gif-slide-right:hover {
+  background-image: url("../img/button-slider-right_hover.svg");
+}
+body section #section-tre-div #trending-gif-slide-left {
+  background-image: url("../img/button-slider-left.svg");
+}
+body section #section-tre-div #trending-gif-slide-left:hover {
+  background-image: url("../img/button-slider-left_hover.svg");
 }
 body section #section-res-gal-pag #arrow-left,
 body section #section-res-gal-pag #arrow-right,
