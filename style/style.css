@@ -589,6 +589,7 @@ body section #section-fav-gal-pag #arrow-right {
   width: 8px;
   height: 14px;
   display: inline-block;
+  cursor: pointer;
 }
 body section #section-res-gal-pag #arrow-left,
 body section #section-fav-gal-pag #arrow-left {

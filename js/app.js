@@ -201,14 +201,12 @@ async function fetchTrendingSearchTerms(giphyAPI) {
 
 (async () => {
     let json = await fetchTrendingGIFs(giphyTrendingSearchTerms);
-    console.log(json);
     for (i = 0; i < 5; i++) {
         let trendA = document.createElement("a");
         let trendH4 = document.createElement("h4");
         let topic = json.data[i];
 
         const searchTrendingTopicCallback = () => {
-            console.log(topic);
             searchBar.value = topic;
             showResults();
         }
@@ -367,7 +365,6 @@ const unfavoriteGif = (gifURL) => {
     let index = gifsFavoritos.findIndex(x => x.url == gifURL);
     gifsFavoritos.splice(index, 1);
     alert("Se borró un gif de favoritos");
-    console.log(gifsFavoritos);
 }
 
 // Favoritea un gif
@@ -431,6 +428,8 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                         searchPaginationList.children[l].classList.remove("activo");
                     }
 
+                    console.log("Voy a ponerle activo a: " + searchPaginationList.children[paginaIndex].innerHTML);
+
                     searchPaginationList.children[paginaIndex].classList.add("activo");
                     console.log("Pagina index: " + paginaIndex);
                     console.log("Cantidad de páginas: " + cantidadPaginas);
@@ -470,6 +469,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                         let indexDesde = paginaIndex * resultadosAMostrar;
                         let indexHasta = indexDesde + resultadosAMostrar;
                         listarResultados(indexDesde, indexHasta);
+                        divArrowRight.removeEventListener('click', clickLinkPaginaSiguiente);
                     }
 
                     if (divArrowLeft.classList.contains('active')){
@@ -551,8 +551,6 @@ const fetchFavoriteGIFs = () => {
 
         const listarResultados = (desde, hasta) => {
             favoritosResultsGallery.innerHTML = "";
-            console.log("Desde: " + desde);
-            console.log("Hasta: " + hasta);
             for (i = desde; i < hasta; i++) {
                 try {
                     let divGif = document.createElement("div");
@@ -572,7 +570,6 @@ const fetchFavoriteGIFs = () => {
                     let fetchedGifTitle = document.createElement("p");
                     fetchedGifTitle.classList.add('fetched-gif-title');
                     
-                    console.log(gifsFavoritos[i].url);
                     let gifURL = gifsFavoritos[i].url;
                     let usuario = gifsFavoritos[i].usuario;
                     let titulo = gifsFavoritos[i].titulo;
