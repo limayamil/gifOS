@@ -721,7 +721,7 @@ body #section-cre #section-cre-fila-1 {
       -ms-flex-align: center;
           align-items: center;
 }
-body #section-cre #section-cre-fila-1 #section-cre-fila-1-proyector {
+body #section-cre #section-cre-fila-1 #section-cre-fila-1-col-1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -735,22 +735,20 @@ body #section-cre #section-cre-fila-1 #section-cre-fila-1-proyector {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  width: 20%;
 }
-body #section-cre #section-cre-fila-1 #section-cre-fila-1-proyector #proyector {
+body #section-cre #section-cre-fila-1 #section-cre-fila-1-col-1 #proyector {
   width: 123px;
   height: 162px;
   background-image: url("../img/misgifos-camara.svg");
 }
-body #section-cre #section-cre-fila-1 #section-cre-fila-1-proyector #luz {
+body #section-cre #section-cre-fila-1 #section-cre-fila-1-col-1 #luz {
   width: 76px;
   height: 128px;
   background-image: url("../img/misgifos-camara-luz.svg");
   margin-bottom: -2px;
 }
-body #section-cre #section-cre-fila-1 #section-cre-fila-1-pantalla {
+body #section-cre #section-cre-fila-1 #section-cre-fila-1-col-2 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -764,16 +762,97 @@ body #section-cre #section-cre-fila-1 #section-cre-fila-1-pantalla {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-flex: 2;
-      -ms-flex-positive: 2;
-          flex-grow: 2;
+  width: 60%;
   border: 1px solid #572ee5;
   height: 390px;
 }
-body #section-cre #section-cre-fila-1 #section-cre-fila-1-espacio {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+body #section-cre #section-cre-fila-1 #section-cre-fila-1-col-3 {
+  width: 20%;
+}
+body #section-cre #section-cre-fila-2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-1 {
+  width: 10%;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 {
+  width: 80%;
+  text-align: center;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 25px 0;
+  list-style-type: none;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 ul li {
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 35px;
+  height: 35px;
+  color: #572ee5;
+  border: 1px solid #572ee5;
+  border-radius: 50%;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 ul li.activo {
+  color: #ffffff;
+  background-color: #572ee5;
+  border-radius: 50%;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 hr {
+  height: 6px;
+  margin: 25px auto;
+  width: 60%;
+  background-color: #572ee5;
+  border-radius: 6px;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-3 {
+  width: 10%;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-3 #rollo {
+  width: 142px;
+  height: 88px;
+  background-image: url("../img/misgifos-rollo.svg");
 }
 body #section-cre #section-cre-fila-3 {
   display: -webkit-box;

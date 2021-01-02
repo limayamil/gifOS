@@ -640,9 +640,9 @@ body {
     background-color: #ffffff;
     #section-cre-fila-1 {
       @include centrarFlex(row, center, center);
-      #section-cre-fila-1-proyector {
+      #section-cre-fila-1-col-1 {
         @include centrarFlex(row, center, center);
-        flex-grow: 1;
+        width: 20%;
         #proyector {
           width: 123px;
           height: 162px;
@@ -655,17 +655,66 @@ body {
           margin-bottom: -2px;
         }
       }
-      #section-cre-fila-1-pantalla {
+      #section-cre-fila-1-col-2 {
         @include centrarFlex(row, center, center);
-        flex-grow: 2;
+        width: 60%;
         border: 1px solid $light-col-pri;
         height: 390px;
       }
-      #section-cre-fila-1-espacio {
-        flex-grow: 1;
+      #section-cre-fila-1-col-3 {
+        width: 20%;
       }
     }
     #section-cre-fila-2 {
+      @include centrarFlex(row, center, center);
+      #section-cre-fila-2-col-1 {
+        //flex-grow: 0;
+        width: 10%;
+      }
+      #section-cre-fila-2-col-2 {
+        width: 80%;
+        //flex-grow: 4;
+        text-align: center;
+        ul {
+          @include centrarFlex(row, center, center);
+          margin: 25px 0;
+          list-style-type: none;
+          li {
+            display: inline-block;
+            font-weight: bold;
+            margin: 0 5px;
+            @include centrarFlex(row, center, center);
+            display: inline-flex;
+            width: 35px;
+            height: 35px;
+            color: $light-col-pri;
+            border: 1px solid $light-col-pri;
+            border-radius: 50%;
+
+            &.activo {
+              color: #ffffff;
+              background-color: $light-col-pri;
+              border-radius: 50%;
+            }
+          }
+        }
+        hr {
+          height: 6px;
+          margin: 25px auto;
+          width: 60%;
+          background-color: $light-col-pri;
+          border-radius: 6px;
+        }
+      }
+      #section-cre-fila-2-col-3 {
+        //flex-grow: 0;
+        width: 10%;
+        #rollo {
+          width: 142px;
+          height: 88px;
+          background-image: url("../img/misgifos-rollo.svg");
+        }
+      }
     }
     #section-cre-fila-3 {
       @include centrarFlex(row, center, center);
