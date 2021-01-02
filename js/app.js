@@ -105,7 +105,7 @@ const changeSection = (section) => {
 
 // Función principal de fetchear GIFs y agregarlos a la galería que se especifique.
 
-async function fetchGif(json, divToPlace, index) {
+async function fetchGif(json, divToPlace, element) {
     let divGif = document.createElement("div");
     divGif.classList.add('fetched-gif');
     let divOverlay = document.createElement("div");
@@ -123,9 +123,9 @@ async function fetchGif(json, divToPlace, index) {
     fetchedGifUser.classList.add('fetched-gif-user');
     let fetchedGifTitle = document.createElement("p");
     fetchedGifTitle.classList.add('fetched-gif-title');
-    let gifURL = json.data[i].images.downsized.url;
-    let usuario = json.data[i].username;
-    let titulo = json.data[i].title;
+    let gifURL = element.images.downsized.url;
+    let usuario = element.username;
+    let titulo = element.title;
     
     if (usuario === "") {
         usuario = "Anónimo";
@@ -192,9 +192,8 @@ async function fetchTrendingGIFs(giphyAPI) {
 
 (async () => {
     let json = await fetchTrendingGIFs(giphyTrendingGIFs);
-    for (i = 0; i < 3; i++){
-        fetchGif(json, trendingGIFsDiv, i);
-    }
+    console.log(json);
+    json.data.forEach(element => fetchGif(json, trendingGIFsDiv, element));
 })();
 
 // Traer los tópicos en Trending
@@ -375,7 +374,6 @@ const unfavoriteGif = (gifURL) => {
 
 // Listar resultados
 const listarResultados = (desde, hasta, paginaIndex, paginaActual, cantidadPaginas, resultadosAMostrar, cantidadResultados) => {
-    
     searchResultsGallery.innerHTML = "";
     for (i = desde; i < hasta; i++){
         fetchGif(resultadosMemoria, searchResultsGallery, i);
@@ -555,7 +553,7 @@ const fetchFavoriteGIFs = () => {
         let resultadosAMostrar = 12;
         let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
         let paginaActual = 1;
-        let paginaIndex = paginaActual - 1;
+        let paginaIndex = 0;
 
         const mostrarMas = () => {
             let indexDesde = paginaIndex * resultadosAMostrar;
@@ -568,7 +566,7 @@ const fetchFavoriteGIFs = () => {
             listarResultados(indexDesde, indexHasta);
         }
 
-        const listarResultados = (desde, hasta) => {
+        const listarResultadosFavoritos = (desde, hasta) => {
             favoritosResultsGallery.innerHTML = "";
             for (i = desde; i < hasta; i++) {
                 try {
@@ -673,7 +671,7 @@ const fetchFavoriteGIFs = () => {
                     }
                     paginaActual = indice + 1;
                     paginaIndex = indice;
-                    listarResultados(indexDesde, indexHasta);
+                    listarResultadosFavoritos(indexDesde, indexHasta);
                 }
 
                 linkPagina.addEventListener('click', clickLinkPagina);
@@ -681,7 +679,7 @@ const fetchFavoriteGIFs = () => {
             }
         }
 
-        listarResultados(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar);
+        listarResultadosFavoritos(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar);
 
     } else {
         misFavoritos.classList.remove("hide");
