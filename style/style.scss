@@ -541,9 +541,13 @@ body {
     }
 
     #section-tre-car {
-      grid-template-columns: 1fr 1fr 1fr;
+      white-space: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      grid-template-columns: repeat(9, 1fr);
       grid-template-rows: 1fr;
       max-width: 50vw;
+      justify-content: initial;
     }
 
     #section-res-gal-pag,

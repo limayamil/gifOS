@@ -105,7 +105,7 @@ const changeSection = (section) => {
 
 // Función principal de fetchear GIFs y agregarlos a la galería que se especifique.
 
-async function fetchGif(json, divToPlace, element) {
+async function fetchGif(json, divToPlace, index) {
     let divGif = document.createElement("div");
     divGif.classList.add('fetched-gif');
     let divOverlay = document.createElement("div");
@@ -123,9 +123,9 @@ async function fetchGif(json, divToPlace, element) {
     fetchedGifUser.classList.add('fetched-gif-user');
     let fetchedGifTitle = document.createElement("p");
     fetchedGifTitle.classList.add('fetched-gif-title');
-    let gifURL = element.images.downsized.url;
-    let usuario = element.username;
-    let titulo = element.title;
+    let gifURL = json.data[i].images.downsized.url;
+    let usuario = json.data[i].username;
+    let titulo = json.data[i].title;
     
     if (usuario === "") {
         usuario = "Anónimo";
@@ -193,7 +193,9 @@ async function fetchTrendingGIFs(giphyAPI) {
 (async () => {
     let json = await fetchTrendingGIFs(giphyTrendingGIFs);
     console.log(json);
-    json.data.forEach(element => fetchGif(json, trendingGIFsDiv, element));
+    for (i = 0; i < 9; i++){
+        fetchGif(json, trendingGIFsDiv, i);
+    }
 })();
 
 // Traer los tópicos en Trending

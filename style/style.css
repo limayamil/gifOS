@@ -578,9 +578,15 @@ body section #section-tre-car img {
   height: 200px;
 }
 body section #section-tre-car {
-  grid-template-columns: 1fr 1fr 1fr;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  grid-template-columns: repeat(9, 1fr);
   grid-template-rows: 1fr;
   max-width: 50vw;
+  -webkit-box-pack: initial;
+      -ms-flex-pack: initial;
+          justify-content: initial;
 }
 body section #section-res-gal-pag #arrow-left,
 body section #section-res-gal-pag #arrow-right,
