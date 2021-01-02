@@ -64,6 +64,12 @@ let searchPaginationList = document.createElement('ul');
 
 // GENERALES
 
+// Chequeo si hay GIFs favoriteados en memoria
+
+if (localStorage.getItem("gifsFavoritos") !== null) {
+    gifsFavoritos = JSON.parse(localStorage.getItem("gifsFavoritos"));
+}
+
 // Cambiar de sección
 const changeSection = (section) => {
 
@@ -72,7 +78,7 @@ const changeSection = (section) => {
         searchResultsGallery.innerHTML = "";
         searchResultsGallery.classList.add('hide');
         searchPagination.innerHTML = "";
-        searchViewMore.classList.add('hide');
+        //searchViewMore.classList.add('hide');
         searchResultsInfo.classList.add('hide');
     }
 
@@ -436,12 +442,16 @@ const listarResultados = (desde, hasta, paginaIndex, paginaActual, cantidadPagin
         }
     }
 
+    // Funciones del botón de ver más
+
+    /*
     if (cantidadResultados > paginaActual * resultadosAMostrar) {
         searchViewMore.classList.remove('hide');
         //searchViewMore.addEventListener('click', mostrarMas);
     } else {
         searchViewMore.classList.add('hide');
     }
+    */
 
     const clickLinkPaginaAnterior = () => {
         //console.clear();
