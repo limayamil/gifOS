@@ -91,6 +91,11 @@ body {
   h2 {
     font-size: 20px;
     text-transform: capitalize;
+
+    em {
+      font-style: inherit;
+      color: $light-col-sec;
+    }
   }
 
   h3 {
@@ -625,6 +630,50 @@ body {
             border-radius: 50%;
           }
         }
+      }
+    }
+  }
+
+  #section-cre {
+    width: $anchomax;
+    margin: 0 auto;
+    background-color: #ffffff;
+    #section-cre-fila-1 {
+      @include centrarFlex(row, center, center);
+      #section-cre-fila-1-proyector {
+        @include centrarFlex(row, center, center);
+        flex-grow: 1;
+        #proyector {
+          width: 123px;
+          height: 162px;
+          background-image: url("../img/misgifos-camara.svg");
+        }
+        #luz {
+          width: 76px;
+          height: 128px;
+          background-image: url("../img/misgifos-camara-luz.svg");
+          margin-bottom: -2px;
+        }
+      }
+      #section-cre-fila-1-pantalla {
+        @include centrarFlex(row, center, center);
+        flex-grow: 2;
+        border: 1px solid $light-col-pri;
+        height: 390px;
+      }
+      #section-cre-fila-1-espacio {
+        flex-grow: 1;
+      }
+    }
+    #section-cre-fila-2 {
+    }
+    #section-cre-fila-3 {
+      @include centrarFlex(row, center, center);
+      #comenzar {
+        width: 131px;
+        height: 52px;
+        background-image: url("../img/cta-comenzar.svg");
+        cursor: pointer;
       }
     }
   }

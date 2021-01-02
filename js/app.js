@@ -27,6 +27,7 @@ const logo = document.getElementById("logo");
 const aModoNocturno = document.getElementById("nav-elem-noc");
 const aMisFavoritos = document.getElementById("nav-elem-fav");
 const aMisGIFOS = document.getElementById("nav-elem-mis");
+const aCrearGIFOS = document.getElementById("nav-elem-agr");
 // Trending
 const trendingGIFsDiv = document.getElementById("section-tre-car");
 const trendingTopicsDiv = document.getElementById("header-tre-top");
@@ -53,6 +54,15 @@ const favoritosResultsInfo = document.getElementById("section-fav-info");
 const favoritosViewMore = document.getElementById("section-fav-gal-more");
 const favoritosPagination = document.getElementById("section-fav-gal-pag");
 const favoritosPaginationList = document.getElementById("section-fav-gal-pag-list");
+// Mis GIFOS
+const misGIFOS = document.getElementById("section-mis");
+const misGIFOSResultsGallery = document.getElementById("section-mis-gal");
+const misGIFOSResultsInfo = document.getElementById("section-mis-info");
+const misGIFOSViewMore = document.getElementById("section-mis-gal-more");
+const misGIFOSPagination = document.getElementById("section-mis-gal-pag");
+const misGIFOSPaginationList = document.getElementById("section-mis-gal-pag-list");
+// Crear GIFOS
+const crearGIFOS = document.getElementById("section-cre");
 
 let divArrowLeft = document.createElement('div');
 divArrowLeft.id = "arrow-left";
@@ -96,18 +106,35 @@ const changeSection = (section) => {
         aMisFavoritos.classList.remove('active');
     }
 
+    const hideAll = () => {
+        header.classList.add('hide');
+        misFavoritos.classList.add('hide');
+    }
+
     resetAll();
     switch (section) {
         case 'home':
+            hideAll();
             header.classList.remove('hide');
             misFavoritos.classList.add('hide');
             break;
         case 'favoritos':
+            hideAll();
             aMisFavoritos.classList.add('active');
-            header.classList.add('hide');
             misFavoritos.classList.remove('hide');
             favoritosResultsGallery.classList.remove('hide');
             favoritosPaginationList.classList.remove('hide');
+            break;
+        case 'mis-gifos':
+            hideAll();
+            aMisGIFOS.classList.add('active');
+            misGIFOS.classList.remove('hide');
+            break;
+        case 'crear-gifos':
+            hideAll();
+            aCrearGIFOS.classList.add('active');
+            crearGIFOS.classList.remove('hide');
+            break;
     }
 }
 
@@ -791,6 +818,18 @@ aMisFavoritos.addEventListener('click', e => {
     e.stopPropagation;
     changeSection('favoritos');
     fetchFavoriteGIFs();
+});
+// Ingresar a mis GIFOS
+aMisGIFOS.addEventListener('click', e => {
+    e.preventDefault;
+    e.stopPropagation;
+    changeSection('mis-gifos');
+});
+// Ingresar a Crear GIFOS
+aCrearGIFOS.addEventListener('click', e => {
+    e.preventDefault;
+    e.stopPropagation;
+    changeSection('crear-gifos');
 });
 //Activar modo nocturno
 aModoNocturno.addEventListener('click', e => {
