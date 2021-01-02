@@ -869,11 +869,21 @@ body #section-cre #section-cre-fila-3 {
       -ms-flex-align: center;
           align-items: center;
 }
-body #section-cre #section-cre-fila-3 #comenzar {
+body #section-cre #section-cre-fila-3 #section-cre-comenzar {
   width: 131px;
   height: 52px;
   background-image: url("../img/cta-comenzar.svg");
   cursor: pointer;
+}
+body #section-cre #section-cre-fila-3 #section-cre-grabar {
+  width: 131px;
+  height: 52px;
+  background-image: url("../img/cta-grabar.svg");
+  cursor: pointer;
+}
+body #section-cre #section-cre-fila-3 #section-cre-video {
+  width: 640px;
+  height: 480px;
 }
 body footer {
   border-bottom: 5px solid #572ee5;

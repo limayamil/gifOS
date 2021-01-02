@@ -63,6 +63,11 @@ const misGIFOSPagination = document.getElementById("section-mis-gal-pag");
 const misGIFOSPaginationList = document.getElementById("section-mis-gal-pag-list");
 // Crear GIFOS
 const crearGIFOS = document.getElementById("section-cre");
+const crearGIFOSComenzar = document.getElementById("section-cre-comenzar");
+const crearGIFOSGrabar = document.getElementById("section-cre-grabar");
+const crearGIFOSTitle = document.getElementById("section-cre-tit");
+const crearGIFOSDescription = document.getElementById("section-cre-des");
+const crearGIFOSVideo = document.getElementById("section-cre-video");
 
 let divArrowLeft = document.createElement('div');
 divArrowLeft.id = "arrow-left";
@@ -793,6 +798,34 @@ const showResults = () => {
     fetchSearchGIFs(giphySearchGIFs, searchTerm);
     searchResultsTitle.textContent = searchTerm;
 }
+
+// Creación de GIFOS
+let recorder;
+let blob;
+let dateStarted;
+let form = new FormData();
+let myGifosArray = [];
+let myGifosString = localStorage.getItem("myGifos");
+let video = document.getElementById("recording_video");
+//let recorded_gifo = document.getElementById("recorded_gifo");
+
+const fetchStream = () => {
+    crearGIFOSComenzar.classList.add("hide");
+    crearGIFOSTitle.innerHTML = "¿Nos das acceso<br>a tu cámara?";
+    crearGIFOSDescription.innerHTML = "El acceso a tu cámara será válido sólo<br>por el tiempo en el que estés creando el GIFO."
+    navigator.mediaDevices
+    .getUserMedia({ audio: false, video: { height: { max: 480 } } })
+    .then( stream => {
+        crearGIFOSTitle.classList.add("hide");
+        crearGIFOSDescription.classList.add("hide");
+        crearGIFOSGrabar.classList.remove("hide");
+        crearGIFOSVideo.classList.remove("hide");
+        crearGIFOSVideo.srcObject = stream;
+        crearGIFOSVideo.play();
+    });
+}
+
+crearGIFOSComenzar.addEventListener("click", fetchStream);
 
 // EVENT LISTENERS
 

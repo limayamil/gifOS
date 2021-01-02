@@ -718,11 +718,21 @@ body {
     }
     #section-cre-fila-3 {
       @include centrarFlex(row, center, center);
-      #comenzar {
+      #section-cre-comenzar {
         width: 131px;
         height: 52px;
         background-image: url("../img/cta-comenzar.svg");
         cursor: pointer;
+      }
+      #section-cre-grabar {
+        width: 131px;
+        height: 52px;
+        background-image: url("../img/cta-grabar.svg");
+        cursor: pointer;
+      }
+      #section-cre-video {
+        width: 640px;
+        height: 480px;
       }
     }
   }
