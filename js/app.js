@@ -52,6 +52,12 @@ const favoritosViewMore = document.getElementById("section-fav-gal-more");
 const favoritosPagination = document.getElementById("section-fav-gal-pag");
 const favoritosPaginationList = document.getElementById("section-fav-gal-pag-list");
 
+let divArrowLeft = document.createElement('div');
+divArrowLeft.id = "arrow-left";
+let divArrowRight = document.createElement('div');
+divArrowRight.id = "arrow-right";
+let searchPaginationList = document.createElement('ul');
+
 // FUNCIONES DE GIPHY
 
 // GENERALES
@@ -367,6 +373,86 @@ const unfavoriteGif = (gifURL) => {
     alert("Se borró un gif de favoritos");
 }
 
+// Listar resultados
+const listarResultados = (desde, hasta, paginaIndex, paginaActual, cantidadPaginas, resultadosAMostrar, cantidadResultados) => {
+    
+    searchResultsGallery.innerHTML = "";
+    for (i = desde; i < hasta; i++){
+        fetchGif(resultadosMemoria, searchResultsGallery, i);
+    }
+
+    for (l = 0; l < searchPaginationList.children.length; l++){
+        searchPaginationList.children[l].classList.remove("activo");
+    }
+
+    console.warn("Voy a ponerle activo a: " + searchPaginationList.children[paginaIndex].innerHTML);
+
+    searchPaginationList.children[paginaIndex].classList.add("activo");
+    
+    console.log("Pagina index: " + paginaIndex);
+    console.log("Cantidad de páginas: " + cantidadPaginas);
+    console.log("Cantidad de resultados: " + cantidadResultados);
+
+    if (cantidadPaginas > 1) {
+        switch(paginaIndex) {
+            case 0:
+                divArrowLeft.classList.remove('active');
+                divArrowRight.classList.add('active');
+                break;
+            case cantidadPaginas - 1:
+                divArrowRight.classList.remove('active');
+                break;
+            default:
+                divArrowLeft.classList.add('active');
+                divArrowRight.classList.add('active');
+                break;
+        }
+    }
+
+    if (cantidadResultados > paginaActual * resultadosAMostrar) {
+        searchViewMore.classList.remove('hide');
+        //searchViewMore.addEventListener('click', mostrarMas);
+    } else {
+        searchViewMore.classList.add('hide');
+    }
+
+    const clickLinkPaginaAnterior = () => {
+        //console.clear();
+        paginaActual--;
+        paginaIndex--;
+        let indexDesde = paginaIndex * resultadosAMostrar;
+        let indexHasta = indexDesde + resultadosAMostrar;
+        console.log("Hacia Atrás");
+        console.log("Index desde: " + indexDesde);
+        console.log("Index hasta: " + indexHasta);
+        console.log("Pagina index: " + paginaIndex);
+        divArrowLeft.removeEventListener('click', clickLinkPaginaAnterior);
+        listarResultados(indexDesde, indexHasta, paginaIndex, paginaActual, cantidadPaginas, resultadosAMostrar, cantidadResultados);
+    }
+
+    const clickLinkPaginaSiguiente = () => {
+        //console.clear();
+        paginaActual++;
+        paginaIndex++;
+        let indexDesde = paginaIndex * resultadosAMostrar;
+        let indexHasta = indexDesde + resultadosAMostrar;
+        console.log("Hacia Delante");
+        console.log("Index desde: " + indexDesde);
+        console.log("Index hasta: " + indexHasta);
+        console.log("Pagina index: " + paginaIndex);
+        divArrowRight.removeEventListener('click', clickLinkPaginaSiguiente);
+        listarResultados(indexDesde, indexHasta, paginaIndex, paginaActual, cantidadPaginas, resultadosAMostrar, cantidadResultados);
+    }
+
+    if (divArrowLeft.classList.contains('active')){
+        divArrowLeft.addEventListener('click', clickLinkPaginaAnterior);
+    }
+
+    if (divArrowRight.classList.contains('active')){
+        divArrowRight.addEventListener('click', clickLinkPaginaSiguiente);
+    }
+}
+
 // Favoritea un gif
 
 const favoriteGif = (gifURL, usuario, titulo) => {
@@ -390,17 +476,11 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
             searchResultsInfo.classList.add("hide");
             searchResults.classList.add("hide");
 
-            let divArrowLeft = document.createElement('div');
-            divArrowLeft.id = "arrow-left";
-            let divArrowRight = document.createElement('div');
-            divArrowRight.id = "arrow-right";
-            let searchPaginationList = document.createElement('ul');
-
             let cantidadResultados = resultadosMemoria.data.length;
             let resultadosAMostrar = 12;
             let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
             let paginaActual = 1;
-            let paginaIndex = paginaActual - 1;
+            let paginaIndex = 0;
 
             if (cantidadResultados > 0) {
                 searchSuggestionsList.innerHTML = "";
@@ -418,68 +498,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                     listarResultados(indexDesde, indexHasta);
                 }
 
-                const listarResultados = (desde, hasta) => {
-                    searchResultsGallery.innerHTML = "";
-                    for (i = desde; i < hasta; i++){
-                        fetchGif(resultadosMemoria, searchResultsGallery, i);
-                    }
-
-                    for (l = 0; l < searchPaginationList.children.length; l++){
-                        searchPaginationList.children[l].classList.remove("activo");
-                    }
-
-                    console.log("Voy a ponerle activo a: " + searchPaginationList.children[paginaIndex].innerHTML);
-
-                    searchPaginationList.children[paginaIndex].classList.add("activo");
-                    console.log("Pagina index: " + paginaIndex);
-                    console.log("Cantidad de páginas: " + cantidadPaginas);
-
-                    if (cantidadPaginas > 1) {
-                        switch(paginaIndex) {
-                            case 0:
-                                divArrowLeft.classList.remove('active');
-                                divArrowRight.classList.add('active');
-                                break;
-                            case cantidadPaginas - 1:
-                                divArrowRight.classList.remove('active');
-                                break;
-                            default:
-                                divArrowLeft.classList.add('active');
-                                divArrowRight.classList.add('active');
-                                break;
-                        }
-                    }
-
-                    if (cantidadResultados > paginaActual * resultadosAMostrar) {
-                        searchViewMore.classList.remove('hide');
-                        searchViewMore.addEventListener('click', mostrarMas);
-                        paginaActual++;
-                        paginaIndex++;
-                    } else {
-                        searchViewMore.classList.add('hide');
-                    }
-
-                    const clickLinkPaginaAnterior = () => {
-                        let indexDesde = (paginaIndex - 1) * resultadosAMostrar;
-                        let indexHasta = ((paginaIndex - 1) * resultadosAMostrar) + resultadosAMostrar;
-                        listarResultados(indexDesde, indexHasta);
-                    }
-
-                    const clickLinkPaginaSiguiente = () => {
-                        let indexDesde = paginaIndex * resultadosAMostrar;
-                        let indexHasta = indexDesde + resultadosAMostrar;
-                        listarResultados(indexDesde, indexHasta);
-                        divArrowRight.removeEventListener('click', clickLinkPaginaSiguiente);
-                    }
-
-                    if (divArrowLeft.classList.contains('active')){
-                        divArrowLeft.addEventListener('click', clickLinkPaginaAnterior);
-                    }
-
-                    if (divArrowRight.classList.contains('active')){
-                        divArrowRight.addEventListener('click', clickLinkPaginaSiguiente);
-                    }
-                }
+                
 
                 if (cantidadPaginas > 0) {
                     searchPagination.classList.remove('hide');
@@ -509,7 +528,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                     searchPagination.insertBefore(divArrowLeft, searchPaginationList);
                 }
 
-                listarResultados(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar);
+                listarResultados(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar, paginaIndex, paginaActual, cantidadPaginas, resultadosAMostrar, cantidadResultados);
 
             } else if (cantidadResultados === 0) {
                 searchResults.classList.remove("hide");
