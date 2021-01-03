@@ -664,6 +664,10 @@ body {
       #section-cre-fila-1-col-3 {
         width: 20%;
       }
+      #section-cre-video {
+        width: 470px;
+        height: 480px;
+      }
     }
     #section-cre-fila-2 {
       @include centrarFlex(row, center, center);
@@ -698,6 +702,22 @@ body {
             }
           }
         }
+
+        #info-container {
+          @include centrarFlex(row, center, center);
+          #info-space {
+            width: 20%;
+          }
+
+          #info-pasos {
+            width: 60%;
+          }
+
+          #info-div {
+            width: 20%;
+          }
+        }
+
         hr {
           height: 6px;
           margin: 25px auto;
@@ -730,9 +750,11 @@ body {
         background-image: url("../img/cta-grabar.svg");
         cursor: pointer;
       }
-      #section-cre-video {
-        width: 640px;
-        height: 480px;
+      #section-cre-finalizar {
+        width: 131px;
+        height: 52px;
+        background-image: url("../img/cta-finalizar.svg");
+        cursor: pointer;
       }
     }
   }

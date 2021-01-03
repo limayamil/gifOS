@@ -769,6 +769,10 @@ body #section-cre #section-cre-fila-1 #section-cre-fila-1-col-2 {
 body #section-cre #section-cre-fila-1 #section-cre-fila-1-col-3 {
   width: 20%;
 }
+body #section-cre #section-cre-fila-1 #section-cre-video {
+  width: 470px;
+  height: 480px;
+}
 body #section-cre #section-cre-fila-2 {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -839,6 +843,30 @@ body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 ul li.activo {
   background-color: #572ee5;
   border-radius: 50%;
 }
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container #info-space {
+  width: 20%;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container #info-pasos {
+  width: 60%;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container #info-div {
+  width: 20%;
+}
 body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 hr {
   height: 6px;
   margin: 25px auto;
@@ -881,9 +909,11 @@ body #section-cre #section-cre-fila-3 #section-cre-grabar {
   background-image: url("../img/cta-grabar.svg");
   cursor: pointer;
 }
-body #section-cre #section-cre-fila-3 #section-cre-video {
-  width: 640px;
-  height: 480px;
+body #section-cre #section-cre-fila-3 #section-cre-finalizar {
+  width: 131px;
+  height: 52px;
+  background-image: url("../img/cta-finalizar.svg");
+  cursor: pointer;
 }
 body footer {
   border-bottom: 5px solid #572ee5;

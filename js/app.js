@@ -68,6 +68,8 @@ const crearGIFOSGrabar = document.getElementById("section-cre-grabar");
 const crearGIFOSTitle = document.getElementById("section-cre-tit");
 const crearGIFOSDescription = document.getElementById("section-cre-des");
 const crearGIFOSVideo = document.getElementById("section-cre-video");
+const crearGIFOSFinalizar = document.getElementById("section-cre-finalizar");
+const crearGIFOSInfoDetail = document.getElementById("info-detail");
 
 let divArrowLeft = document.createElement('div');
 divArrowLeft.id = "arrow-left";
@@ -822,10 +824,50 @@ const fetchStream = () => {
         crearGIFOSVideo.classList.remove("hide");
         crearGIFOSVideo.srcObject = stream;
         crearGIFOSVideo.play();
+
+        recorder = RecordRTC(stream, {
+            type: "gif",
+            frameRate: 1,
+            quality: 10,
+            width: 360,
+            hidden: 240,
+            onGifRecordingStarted: function () {
+              console.warn("Grabando");
+            },
+        });
     });
 }
 
 crearGIFOSComenzar.addEventListener("click", fetchStream);
+
+const calculateTimeDuration = secs => {
+    var hr = Math.floor(secs / 3600);
+    var min = Math.floor((secs - hr * 3600) / 60);
+    var sec = Math.floor(secs - hr * 3600 - min * 60);
+    if (min < 10) {
+      min = "0" + min;
+    }
+    if (sec < 10) {
+      sec = "0" + sec;
+    }
+    return hr + ":" + min + ":" + sec;
+  }
+
+const recordStream = () => {
+    recorder.startRecording();
+    crearGIFOSGrabar.classList.add("hide");
+    crearGIFOSFinalizar.classList.remove("hide");
+
+    dateStarted = new Date().getTime();
+    (function looper() {
+        crearGIFOSInfoDetail.innerHTML = calculateTimeDuration(
+        (new Date().getTime() - dateStarted) / 1000
+        );
+        setTimeout(looper, 1000);
+  })();
+}
+
+crearGIFOSGrabar.addEventListener("click", recordStream);
 
 // EVENT LISTENERS
 
