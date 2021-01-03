@@ -915,6 +915,12 @@ body #section-cre #section-cre-fila-3 #section-cre-finalizar {
   background-image: url("../img/cta-finalizar.svg");
   cursor: pointer;
 }
+body #section-cre #section-cre-fila-3 #section-cre-subirgifo {
+  width: 131px;
+  height: 52px;
+  background-image: url("../img/cta-subirgifo.svg");
+  cursor: pointer;
+}
 body footer {
   border-bottom: 5px solid #572ee5;
 }

@@ -68,8 +68,12 @@ const crearGIFOSGrabar = document.getElementById("section-cre-grabar");
 const crearGIFOSTitle = document.getElementById("section-cre-tit");
 const crearGIFOSDescription = document.getElementById("section-cre-des");
 const crearGIFOSVideo = document.getElementById("section-cre-video");
+const crearGIFOSVideoRecorded = document.getElementById("section-cre-video-recorded");
 const crearGIFOSFinalizar = document.getElementById("section-cre-finalizar");
-const crearGIFOSInfoDetail = document.getElementById("info-detail");
+const crearGIFOSSubir = document.getElementById("section-cre-subirgifo");
+const crearGIFOSInfoTimer = document.getElementById("info-timer");
+const crearGIFOSInfoRepeat = document.getElementById("info-repeat");
+const crearGIFOSInfoRepeatA = document.getElementById("info-repeat-a");
 
 let divArrowLeft = document.createElement('div');
 divArrowLeft.id = "arrow-left";
@@ -860,7 +864,7 @@ const recordStream = () => {
 
     dateStarted = new Date().getTime();
     (function looper() {
-        crearGIFOSInfoDetail.innerHTML = calculateTimeDuration(
+        crearGIFOSInfoTimer.innerHTML = calculateTimeDuration(
         (new Date().getTime() - dateStarted) / 1000
         );
         setTimeout(looper, 1000);
@@ -868,6 +872,58 @@ const recordStream = () => {
 }
 
 crearGIFOSGrabar.addEventListener("click", recordStream);
+
+const repeatStream = () => {
+    recorder.clearRecordedData();
+    crearGIFOSInfoTimer.classList.add("hide");
+    crearGIFOSSubir.classList.add("hide");
+    crearGIFOSVideoRecorded.classList.add("hide");
+    crearGIFOSGrabar.classList.remove("hide");
+    navigator.mediaDevices
+    .getUserMedia({ audio: false, video: { height: { max: 480 } } })
+
+    .then(function (stream) {
+      //step_second.classList.add("step_now");
+
+      crearGIFOSVideo.classList.remove("hide");
+      crearGIFOSVideo.srcObject = stream;
+      crearGIFOSVideo.play();
+
+      recorder = RecordRTC(stream, {
+        type: "gif",
+        frameRate: 1,
+        quality: 10,
+        width: 360,
+        hidden: 240,
+        onGifRecordingStarted: function () {
+            console.warn("Grabando");
+        },
+      });
+    });
+}
+
+const endStream = () => {
+    crearGIFOSFinalizar.classList.add("hide");
+    crearGIFOSSubir.classList.remove("hide");
+    crearGIFOSInfoTimer.classList.add("hide");
+    crearGIFOSInfoRepeat.classList.remove("hide");
+    crearGIFOSInfoRepeatA.addEventListener("click", repeatStream);
+
+    recorder.stopRecording(function () {
+        crearGIFOSVideo.classList.add("hide");
+        crearGIFOSVideoRecorded.classList.remove("hide");
+        blob = recorder.getBlob();
+        crearGIFOSVideoRecorded.src = URL.createObjectURL(recorder.getBlob());
+        form.append("file", recorder.getBlob(), "myGifo.gif");
+        form.append("api_key", api_key);
+      });
+}
+
+crearGIFOSFinalizar.addEventListener("click", endStream);
+
+const uploadStream = () => {
+    //
+}
 
 // EVENT LISTENERS
 
