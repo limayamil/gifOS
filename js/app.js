@@ -14,6 +14,10 @@ let resultadosMemoria;
 // Favoritos en memoria
 let gifsFavoritos = [];
 
+// Mis GIFOS
+let misGIFOSArray = [];
+let misGIFOSArrayStringified = [];
+
 // Booleano del modo nocturno
 let modoNocturno = false;
 
@@ -74,6 +78,10 @@ const crearGIFOSSubir = document.getElementById("section-cre-subirgifo");
 const crearGIFOSInfoTimer = document.getElementById("info-timer");
 const crearGIFOSInfoRepeat = document.getElementById("info-repeat");
 const crearGIFOSInfoRepeatA = document.getElementById("info-repeat-a");
+const crearGIFOSVideoOverlay = document.getElementById("section-cre-video-recorded-overlay");
+const crearGIFOSVideoOverlayActions = document.getElementById("section-cre-video-recorded-overlay-actions");
+const crearGIFOSVideoOverlayIcon = document.getElementById("section-cre-video-recorded-overlay-icon");
+const crearGIFOSVideoOverlayText = document.getElementById("section-cre-video-recorded-overlay-text");
 
 let divArrowLeft = document.createElement('div');
 divArrowLeft.id = "arrow-left";
@@ -914,16 +922,66 @@ const endStream = () => {
         crearGIFOSVideoRecorded.classList.remove("hide");
         blob = recorder.getBlob();
         crearGIFOSVideoRecorded.src = URL.createObjectURL(recorder.getBlob());
+        //crearGIFOSVideoRecorded.play();
         form.append("file", recorder.getBlob(), "myGifo.gif");
-        form.append("api_key", api_key);
+        form.append("api_key", key);
       });
 }
 
 crearGIFOSFinalizar.addEventListener("click", endStream);
 
 const uploadStream = () => {
-    //
+    crearGIFOSVideoOverlay.classList.remove("hide");
+    crearGIFOSVideoOverlayIcon.remove("hide");
+    crearGIFOSVideoOverlayText.textContent = "Estamos subiendo tu GIFO"
+    crearGIFOSVideoOverlayText.classList.remove("hide");
+    //step_second.classList.remove("step_now");
+    //step_third.classList.add("step_now");
+    crearGIFOSInfoRepeat.classList.add("hide");
+
+
+    fetch("https://upload.giphy.com/v1/gifs", {
+      method: "POST",
+      body: form,
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((gifo) => {
+        let gifoID = gifo.data.id;
+        crearGIFOSVideoOverlayActions.classList.remove("hide");
+        crearGIFOSVideoOverlayIcon.classList.remove("loader");
+        crearGIFOSVideoOverlayIcon.classList.add("check");
+        crearGIFOSVideoOverlayText.textContent = "GIFO subido con éxito";
+        crearGIFOSVideoOverlayActions.innerHTML = `
+              <button class="gifo__btn" id="download_btn" onclick="downloadGIFO('${gifoID}')">
+                  <img src="./img/icon-download-hover.svg" alt="Descargar">
+              </button>
+              <button class="gifo__btn" id="link_btn">
+                  <img src="./img/icon-link-hover.svg" alt="link">
+              </button>`;
+              crearGIFOSSubir.classList.add("hide");
+  
+        //if (misGIFOSArray == null) {
+        //    misGIFOSArray = [];
+        //} else {
+        //    misGIFOSArray = JSON.parse(myGifosString);
+        //}
+        misGIFOSArray.push(gifoID);
+        misGIFOSArrayStringified = JSON.stringify(misGIFOSArray);
+        localStorage.setItem("myGifos", misGIFOSArrayStringified);
+      })
+      .catch((error) => console.log(error));
 }
+
+crearGIFOSSubir.addEventListener("click", uploadStream);
+
+async function downloadGIFO(gifoImg) {
+    let blob = await fetch(
+      "https://media.giphy.com/media/" + gifoImg + "/giphy.gif"
+    ).then((img) => img.blob());
+    invokeSaveAsDialog(blob, "myGifo.gif");
+  }
 
 // EVENT LISTENERS
 
@@ -978,3 +1036,4 @@ aModoNocturno.addEventListener('click', e => {
         modoNocturno = false;
     }
 });
+
