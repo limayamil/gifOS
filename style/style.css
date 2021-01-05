@@ -415,7 +415,8 @@ body section #section-fav-info h3 {
 }
 body section #section-res-gal,
 body section #section-fav-gal,
-body section #section-tre-car {
+body section #section-tre-car,
+body section #section-mis-gal {
   max-width: 70vw;
   margin: 50px auto;
   display: grid;
@@ -430,7 +431,8 @@ body section #section-tre-car {
 }
 body section #section-res-gal .fetched-gif,
 body section #section-fav-gal .fetched-gif,
-body section #section-tre-car .fetched-gif {
+body section #section-tre-car .fetched-gif,
+body section #section-mis-gal .fetched-gif {
   width: 260px;
   height: 200px;
   background-size: cover;
@@ -440,12 +442,14 @@ body section #section-tre-car .fetched-gif {
 }
 body section #section-res-gal .fetched-gif:hover .fetched-gif-overlay,
 body section #section-fav-gal .fetched-gif:hover .fetched-gif-overlay,
-body section #section-tre-car .fetched-gif:hover .fetched-gif-overlay {
+body section #section-tre-car .fetched-gif:hover .fetched-gif-overlay,
+body section #section-mis-gal .fetched-gif:hover .fetched-gif-overlay {
   top: 0;
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay {
   background-color: rgba(87, 46, 229, 0.7);
   height: 100%;
   width: 100%;
@@ -472,7 +476,8 @@ body section #section-tre-car .fetched-gif .fetched-gif-overlay {
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -490,7 +495,8 @@ body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-opt
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options div,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options div,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options div {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options div,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options div {
   margin-left: 10px;
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
@@ -501,48 +507,59 @@ body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-opt
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
 body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
 body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
   height: 32px;
   width: 32px;
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav {
   background-image: url("../img/icon-fav-normal.svg");
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav:hover {
   background-image: url("../img/icon-fav-hover.svg");
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav.active,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav.active,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav.active {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav.active,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav.active {
   background-image: url("../img/icon-fav-active.svg");
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down {
   background-image: url("../img/icon-download-normal.svg");
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down:hover,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down:hover,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down:hover {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down:hover,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down:hover {
   background-image: url("../img/icon-download-hover.svg");
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
   background-image: url("../img/icon-max-normal.svg");
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover {
   background-image: url("../img/icon-max-hover.svg");
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-info {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-info,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -560,24 +577,28 @@ body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-inf
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-user,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-user,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-user {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-user,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-user {
   font-size: 14px;
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-title,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-title,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-title {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-title,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info .fetched-gif-title {
   font-size: 16px;
   font-weight: bold;
   text-align: left;
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay p,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay p,
-body section #section-tre-car .fetched-gif .fetched-gif-overlay p {
+body section #section-tre-car .fetched-gif .fetched-gif-overlay p,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay p {
   color: #fff;
 }
 body section #section-res-gal img,
 body section #section-fav-gal img,
-body section #section-tre-car img {
+body section #section-tre-car img,
+body section #section-mis-gal img {
   width: 260px;
   height: 200px;
 }
@@ -797,6 +818,17 @@ body #section-cre #section-cre-fila-1 #section-cre-video-recorded-div #section-c
       -ms-flex-align: center;
           align-items: center;
 }
+body #section-cre #section-cre-fila-1 #section-cre-video-recorded-div #section-cre-video-recorded-overlay #section-cre-video-recorded-overlay-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+body #section-cre #section-cre-fila-1 #section-cre-video-recorded-div #section-cre-video-recorded-overlay #section-cre-video-recorded-overlay-actions button {
+  border: none;
+  margin: 10px 10px 0 0;
+  padding: initial;
+  cursor: pointer;
+}
 body #section-cre #section-cre-fila-1 #section-cre-video-recorded-div #section-cre-video-recorded-overlay #section-cre-video-recorded-overlay-icon.loader {
   width: 22px;
   height: 22px;
@@ -806,6 +838,14 @@ body #section-cre #section-cre-fila-1 #section-cre-video-recorded-div #section-c
   width: 18px;
   height: 13px;
   background-image: url("../img/icon-check.svg");
+}
+body #section-cre #section-cre-fila-1 #section-cre-video-recorded-div #section-cre-video-recorded-overlay #section-cre-video-recorded-overlay-text {
+  font-family: Montserrat, sans-serif;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 body #section-cre #section-cre-fila-2 {
   display: -webkit-box;
@@ -893,13 +933,22 @@ body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container 
           align-items: center;
 }
 body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container #info-space {
-  width: 20%;
+  width: 30%;
 }
 body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container #info-pasos {
-  width: 60%;
+  width: 40%;
 }
 body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container #info-div {
-  width: 20%;
+  width: 30%;
+}
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container #info-div p,
+body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 #info-container #info-div a {
+  font-family: Montserrat, sans-serif;
+  text-decoration: none;
+  color: #572ee5;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 body #section-cre #section-cre-fila-2 #section-cre-fila-2-col-2 hr {
   height: 6px;

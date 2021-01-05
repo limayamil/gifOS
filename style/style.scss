@@ -441,7 +441,8 @@ body {
 
     #section-res-gal,
     #section-fav-gal,
-    #section-tre-car {
+    #section-tre-car,
+    #section-mis-gal {
       max-width: $anchomax;
       margin: 50px auto;
       display: grid;
@@ -682,6 +683,18 @@ body {
           background-color: rgba(87, 46, 229, 0.6);
           @include centrarFlex(column, center, center);
 
+          #section-cre-video-recorded-overlay-actions {
+            position: absolute;
+            top: 0;
+            right: 0;
+            button {
+              border: none;
+              margin: 10px 10px 0 0;
+              padding: initial;
+              cursor: pointer;
+            }
+          }
+
           #section-cre-video-recorded-overlay-icon {
             &.loader {
               width: 22px;
@@ -697,6 +710,12 @@ body {
           }
 
           #section-cre-video-recorded-overlay-text {
+            font-family: Montserrat, sans-serif;
+            text-decoration: none;
+            color: $dark-col-pri;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
           }
         }
       }
@@ -738,15 +757,25 @@ body {
         #info-container {
           @include centrarFlex(row, center, center);
           #info-space {
-            width: 20%;
+            width: 30%;
           }
 
           #info-pasos {
-            width: 60%;
+            width: 40%;
           }
 
           #info-div {
-            width: 20%;
+            width: 30%;
+
+            p,
+            a {
+              font-family: Montserrat, sans-serif;
+              text-decoration: none;
+              color: #572ee5;
+              font-weight: bold;
+              font-size: 14px;
+              text-transform: uppercase;
+            }
           }
         }
 

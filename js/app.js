@@ -123,15 +123,30 @@ const changeSection = (section) => {
         favoritosPagination.innerHTML = "";
     }
 
+    const resetMisGIFOS = () => {
+        misGIFOSViewMore.classList.add('hide');
+        misGIFOSResultsInfo.classList.add('hide');
+        misGIFOSResultsGallery.innerHTML = "";
+        misGIFOSPagination.innerHTML = "";
+    }
+
+    const resetGIFOS = () => {
+        
+    }
+
     const resetAll = () => {
         resetHome();
         resetFavorites();
+        resetMisGIFOS();
+        resetGIFOS();
         aMisFavoritos.classList.remove('active');
     }
 
     const hideAll = () => {
         header.classList.add('hide');
         misFavoritos.classList.add('hide');
+        misGIFOS.classList.add('hide');
+        crearGIFOS.classList.add('hide');
     }
 
     resetAll();
@@ -808,7 +823,8 @@ const fetchMisGIFOS = () => {
         }
 
         const listarResultadosMisGIFOS = (desde, hasta) => {
-            favoritosResultsGallery.innerHTML = "";
+            misGIFOSResultsGallery.innerHTML = "";
+            misGIFOSResultsGallery.classList.remove("hide");
             for (i = desde; i < hasta; i++) {
                 try {
                     let divGif = document.createElement("div");
@@ -830,7 +846,8 @@ const fetchMisGIFOS = () => {
                     let fetchedGifTitle = document.createElement("p");
                     fetchedGifTitle.classList.add('fetched-gif-title');
                     
-                    let gifURL = misGIFOSArray[i].url;
+                    let gifURL = "https://media2.giphy.com/media/" + misGIFOSArray[i] + "/giphy.gif" ;
+                    console.log(gifURL);
                     let usuario = misGIFOSArray[i].usuario;
                     let titulo = misGIFOSArray[i].titulo;
     
@@ -1171,6 +1188,7 @@ aMisGIFOS.addEventListener('click', e => {
     e.preventDefault;
     e.stopPropagation;
     changeSection('mis-gifos');
+    fetchMisGIFOS();
 });
 // Ingresar a Crear GIFOS
 aCrearGIFOS.addEventListener('click', e => {
