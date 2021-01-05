@@ -99,6 +99,10 @@ if (localStorage.getItem("gifsFavoritos") !== null) {
     gifsFavoritos = JSON.parse(localStorage.getItem("gifsFavoritos"));
 }
 
+if (localStorage.getItem("myGIFOS") !== null) {
+    misGIFOSArray = JSON.parse(localStorage.getItem("myGIFOS"));
+}
+
 // Cambiar de sección
 const changeSection = (section) => {
 
@@ -780,6 +784,160 @@ const fetchFavoriteGIFs = () => {
     }
 }
 
+// Muestra los Mis GIFOS.
+
+const fetchMisGIFOS = () => {
+    misGIFOSResultsInfo.innerHTML = "";
+
+    if (misGIFOSArray.length != 0){
+        let cantidadResultados = misGIFOSArray.length;
+        let resultadosAMostrar = 12;
+        let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
+        let paginaActual = 1;
+        let paginaIndex = 0;
+
+        const mostrarMas = () => {
+            let indexDesde = paginaIndex * resultadosAMostrar;
+            let indexHasta = (paginaIndex * resultadosAMostrar) + resultadosAMostrar;
+
+            if (cantidadResultados < indexHasta) {
+                indexHasta = cantidadResultados;
+            }
+
+            listarResultados(indexDesde, indexHasta);
+        }
+
+        const listarResultadosMisGIFOS = (desde, hasta) => {
+            favoritosResultsGallery.innerHTML = "";
+            for (i = desde; i < hasta; i++) {
+                try {
+                    let divGif = document.createElement("div");
+                    let divOverlay = document.createElement("div");
+                    let divFetchedGifOptions = document.createElement("div");
+                    divFetchedGifOptions.classList.add('fetched-gif-options');
+                    let divFetchedGifInfo = document.createElement("div");
+                    divFetchedGifInfo.classList.add('fetched-gif-info');
+                    let fetchedGifOptionFavorite = document.createElement("div");
+                    fetchedGifOptionFavorite.classList.add("fetched-gif-option-fav");
+                    let fetchedGifOptionDownload = document.createElement("div");
+                    fetchedGifOptionDownload.classList.add("fetched-gif-option-down");
+                    let fetchedGifOptionDelete = document.createElement("div");
+                    fetchedGifOptionDelete.classList.add("fetched-gif-option-delete");
+                    let fetchedGifOptionView = document.createElement("div");
+                    fetchedGifOptionView.classList.add("fetched-gif-option-view");
+                    let fetchedGifUser = document.createElement("p");
+                    fetchedGifUser.classList.add('fetched-gif-user');
+                    let fetchedGifTitle = document.createElement("p");
+                    fetchedGifTitle.classList.add('fetched-gif-title');
+                    
+                    let gifURL = misGIFOSArray[i].url;
+                    let usuario = misGIFOSArray[i].usuario;
+                    let titulo = misGIFOSArray[i].titulo;
+    
+                    if (usuario === "") {
+                        usuario = "Anónimo";
+                    }
+    
+                    if (titulo === "") {
+                        titulo = "Sin título";
+                    }
+    
+                    divGif.classList.add('fetched-gif');
+                    divOverlay.classList.add('fetched-gif-overlay');
+    
+                    // divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
+                    // Se podría hacer que el botón elimine de favoritos?
+                    divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
+                    //divFetchedGifOptions.appendChild(fetchedGifOptionView);
+                    divOverlay.appendChild(divFetchedGifOptions);
+    
+                    fetchedGifUser.textContent = usuario;
+                    fetchedGifTitle.textContent = titulo;
+                    divFetchedGifInfo.appendChild(fetchedGifUser);
+                    divFetchedGifInfo.appendChild(fetchedGifTitle);
+                    divOverlay.appendChild(divFetchedGifInfo);
+    
+                    divGif.style.backgroundImage = "url(" + gifURL + ")";
+                    divGif.appendChild(divOverlay);
+                    misGIFOSResultsGallery.appendChild(divGif);
+    
+                    const unfavoriteGifCallback = () => {
+                        unfavoriteGif(gifURL);
+                    };
+    
+                    const downloadGifCallback = () => {
+                        downloadGif(index);
+                    };
+    
+                    const expandGifCallback = () => {
+                        expandGif(index, gifURL, usuario, titulo);
+                    };
+    
+                    //divGif.addEventListener("click", expandGifCallback);
+                    //fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
+                    fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
+                    //fetchedGifOptionView.addEventListener("click", expandGifCallback);
+                } catch(e) {
+                    break;
+                }
+                
+            }
+
+            for (l = 0; l < misGIFOSPaginationList.children.length; l++) {
+                misGIFOSPaginationList.children[l].classList.remove("activo");
+            }
+
+            misGIFOSPaginationList.children[paginaIndex].classList.add("activo");
+
+            if (cantidadResultados > paginaActual * resultadosAMostrar) {
+                misGIFOSViewMore.classList.remove('hide');
+                misGIFOSViewMore.addEventListener('click', mostrarMas);
+                paginaActual++;
+                paginaIndex++;
+            } else {
+                misGIFOSViewMore.classList.add('hide');
+            }
+        }
+
+        if (cantidadPaginas > 0) {
+            misGIFOSPagination.classList.remove('hide');
+            for (i = 0; i < cantidadPaginas; i++){
+                let linkPagina = document.createElement("li");
+                linkPagina.textContent = i + 1;
+                let indice = i;
+
+                const clickLinkPagina = () => {
+                    let indexDesde = indice * resultadosAMostrar;
+                    let indexHasta = (indice * resultadosAMostrar) + resultadosAMostrar;
+                    if (cantidadResultados < indexHasta) {
+                        indexHasta = cantidadResultados;
+                    }
+                    paginaActual = indice + 1;
+                    paginaIndex = indice;
+                    listarResultadosMisGIFOS(indexDesde, indexHasta);
+                }
+
+                linkPagina.addEventListener('click', clickLinkPagina);
+                misGIFOSPaginationList.appendChild(linkPagina);
+            }
+        }
+
+        listarResultadosMisGIFOS(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar);
+
+    } else {
+        misGIFOS.classList.remove("hide");
+        misGIFOSResultsInfo.classList.remove("hide");
+        misGIFOSResultsGallery.innerHTML = "";
+        let imgSinResultados = document.createElement("img");
+        imgSinResultados.src = "img/icon-mis-gifos-sin-contenido.svg"
+        let titSinResultados = document.createElement("h3");
+        titSinResultados.classList.add("section-fav-info-tit");
+        titSinResultados.textContent = "¡Anímate a crear tu primer GIFO!";
+        misGIFOSResultsInfo.appendChild(imgSinResultados);
+        misGIFOSResultsInfo.appendChild(titSinResultados);
+    }
+}
+
 // Cuando detecta un cambio en la barra de búsqueda, trae las sugerencias
 
 const changeSearchBar = () => {
@@ -819,7 +977,7 @@ let blob;
 let dateStarted;
 let form = new FormData();
 let myGifosArray = [];
-let myGifosString = localStorage.getItem("myGifos");
+let myGifosString = localStorage.getItem("myGIFOS");
 let video = document.getElementById("recording_video");
 //let recorded_gifo = document.getElementById("recorded_gifo");
 
@@ -969,7 +1127,7 @@ const uploadStream = () => {
         //}
         misGIFOSArray.push(gifoID);
         misGIFOSArrayStringified = JSON.stringify(misGIFOSArray);
-        localStorage.setItem("myGifos", misGIFOSArrayStringified);
+        localStorage.setItem("myGIFOS", misGIFOSArrayStringified);
       })
       .catch((error) => console.log(error));
 }
