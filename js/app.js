@@ -1066,8 +1066,7 @@ const repeatStream = () => {
     .getUserMedia({ audio: false, video: { height: { max: 480 } } })
 
     .then(function (stream) {
-      //step_second.classList.add("step_now");
-
+      // Actualizar paso
       crearGIFOSVideo.classList.remove("hide");
       crearGIFOSVideo.srcObject = stream;
       crearGIFOSVideo.play();
@@ -1110,8 +1109,7 @@ const uploadStream = () => {
     crearGIFOSVideoOverlayIcon.remove("hide");
     crearGIFOSVideoOverlayText.textContent = "Estamos subiendo tu GIFO"
     crearGIFOSVideoOverlayText.classList.remove("hide");
-    //step_second.classList.remove("step_now");
-    //step_third.classList.add("step_now");
+    // Actualizar paso
     crearGIFOSInfoRepeat.classList.add("hide");
 
 
@@ -1137,11 +1135,6 @@ const uploadStream = () => {
               </button>`;
               crearGIFOSSubir.classList.add("hide");
   
-        //if (misGIFOSArray == null) {
-        //    misGIFOSArray = [];
-        //} else {
-        //    misGIFOSArray = JSON.parse(myGifosString);
-        //}
         misGIFOSArray.push(gifoID);
         misGIFOSArrayStringified = JSON.stringify(misGIFOSArray);
         localStorage.setItem("myGIFOS", misGIFOSArrayStringified);
