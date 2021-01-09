@@ -83,6 +83,9 @@ const crearGIFOSVideoOverlay = document.getElementById("section-cre-video-record
 const crearGIFOSVideoOverlayActions = document.getElementById("section-cre-video-recorded-overlay-actions");
 const crearGIFOSVideoOverlayIcon = document.getElementById("section-cre-video-recorded-overlay-icon");
 const crearGIFOSVideoOverlayText = document.getElementById("section-cre-video-recorded-overlay-text");
+const crearGIFOSPaso1 = document.getElementById("paso-1");
+const crearGIFOSPaso2 = document.getElementById("paso-2");
+const crearGIFOSPaso3 = document.getElementById("paso-3");
 
 let divArrowLeft = document.createElement('div');
 divArrowLeft.id = "arrow-left";
@@ -171,6 +174,7 @@ const changeSection = (section) => {
             hideAll();
             aMisGIFOS.classList.add('active');
             misGIFOS.classList.remove('hide');
+            fetchMisGIFOS();
             break;
         case 'crear-gifos':
             hideAll();
@@ -723,7 +727,6 @@ const favoriteGif = (gifURL, usuario, titulo) => {
 
 const fetchSearchGIFs = (giphyAPI, searchTerm) => {
     searchResults.classList.remove("hide");
-    console.log("pogi");
     searchResultsTitle.classList.add("hide");
     let resultsLoading = document.createElement("div");
     resultsLoading.id = "section-res-loading";
@@ -824,9 +827,11 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
 // Muestra los GIFs favoritos
 
 const fetchFavoriteGIFs = () => {
+
     favoritosResultsInfo.innerHTML = "";
 
     if (gifsFavoritos.length != 0){
+        resultsLoading.classList.add("hide");
         let cantidadResultados = gifsFavoritos.length;
         let resultadosAMostrar = 12;
         let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
@@ -1116,7 +1121,6 @@ const fetchMisGIFOS = () => {
         listarResultadosMisGIFOS(paginaIndex * resultadosAMostrar, (paginaIndex * resultadosAMostrar) + resultadosAMostrar);
 
     } else {
-        misGIFOS.classList.remove("hide");
         misGIFOSResultsInfo.classList.remove("hide");
         misGIFOSResultsGallery.innerHTML = "";
         let imgSinResultados = document.createElement("img");
@@ -1174,11 +1178,14 @@ let video = document.getElementById("recording_video");
 
 const fetchStream = () => {
     crearGIFOSComenzar.classList.add("hide");
+    crearGIFOSPaso1.classList.add("activo");
     crearGIFOSTitle.innerHTML = "¿Nos das acceso<br>a tu cámara?";
     crearGIFOSDescription.innerHTML = "El acceso a tu cámara será válido sólo<br>por el tiempo en el que estés creando el GIFO."
     navigator.mediaDevices
     .getUserMedia({ audio: false, video: { height: { max: 480 } } })
     .then( stream => {
+        crearGIFOSPaso1.classList.remove("activo");
+        crearGIFOSPaso2.classList.add("activo");
         crearGIFOSTitle.classList.add("hide");
         crearGIFOSDescription.classList.add("hide");
         crearGIFOSGrabar.classList.remove("hide");
@@ -1279,8 +1286,10 @@ const endStream = () => {
 crearGIFOSFinalizar.addEventListener("click", endStream);
 
 const uploadStream = () => {
+    crearGIFOSPaso2.classList.remove("activo");
+    crearGIFOSPaso3.classList.add("activo");
     crearGIFOSVideoOverlay.classList.remove("hide");
-    crearGIFOSVideoOverlayIcon.remove("hide");
+    crearGIFOSVideoOverlayIcon.classList.remove("hide");
     crearGIFOSVideoOverlayText.textContent = "Estamos subiendo tu GIFO"
     crearGIFOSVideoOverlayText.classList.remove("hide");
     // Actualizar paso

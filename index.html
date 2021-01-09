@@ -94,6 +94,7 @@
     <!-- Mis GIFOS -->
     <section id="section-mis" class="hide">
       <div id="section-tit">
+        <div id="section-mis-icon"></div>
         <h2 id="section-mis-tit">Mis GIFOS</h2>
       </div>
       <div id="section-mis-gal" class="hide"></div>
@@ -108,9 +109,13 @@
       <div id="section-cre-fila-1">
         <div id="section-cre-fila-1-col-1">
           <div id="proyector"></div>
-          <div id="luz"></div>
+          <div id="luz" class="animate-flicker"></div>
         </div>
         <div id="section-cre-fila-1-col-2">
+          <div id="borde-top-left" class="borde"></div>
+          <div id="borde-top-right" class="borde"></div>
+          <div id="borde-bottom-left" class="borde"></div>
+          <div id="borde-bottom-right" class="borde"></div>
           <video id="section-cre-video" class="hide"></video>
           <div id="section-cre-video-recorded-div">
             <div id="section-cre-video-recorded-overlay" class="hide">
@@ -149,9 +154,9 @@
             <div id="info-space"></div>
             <div id="info-pasos">
               <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li id="paso-1">1</li>
+                <li id="paso-2">2</li>
+                <li id="paso-3">3</li>
               </ul>
             </div>
             <div id="info-div">

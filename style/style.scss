@@ -90,7 +90,7 @@ body {
 
   h2 {
     font-size: 20px;
-    text-transform: capitalize;
+    text-transform: initial;
 
     em {
       font-style: inherit;
@@ -432,10 +432,10 @@ body {
   section {
     text-align: center;
     padding: 30px 0;
-    background-color: $light-gris;
+    //background-color: $light-gris;
 
     &#section-tre {
-      //background-color: $light-gris;
+      background-color: $light-gris;
 
       #section-tit {
         line-height: $interlineado;
@@ -451,7 +451,6 @@ body {
     }
 
     &#section-res {
-      background-color: #ffffff;
       padding-top: 0;
 
       hr {
@@ -478,14 +477,27 @@ body {
     }
 
     &#section-fav {
-      background-color: #ffffff;
-
       #section-tit {
         @include centrarFlex(column, center, center);
         #section-fav-icon {
           background-image: url("../img/icon-favoritos.svg");
           width: 28px;
           height: 21px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    &#section-mis {
+      background-color: #ffffff;
+
+      #section-tit {
+        @include centrarFlex(column, center, center);
+        #section-mis-icon {
+          background-image: url("../img/icon-mis-gifos.svg");
+          background-repeat: no-repeat;
+          width: 24px;
+          height: 22px;
           margin-bottom: 10px;
         }
       }
@@ -509,7 +521,8 @@ body {
     }
 
     #section-res-info,
-    #section-fav-info {
+    #section-fav-info,
+    #section-mis-info {
       margin: 95px 0;
       h3 {
         text-align: center;
@@ -639,6 +652,7 @@ body {
 
       #trending-gif-slide-right,
       #trending-gif-slide-left {
+        cursor: pointer;
         width: 40px;
         height: 40px;
         display: inline-block;
@@ -741,6 +755,46 @@ body {
         width: 60%;
         border: 1px solid $light-col-pri;
         height: 390px;
+        position: relative;
+
+        .borde {
+          position: absolute;
+          height: 25px;
+          width: 25px;
+          margin: 15px;
+        }
+
+        #borde-top-left {
+          top: 0;
+          left: 0;
+          border-top: 1px solid $dark-col-sec;
+          border-left: 1px solid $dark-col-sec;
+        }
+
+        #borde-top-right {
+          top: 0;
+          right: 0;
+          border-top: 1px solid $dark-col-sec;
+          border-right: 1px solid $dark-col-sec;
+        }
+
+        #borde-bottom-left {
+          bottom: 0;
+          left: 0;
+          border-left: 1px solid $dark-col-sec;
+          border-bottom: 1px solid $dark-col-sec;
+        }
+
+        #borde-bottom-right {
+          bottom: 0;
+          right: 0;
+          border-right: 1px solid $dark-col-sec;
+          border-bottom: 1px solid $dark-col-sec;
+        }
+
+        #section-tit {
+          line-height: 1.8;
+        }
       }
       #section-cre-fila-1-col-3 {
         width: 20%;
@@ -775,6 +829,7 @@ body {
           }
 
           #section-cre-video-recorded-overlay-icon {
+            margin-bottom: 10px;
             &.loader {
               width: 22px;
               height: 22px;
@@ -794,7 +849,6 @@ body {
             color: $dark-col-pri;
             font-weight: bold;
             font-size: 14px;
-            text-transform: uppercase;
           }
         }
       }
@@ -1028,10 +1082,50 @@ body.dark-mode {
         }
       }
     }
+
+    #header-tre {
+      #section-tre-div {
+        #trending-gif-slide-right {
+          background-image: url("../img/button-slider-right-noc.svg");
+
+          &:hover {
+            background-image: url("../img/button-slider-right-noc_hover.svg");
+          }
+        }
+
+        #trending-gif-slide-left {
+          background-image: url("../img/button-slider-left-noc.svg");
+
+          &:hover {
+            background-image: url("../img/button-slider-left-noc_hover.svg");
+          }
+        }
+      }
+    }
   }
 
   section {
     background-color: $dark-gris-oscuro;
+
+    &#section-tre {
+      background-color: $dark-gris-oscuro;
+
+      #trending-gif-slide-right {
+        background-image: url("../img/button-slider-right-noc.svg");
+
+        &:hover {
+          background-image: url("../img/button-slider-right-noc_hover.svg");
+        }
+      }
+
+      #trending-gif-slide-left {
+        background-image: url("../img/button-slider-left-noc.svg");
+
+        &:hover {
+          background-image: url("../img/button-slider-left-noc_hover.svg");
+        }
+      }
+    }
 
     #section-res-gal-pag {
       ul {
@@ -1097,7 +1191,7 @@ body.dark-mode {
     }
 
     main {
-      padding-top: 200px;
+      padding-top: 120px;
     }
 
     header {
@@ -1155,4 +1249,57 @@ body.dark-mode {
       }
     }
   }
+}
+
+/* ANIMACIONES */
+
+@keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes flickerAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animate-flicker {
+  -webkit-animation: flickerAnimation 0.2s infinite;
+  -moz-animation: flickerAnimation 0.2s infinite;
+  -o-animation: flickerAnimation 0.2s infinite;
+  animation: flickerAnimation 0.2s infinite;
 }
