@@ -145,6 +145,7 @@ const changeSection = (section) => {
 
     const hideAll = () => {
         header.classList.add('hide');
+        searchResults.classList.add('hide');
         misFavoritos.classList.add('hide');
         misGIFOS.classList.add('hide');
         crearGIFOS.classList.add('hide');
@@ -164,6 +165,7 @@ const changeSection = (section) => {
             misFavoritos.classList.remove('hide');
             favoritosResultsGallery.classList.remove('hide');
             favoritosPaginationList.classList.remove('hide');
+            fetchMisGIFOS();
             break;
         case 'mis-gifos':
             hideAll();
@@ -178,6 +180,7 @@ const changeSection = (section) => {
         case 'resultados':
             hideAll();
             header.classList.remove('hide');
+            searchResults.classList.remove('hide');
             trendingGIFs.classList.add('hide');
             //trendingGIFs.classList.add('hide');
             break;
@@ -505,7 +508,7 @@ async function downloadGif(index, json) {
 const unfavoriteGif = (gifURL) => {
     let index = gifsFavoritos.findIndex(x => x.url == gifURL);
     gifsFavoritos.splice(index, 1);
-    alert("Se borró un gif de favoritos");
+    localStorage.setItem("gifsFavoritos", JSON.stringify(gifsFavoritos));
 }
 
 // Listar resultados
@@ -603,6 +606,7 @@ const favoriteGif = (gifURL, usuario, titulo) => {
 
 const fetchSearchGIFs = (giphyAPI, searchTerm) => {
     searchResults.classList.remove("hide");
+    console.log("pogi");
     searchResultsTitle.classList.add("hide");
     let resultsLoading = document.createElement("div");
     resultsLoading.id = "section-res-loading";
@@ -688,6 +692,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
                 searchResults.classList.remove("hide");
                 searchResultsInfo.classList.remove("hide");
                 searchResultsGallery.innerHTML = "";
+                trendingGIFs.classList.remove("hide");
                 let imgSinResultados = document.createElement("img");
                 imgSinResultados.src = "img/icon-busqueda-sin-resultado.svg"
                 let titSinResultados = document.createElement("h3");
@@ -758,8 +763,7 @@ const fetchFavoriteGIFs = () => {
                     divGif.classList.add('fetched-gif');
                     divOverlay.classList.add('fetched-gif-overlay');
     
-                    // divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
-                    // Se podría hacer que el botón elimine de favoritos?
+                    divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
                     divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
                     //divFetchedGifOptions.appendChild(fetchedGifOptionView);
                     divOverlay.appendChild(divFetchedGifOptions);
@@ -770,12 +774,13 @@ const fetchFavoriteGIFs = () => {
                     divFetchedGifInfo.appendChild(fetchedGifTitle);
                     divOverlay.appendChild(divFetchedGifInfo);
     
-                    divGif.style.backgroundImage = "url(" + gifURL + ")";
+                    divGif.style.background = "url(" + gifURL + ") no-repeat center / cover, url('img/loading.gif') no-repeat center";
                     divGif.appendChild(divOverlay);
                     favoritosResultsGallery.appendChild(divGif);
     
                     const unfavoriteGifCallback = () => {
                         unfavoriteGif(gifURL);
+                        divGif.remove();
                     };
     
                     const downloadGifCallback = () => {
@@ -787,7 +792,7 @@ const fetchFavoriteGIFs = () => {
                     };
     
                     //divOverlay.addEventListener("click", expandGifCallback);
-                    //fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
+                    fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
                     fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
                     //fetchedGifOptionView.addEventListener("click", expandGifCallback);
                 } catch(e) {
@@ -1233,7 +1238,6 @@ aMisGIFOS.addEventListener('click', e => {
     e.preventDefault;
     e.stopPropagation;
     changeSection('mis-gifos');
-    fetchMisGIFOS();
 });
 // Ingresar a Crear GIFOS
 aCrearGIFOS.addEventListener('click', e => {

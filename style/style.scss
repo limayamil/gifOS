@@ -477,6 +477,20 @@ body {
       }
     }
 
+    &#section-fav {
+      background-color: #ffffff;
+
+      #section-tit {
+        @include centrarFlex(column, center, center);
+        #section-fav-icon {
+          background-image: url("../img/icon-favoritos.svg");
+          width: 28px;
+          height: 21px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
     #section-res-tit {
       font-size: 36px;
       margin-bottom: 60px;

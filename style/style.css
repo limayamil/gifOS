@@ -459,6 +459,30 @@ body section#section-res #section-res-loading #section-res-loading-icon {
   width: 150px;
   margin-bottom: 30px;
 }
+body section#section-fav {
+  background-color: #ffffff;
+}
+body section#section-fav #section-tit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+body section#section-fav #section-tit #section-fav-icon {
+  background-image: url("../img/icon-favoritos.svg");
+  width: 28px;
+  height: 21px;
+  margin-bottom: 10px;
+}
 body section #section-res-tit {
   font-size: 36px;
   margin-bottom: 60px;
