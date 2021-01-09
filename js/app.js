@@ -399,9 +399,16 @@ const expandGif = (index, gifURL, usuario, titulo) => {
     overlayInfoDetailsTitle.textContent = titulo;
     overlayInfoDetails.appendChild(overlayInfoDetailsUser);
     overlayInfoDetails.appendChild(overlayInfoDetailsTitle);
+    let overlayInfoActions = document.createElement("div");
+    overlayInfoActions.id ="overlay-info-actions";
+    let overlayInfoActionsFavorite = document.createElement("div");
+    overlayInfoActionsFavorite.id ="overlay-info-actions-favorite";
+    let overlayInfoActionsDownload = document.createElement("div");
+    overlayInfoActionsDownload.id ="overlay-info-actions-download";
+    overlayInfoActions.appendChild(overlayInfoActionsFavorite);
+    overlayInfoActions.appendChild(overlayInfoActionsDownload);
+    overlayInfo.appendChild(overlayInfoActions);
     overlayInfo.appendChild(overlayInfoDetails);
-
-    // Faltan las opciones de agregar
 
     const closeOverlay = () => {
         overlayDiv.remove();
@@ -428,7 +435,28 @@ const expandGif = (index, gifURL, usuario, titulo) => {
         expandGif(nextIndex,nextURL,nextUser,nextTitle);
     }
 
+    const favoriteExpanded = () => {
+        gifsFavoritos.push({url: gifURL, usuario: usuario, titulo: titulo});
+        localStorage.setItem("gifsFavoritos", JSON.stringify(gifsFavoritos));
+        overlayInfoActionsFavorite.classList.add("active");
+    }
+
+     const downloadExpanded = async () => {
+        let a = document.createElement('a');
+        let resp = await fetch(resultadosMemoria.data[index].images.downsized.url);
+        let file = await resp.blob();
+        
+        a.download = resultadosMemoria.data[index].title + ".gif";
+        a.href = window.URL.createObjectURL(file);
+        a.click();
+        a.remove();
+    }
+
+    overlayInfoActionsFavorite.addEventListener("click", favoriteExpanded);
+    overlayInfoActionsDownload.addEventListener("click", downloadExpanded);
+
     overlayDivClose.addEventListener("click", closeOverlay);
+
     overlayDivColRight.appendChild(overlayDivClose);
     overlayDivColMid.appendChild(overlayGIF);
     overlayDivColMid.appendChild(overlayInfo);
@@ -734,7 +762,7 @@ const fetchFavoriteGIFs = () => {
                         expandGif(index, gifURL, usuario, titulo);
                     };
     
-                    //divGif.addEventListener("click", expandGifCallback);
+                    //divOverlay.addEventListener("click", expandGifCallback);
                     //fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
                     fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
                     //fetchedGifOptionView.addEventListener("click", expandGifCallback);
