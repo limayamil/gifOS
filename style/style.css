@@ -515,7 +515,6 @@ body section #section-mis-gal {
   margin: 50px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
   gap: 25px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -1175,6 +1174,7 @@ body.dark-mode input {
 }
 body.dark-mode nav {
   border-top-color: #000000;
+  background-color: #37383c;
 }
 body.dark-mode nav #nav-div #logo {
   background-image: url("../img/logo-desktop-nocturno.svg");
@@ -1234,6 +1234,12 @@ body.dark-mode section #section-res-gal-more:hover {
   body h4 {
     font-size: 16px;
   }
+  body nav {
+    position: fixed;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 1;
+  }
   body nav #nav-div {
     max-width: 70vw;
     margin: 0 auto;
@@ -1259,13 +1265,16 @@ body.dark-mode section #section-res-gal-more:hover {
         -ms-flex-align: center;
             align-items: center;
   }
-  body header #header-tre {
+  body header#header {
+    padding-top: 200px;
+  }
+  body header#header #header-tre {
     padding: 70px;
   }
-  body header #header-bus img {
+  body header#header #header-bus img {
     max-width: 390px;
   }
-  body header #header-bus #search-div {
+  body header#header #header-bus #search-div {
     width: 520px;
   }
   body section#section-tre #section-tit {

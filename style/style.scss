@@ -526,7 +526,7 @@ body {
       margin: 50px auto;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr;
+      //grid-template-rows: 1fr 1fr 1fr;
       gap: 25px;
       justify-content: center;
       align-content: center;
@@ -982,6 +982,7 @@ body.dark-mode {
 
   nav {
     border-top-color: $dark-negro;
+    background-color: $dark-gris;
 
     #nav-div {
       #logo {
@@ -990,7 +991,7 @@ body.dark-mode {
 
       #nav-elem {
         a {
-          color: $dark-col-pri;
+          color: #ffffff;
         }
 
         #nav-elem-agr {
@@ -1076,6 +1077,11 @@ body.dark-mode {
     }
 
     nav {
+      position: fixed;
+      width: 100%;
+      background-color: #ffffff;
+      z-index: 1;
+
       #nav-div {
         max-width: $anchomax;
         margin: 0 auto;
@@ -1091,17 +1097,21 @@ body.dark-mode {
     }
 
     header {
-      #header-tre {
-        padding: 70px;
-      }
+      &#header {
+        padding-top: 200px;
 
-      #header-bus {
-        img {
-          max-width: 390px;
+        #header-tre {
+          padding: 70px;
         }
 
-        #search-div {
-          width: 520px;
+        #header-bus {
+          img {
+            max-width: 390px;
+          }
+
+          #search-div {
+            width: 520px;
+          }
         }
       }
     }

@@ -491,6 +491,123 @@ const expandGif = (index, gifURL, usuario, titulo) => {
     document.body.insertBefore(overlayDiv, document.body.firstChild);
 }
 
+// Expande un gif de favoritos a pantalla completa
+
+const expandGifFavorite = (index, gifURL, usuario, titulo) => {
+    
+    let overlayDiv = document.createElement("div");
+    overlayDiv.id = "overlay";
+
+    let overlayDivColLeft = document.createElement("div");
+    overlayDivColLeft.id = "overlay-gif-left-div";
+    let overlayDivColMid = document.createElement("div");
+    overlayDivColMid.id = "overlay-gif-middle-div";
+    let overlayDivColRight = document.createElement("div");
+    overlayDivColRight.id = "overlay-gif-right-div";
+    let overlayDivSlideRight = document.createElement("div");
+    overlayDivSlideRight.id = "overlay-gif-slide-right";
+    let overlayDivSlideLeft = document.createElement("div");
+    overlayDivSlideLeft.id = "overlay-gif-slide-left";
+    let overlayDivClose = document.createElement("img");
+    overlayDivClose.id = "overlay-close";
+    overlayDivClose.src = "img/close.svg";
+
+    let overlayGIF = document.createElement("img");
+    overlayGIF.src = gifURL;
+
+    let overlayInfo = document.createElement("div");
+    overlayInfo.id = "overlay-info";
+    let overlayInfoDetails = document.createElement("div");
+    overlayInfoDetails.id = "overlay-info-det";
+    let overlayInfoDetailsUser = document.createElement("p");
+    overlayInfoDetailsUser.id = "overlay-info-det-user";
+    let overlayInfoDetailsTitle = document.createElement("p");
+    overlayInfoDetailsTitle.id = "overlay-info-det-title";
+    overlayInfoDetailsUser.textContent = usuario;
+    overlayInfoDetailsTitle.textContent = titulo;
+    overlayInfoDetails.appendChild(overlayInfoDetailsUser);
+    overlayInfoDetails.appendChild(overlayInfoDetailsTitle);
+    let overlayInfoActions = document.createElement("div");
+    overlayInfoActions.id ="overlay-info-actions";
+    let overlayInfoActionsFavorite = document.createElement("div");
+    overlayInfoActionsFavorite.id ="overlay-info-actions-favorite";
+    let overlayInfoActionsDownload = document.createElement("div");
+    overlayInfoActionsDownload.id ="overlay-info-actions-download";
+    overlayInfoActions.appendChild(overlayInfoActionsFavorite);
+    overlayInfoActions.appendChild(overlayInfoActionsDownload);
+    overlayInfo.appendChild(overlayInfoActions);
+    overlayInfo.appendChild(overlayInfoDetails);
+
+    const closeOverlay = () => {
+        overlayDiv.remove();
+        overlayDivClose.removeEventListener("click", closeOverlay);
+    }
+
+    const slideLeft = () => {
+        prevIndex = index - 1;
+        prevURL = gifsFavoritos[prevIndex].url;
+        prevUser = gifsFavoritos[prevIndex].usuario;
+        prevTitle = gifsFavoritos[prevIndex].titulo;
+        overlayDivSlideLeft.removeEventListener("click", slideRight);
+        overlayDiv.remove();
+        expandGifFavorite(prevIndex,prevURL,prevUser,prevTitle);
+    }
+
+    const slideRight = () => {
+        nextIndex = index + 1;
+        nextURL = gifsFavoritos[nextIndex].url;
+        nextUser = gifsFavoritos[nextIndex].usuario;
+        nextTitle = gifsFavoritos[nextIndex].titulo;
+        overlayDivSlideRight.removeEventListener("click", slideRight);
+        overlayDiv.remove();
+        expandGifFavorite(nextIndex,nextURL,nextUser,nextTitle);
+    }
+
+    const unfavoriteExpanded = () => {
+        //gifsFavoritos.push({url: gifURL, usuario: usuario, titulo: titulo});
+        //localStorage.setItem("gifsFavoritos", JSON.stringify(gifsFavoritos));
+        //overlayInfoActionsFavorite.classList.add("active");
+    }
+
+     const downloadExpanded = async () => {
+        let a = document.createElement('a');
+        let resp = await fetch(resultadosMemoria.data[index].images.downsized.url);
+        let file = await resp.blob();
+        
+        a.download = resultadosMemoria.data[index].title + ".gif";
+        a.href = window.URL.createObjectURL(file);
+        a.click();
+        a.remove();
+    }
+
+    overlayInfoActionsFavorite.addEventListener("click", unfavoriteExpanded);
+    overlayInfoActionsDownload.addEventListener("click", downloadExpanded);
+
+    overlayDivClose.addEventListener("click", closeOverlay);
+
+    overlayDivColRight.appendChild(overlayDivClose);
+    overlayDivColMid.appendChild(overlayGIF);
+    overlayDivColMid.appendChild(overlayInfo);
+
+    if (index === 0 && resultadosMemoria.data.length > 1){
+        overlayDivColRight.appendChild(overlayDivSlideRight);
+        overlayDivSlideRight.addEventListener("click", slideRight);
+    } else if (index === resultadosMemoria.data.length && resultadosMemoria.data.length > 1) {
+        overlayDivColLeft.appendChild(overlayDivSlideLeft);
+        overlayDivSlideLeft.addEventListener("click", slideLeft);
+    } else if (index < resultadosMemoria.data.length && index > 0) {
+        overlayDivColRight.appendChild(overlayDivSlideRight);
+        overlayDivSlideRight.addEventListener("click", slideRight);
+        overlayDivColLeft.appendChild(overlayDivSlideLeft);
+        overlayDivSlideLeft.addEventListener("click", slideLeft);
+    }
+
+    overlayDiv.appendChild(overlayDivColLeft);
+    overlayDiv.appendChild(overlayDivColMid);
+    overlayDiv.appendChild(overlayDivColRight);
+    document.body.insertBefore(overlayDiv, document.body.firstChild);
+}
+
 // Descarga un gif
 
 async function downloadGif(index, json) {
@@ -765,7 +882,7 @@ const fetchFavoriteGIFs = () => {
     
                     divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
                     divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
-                    //divFetchedGifOptions.appendChild(fetchedGifOptionView);
+                    divFetchedGifOptions.appendChild(fetchedGifOptionView);
                     divOverlay.appendChild(divFetchedGifOptions);
     
                     fetchedGifUser.textContent = usuario;
@@ -788,13 +905,13 @@ const fetchFavoriteGIFs = () => {
                     };
     
                     const expandGifCallback = () => {
-                        expandGif(index, gifURL, usuario, titulo);
+                        expandGifFavorite(i, gifURL, usuario, titulo);
                     };
     
                     //divOverlay.addEventListener("click", expandGifCallback);
                     fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
                     fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
-                    //fetchedGifOptionView.addEventListener("click", expandGifCallback);
+                    fetchedGifOptionView.addEventListener("click", expandGifCallback);
                 } catch(e) {
                     break;
                 }
