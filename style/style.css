@@ -1265,7 +1265,7 @@ body.dark-mode section #section-res-gal-more:hover {
         -ms-flex-align: center;
             align-items: center;
   }
-  body header#header {
+  body main {
     padding-top: 200px;
   }
   body header#header #header-tre {

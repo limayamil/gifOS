@@ -882,7 +882,7 @@ const fetchFavoriteGIFs = () => {
     
                     divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
                     divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
-                    divFetchedGifOptions.appendChild(fetchedGifOptionView);
+                    //divFetchedGifOptions.appendChild(fetchedGifOptionView);
                     divOverlay.appendChild(divFetchedGifOptions);
     
                     fetchedGifUser.textContent = usuario;
@@ -911,7 +911,7 @@ const fetchFavoriteGIFs = () => {
                     //divOverlay.addEventListener("click", expandGifCallback);
                     fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
                     fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
-                    fetchedGifOptionView.addEventListener("click", expandGifCallback);
+                    //fetchedGifOptionView.addEventListener("click", expandGifCallback);
                 } catch(e) {
                     break;
                 }

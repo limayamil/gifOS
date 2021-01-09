@@ -1096,10 +1096,12 @@ body.dark-mode {
       }
     }
 
+    main {
+      padding-top: 200px;
+    }
+
     header {
       &#header {
-        padding-top: 200px;
-
         #header-tre {
           padding: 70px;
         }
