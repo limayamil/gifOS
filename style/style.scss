@@ -450,6 +450,33 @@ body {
       }
     }
 
+    &#section-res {
+      background-color: #ffffff;
+      padding-top: 0;
+
+      hr {
+        height: 1px;
+        margin: 20px auto 70px auto;
+        max-width: 330px;
+        background-color: $light-gris-oscuro;
+        opacity: 0.5;
+        border-radius: 6px;
+        border: none;
+      }
+
+      #section-res-loading {
+        @include centrarFlex(column, center, center);
+        margin: 60px 0;
+
+        #section-res-loading-icon {
+          background-image: url("../img/icon-mis-gifos-sin-contenido.svg");
+          height: 150px;
+          width: 150px;
+          margin-bottom: 30px;
+        }
+      }
+    }
+
     #section-res-tit {
       font-size: 36px;
       margin-bottom: 60px;

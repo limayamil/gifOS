@@ -33,6 +33,7 @@ const aMisFavoritos = document.getElementById("nav-elem-fav");
 const aMisGIFOS = document.getElementById("nav-elem-mis");
 const aCrearGIFOS = document.getElementById("nav-elem-agr");
 // Trending
+const trendingGIFs = document.getElementById("header-tre");
 const trendingGIFsDiv = document.getElementById("section-tre-car");
 const trendingTopicsDiv = document.getElementById("header-tre-top");
 const trendingSlideLeft = document.getElementById("trending-gif-slide-left");
@@ -154,6 +155,7 @@ const changeSection = (section) => {
         case 'home':
             hideAll();
             header.classList.remove('hide');
+            trendingGIFs.classList.remove('hide');
             misFavoritos.classList.add('hide');
             break;
         case 'favoritos':
@@ -172,6 +174,12 @@ const changeSection = (section) => {
             hideAll();
             aCrearGIFOS.classList.add('active');
             crearGIFOS.classList.remove('hide');
+            break;
+        case 'resultados':
+            hideAll();
+            header.classList.remove('hide');
+            trendingGIFs.classList.add('hide');
+            //trendingGIFs.classList.add('hide');
             break;
     }
 }
@@ -591,10 +599,25 @@ const favoriteGif = (gifURL, usuario, titulo) => {
     alert("Se añadió un gif a favoritos");
 }
 
-// Trae GIFs cuyo término se haya búsqueda
+// Trae GIFs cuyo término se haya buscado
 
 const fetchSearchGIFs = (giphyAPI, searchTerm) => {
-    fetch(giphyAPI + searchTerm)
+    searchResults.classList.remove("hide");
+    searchResultsTitle.classList.add("hide");
+    let resultsLoading = document.createElement("div");
+    resultsLoading.id = "section-res-loading";
+    let resultsLoadingIcon = document.createElement("div");
+    resultsLoadingIcon.id = "section-res-loading-icon";
+    let resultsLoadingText = document.createElement("h3");
+    resultsLoadingText.id = "section-res-loading-text";
+    resultsLoading.classList.remove("hide");
+    resultsLoadingText.textContent = "Cargando resultados...";
+    resultsLoading.appendChild(resultsLoadingIcon);
+    resultsLoading.appendChild(resultsLoadingText);
+    searchResults.prepend(resultsLoading);
+
+    changeSection('resultados');
+        fetch(giphyAPI + searchTerm)
         .then((response) => {
             return response.json();
         })
@@ -604,7 +627,9 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
             searchPagination.innerHTML = "";
             searchResultsGallery.classList.add("hide");
             searchResultsInfo.classList.add("hide");
-            searchResults.classList.add("hide");
+            //searchResults.classList.add("hide");
+            resultsLoading.classList.add("hide");
+            searchResultsTitle.classList.remove("hide");
 
             let cantidadResultados = resultadosMemoria.data.length;
             let resultadosAMostrar = 12;
@@ -614,7 +639,6 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
 
             if (cantidadResultados > 0) {
                 searchSuggestionsList.innerHTML = "";
-                searchResults.classList.remove("hide");
                 searchResultsGallery.classList.remove("hide");
 
                 const mostrarMas = () => {
