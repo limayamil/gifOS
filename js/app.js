@@ -167,21 +167,23 @@ const changeSection = (section) => {
 
   const resetGIFOS = () => {};
 
-  const resetAll = () => {
-    resetHome();
-    resetFavorites();
-    resetMisGIFOS();
-    resetGIFOS();
-    aMisFavoritos.classList.remove("active");
-  };
-
   const hideAll = () => {
     header.classList.add("hide");
     searchResults.classList.add("hide");
     misFavoritos.classList.add("hide");
     misGIFOS.classList.add("hide");
     crearGIFOS.classList.add("hide");
+
+    aMisFavoritos.classList.remove("active");
+    aMisGIFOS.classList.remove("active");
   };
+
+  const resetAll = () => {
+    resetHome();
+    resetFavorites();
+    resetMisGIFOS();
+    resetGIFOS();
+  }; 
 
   resetAll();
   switch (section) {
@@ -189,7 +191,7 @@ const changeSection = (section) => {
       hideAll();
       header.classList.remove("hide");
       trendingGIFs.classList.remove("hide");
-      misFavoritos.classList.add("hide");
+      //misFavoritos.classList.add("hide");
       break;
     case "favoritos":
       hideAll();
@@ -215,7 +217,6 @@ const changeSection = (section) => {
       header.classList.remove("hide");
       searchResults.classList.remove("hide");
       trendingGIFs.classList.add("hide");
-      //trendingGIFs.classList.add('hide');
       break;
   }
 };
@@ -861,9 +862,7 @@ const fetchSearchGIFs = (giphyAPI, searchTerm) => {
               paginaIndex = indice;
               listarResultados(indexDesde, indexHasta);
             };
-
             linkPagina.addEventListener("click", clickLinkPagina);
-
             searchPaginationList.appendChild(linkPagina);
           }
 
@@ -903,7 +902,6 @@ const fetchFavoriteGIFs = () => {
   favoritosResultsInfo.innerHTML = "";
 
   if (gifsFavoritos.length != 0) {
-    resultsLoading.classList.add("hide");
     let cantidadResultados = gifsFavoritos.length;
     let resultadosAMostrar = 12;
     let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
