@@ -18,180 +18,200 @@
     <nav>
       <div id="nav-div">
         <div id="logo"></div>
-        <div id="nav-ham"><span>H</span></div>
+        <div id="nav-ham"></div>
         <div id="nav-elem">
           <a href="#" id="nav-elem-noc">Modo Nocturno</a>
           <a href="#" id="nav-elem-fav">Favoritos</a>
           <a href="#" id="nav-elem-mis">Mis GIFOS</a>
-          <div id="nav-elem-agr" alt="Crear un GIFOS"></div>
+          <div id="nav-elem-agr"></div>
         </div>
+      </div>
+      <div id="nav-ham-div" class="hide">
+        <div id="nav-ham-top">
+          <div id="logo-mobile"></div>
+          <div id="nav-ham-close"></div>
+        </div>
+        <ul>
+          <li><a href="#" id="nav-ham-link-nocturno">Modo Nocturno</a></li>
+          <li><a href="#" id="nav-ham-link-favoritos">Favoritos</a></li>
+          <li><a href="#" id="nav-ham-link-misgifos">Mis GIFOS</a></li>
+        </ul>
       </div>
     </nav>
     <!-- Main -->
     <main>
-    <!-- Header -->
-    <header id="header">
-      <h1>Inspírate, busca, guarda, y crea los mejores <em>GIFOS</em></h1>
-      <div id="header-bus">
-        <img
-          src="img/ilustra_header.svg"
-          alt="Buscá en GIFOS en el campo siguiente"
-        />
-        <div id="search-div">
-          <div class="search-bar-div">
-            <div id="search-bar-lupa-search" class="hide"></div>
-            <form
-              action="#"
-              id="form-search"
-              autocomplete="off"
-              onsubmit="return false"
-            >
-              <input
-                type="search"
-                name=""
-                id="search-bar"
+      <!-- Header -->
+      <header id="header">
+        <h1>Inspírate, busca, guarda, y crea los mejores <em>GIFOS</em></h1>
+        <div id="header-bus">
+          <img
+            src="img/ilustra_header.svg"
+            alt="Buscá en GIFOS en el campo siguiente"
+          />
+          <div id="search-div">
+            <div class="search-bar-div">
+              <div id="search-bar-lupa-search" class="hide"></div>
+              <form
+                action="#"
+                id="form-search"
                 autocomplete="off"
-                placeholder="Busca GIFOS y más"
-              />
-            </form>
-            <div id="search-bar-lupa-placeholder"></div>
-            <div id="search-bar-cross" class="hide"></div>
-          </div>
-          <ul id="search-sug-list"></ul>
-        </div>
-      </div>
-      <div id="header-tre">
-        <h3>Trending:</h3>
-        <div id="header-tre-top"></div>
-      </div>
-    </header>
-    <!-- Resultados -->
-    <section id="section-res" class="hide">
-      <hr>
-      <div id="section-tit">
-        <h2 id="section-res-tit"></h2>
-      </div>
-      <div id="section-res-gal" class="hide"></div>
-      <div id="section-res-gal-pag" class="hide">
-        <!-- <ul id="section-res-gal-pag-list"></ul> -->
-      </div>
-      <!-- <div id="section-res-gal-more" class="hide"></div> -->
-      <div id="section-res-info" class="hide"></div>
-    </section>
-    <!-- Mis favoritos -->
-    <section id="section-fav" class="hide">
-      <div id="section-tit">
-        <div id="section-fav-icon"></div>
-        <h2 id="section-fav-tit">Favoritos</h2>
-      </div>
-      <div id="section-fav-gal" class="hide"></div>
-      <div id="section-fav-gal-pag" class="hide">
-        <ul id="section-fav-gal-pag-list"></ul>
-      </div>
-      <div id="section-fav-gal-more" class="hide"></div>
-      <div id="section-fav-info" class="hide"></div>
-    </section>
-    <!-- Mis GIFOS -->
-    <section id="section-mis" class="hide">
-      <div id="section-tit">
-        <div id="section-mis-icon"></div>
-        <h2 id="section-mis-tit">Mis GIFOS</h2>
-      </div>
-      <div id="section-mis-gal" class="hide"></div>
-      <div id="section-mis-gal-pag" class="hide">
-        <ul id="section-mis-gal-pag-list"></ul>
-      </div>
-      <div id="section-mis-gal-more" class="hide"></div>
-      <div id="section-mis-info" class="hide"></div>
-    </section>
-    <!-- Crear GIFOS -->
-    <section id="section-cre" class="hide">
-      <div id="section-cre-fila-1">
-        <div id="section-cre-fila-1-col-1">
-          <div id="proyector"></div>
-          <div id="luz" class="animate-flicker"></div>
-        </div>
-        <div id="section-cre-fila-1-col-2">
-          <div id="borde-top-left" class="borde"></div>
-          <div id="borde-top-right" class="borde"></div>
-          <div id="borde-bottom-left" class="borde"></div>
-          <div id="borde-bottom-right" class="borde"></div>
-          <video id="section-cre-video" class="hide"></video>
-          <div id="section-cre-video-recorded-div">
-            <div id="section-cre-video-recorded-overlay" class="hide">
-              <div
-                id="section-cre-video-recorded-overlay-actions"
-                class="hide"
-              ></div>
-              <div
-                id="section-cre-video-recorded-overlay-icon"
-                class="loader hide"
-              ></div>
-              <p id="section-cre-video-recorded-overlay-text"></p>
+                onsubmit="return false"
+              >
+                <input
+                  type="search"
+                  name="search-bar"
+                  id="search-bar"
+                  autocomplete="off"
+                  placeholder="Busca GIFOS y más"
+                />
+              </form>
+              <div id="search-bar-lupa-placeholder"></div>
+              <div id="search-bar-cross" class="hide"></div>
             </div>
-            <img
-              id="section-cre-video-recorded"
+            <ul id="search-sug-list"></ul>
+          </div>
+        </div>
+        <div id="header-tre">
+          <h3>Trending:</h3>
+          <div id="header-tre-top"></div>
+        </div>
+      </header>
+      <!-- Resultados -->
+      <section id="section-res" class="hide">
+        <hr />
+        <div id="section-res-tit-div">
+          <h2 id="section-res-tit">Resultado</h2>
+        </div>
+        <div id="section-res-gal" class="hide"></div>
+        <div id="section-res-gal-pag" class="hide">
+          <!-- <ul id="section-res-gal-pag-list"></ul> -->
+        </div>
+        <!-- <div id="section-res-gal-more" class="hide"></div> -->
+        <div id="section-res-info" class="hide"></div>
+      </section>
+      <!-- Mis favoritos -->
+      <section id="section-fav" class="hide">
+        <div id="section-fav-tit-div">
+          <div id="section-fav-icon"></div>
+          <h2 id="section-fav-tit">Favoritos</h2>
+        </div>
+        <div id="section-fav-gal" class="hide"></div>
+        <div id="section-fav-gal-pag" class="hide">
+          <ul id="section-fav-gal-pag-list"></ul>
+        </div>
+        <div id="section-fav-gal-more" class="hide"></div>
+        <div id="section-fav-info" class="hide"></div>
+      </section>
+      <!-- Mis GIFOS -->
+      <section id="section-mis" class="hide">
+        <div id="section-mis-tit-div">
+          <div id="section-mis-icon"></div>
+          <h2 id="section-mis-tit">Mis GIFOS</h2>
+        </div>
+        <div id="section-mis-gal" class="hide"></div>
+        <div id="section-mis-gal-pag" class="hide">
+          <ul id="section-mis-gal-pag-list"></ul>
+        </div>
+        <div id="section-mis-gal-more" class="hide"></div>
+        <div id="section-mis-info" class="hide"></div>
+      </section>
+      <!-- Crear GIFOS -->
+      <section id="section-cre" class="hide">
+        <div id="section-cre-fila-1">
+          <div id="section-cre-fila-1-col-1">
+            <div id="proyector-anim">
+              <div id="rollo-1"></div>
+              <div id="rollo-2"></div>
+              <div id="proyector"></div>
+              <div id="luz" class="animate-flicker"></div>
+            </div>
+          </div>
+          <div id="section-cre-fila-1-col-2">
+            <div id="borde-top-left" class="borde"></div>
+            <div id="borde-top-right" class="borde"></div>
+            <div id="borde-bottom-left" class="borde"></div>
+            <div id="borde-bottom-right" class="borde"></div>
+            <video
+              id="section-cre-video"
               class="hide"
-              alt="Video grabado"
-            />
-          </div>
-          <div id="section-tit">
-            <h2 id="section-cre-tit">
-              Aquí podrás crear tus propios <em>GIFOS</em>
-            </h2>
-            <p id="section-cre-des">
-              ¡Crea tu GIFO en sólo 3 pasos!<br />(sólo necesitas una cámara
-              para grabar un video)
-            </p>
-          </div>
-        </div>
-        <div id="section-cre-fila-1-col-3"></div>
-      </div>
-      <div id="section-cre-fila-2">
-        <div id="section-cre-fila-2-col-1"></div>
-        <div id="section-cre-fila-2-col-2">
-          <div id="info-container">
-            <div id="info-space"></div>
-            <div id="info-pasos">
-              <ul>
-                <li id="paso-1">1</li>
-                <li id="paso-2">2</li>
-                <li id="paso-3">3</li>
-              </ul>
+              src="img/empty.svg"
+            ></video>
+            <div id="section-cre-video-recorded-div">
+              <div id="section-cre-video-recorded-overlay" class="hide">
+                <div
+                  id="section-cre-video-recorded-overlay-actions"
+                  class="hide"
+                ></div>
+                <div
+                  id="section-cre-video-recorded-overlay-icon"
+                  class="loader hide"
+                ></div>
+                <p id="section-cre-video-recorded-overlay-text"></p>
+              </div>
+              <img
+                id="section-cre-video-recorded"
+                class="hide"
+                alt="Video grabado"
+                src="img/empty.svg"
+              />
             </div>
-            <div id="info-div">
-              <p id="info-timer"></p>
-              <p id="info-repeat" class="hide">
-                <a href="#" id="info-repeat-a">Repetir captura</a>
+            <div id="section-cre-tit-div">
+              <h2 id="section-cre-tit">
+                Aquí podrás crear tus propios <em>GIFOS</em>
+              </h2>
+              <p id="section-cre-des">
+                ¡Crea tu GIFO en sólo 3 pasos!<br />(sólo necesitas una cámara
+                para grabar un video)
               </p>
             </div>
           </div>
-          <hr />
+          <div id="section-cre-fila-1-col-3"></div>
         </div>
-        <div id="section-cre-fila-2-col-3">
-          <div id="rollo"></div>
+        <div id="section-cre-fila-2">
+          <div id="section-cre-fila-2-col-1"></div>
+          <div id="section-cre-fila-2-col-2">
+            <div id="info-container">
+              <div id="info-space"></div>
+              <div id="info-pasos">
+                <ul>
+                  <li id="paso-1">1</li>
+                  <li id="paso-2">2</li>
+                  <li id="paso-3">3</li>
+                </ul>
+              </div>
+              <div id="info-div">
+                <p id="info-timer"></p>
+                <p id="info-repeat" class="hide">
+                  <a href="#" id="info-repeat-a">Repetir captura</a>
+                </p>
+              </div>
+            </div>
+            <hr />
+          </div>
+          <div id="section-cre-fila-2-col-3">
+            <div id="rollo"></div>
+          </div>
         </div>
-      </div>
-      <div id="section-cre-fila-3">
-        <div id="section-cre-comenzar"></div>
-        <div id="section-cre-grabar" class="hide"></div>
-        <div id="section-cre-finalizar" class="hide"></div>
-        <div id="section-cre-subirgifo" class="hide"></div>
-      </div>
-    </section>
-    <!-- Trendings -->
-    <section id="section-tre">
-      <div id="section-tit">
-        <h2>Trending GIFOS</h2>
-        <p>Mira los últimos GIFOS de nuestra comunidad.</p>
-      </div>
-      <div id="section-tre-div">
-        <div id="trending-gif-slide-left"></div>
-        <div id="section-tre-car"></div>
-        <div id="trending-gif-slide-right"></div>
-      </div>
-    </section>
-  </main>
+        <div id="section-cre-fila-3">
+          <div id="section-cre-comenzar"></div>
+          <div id="section-cre-grabar" class="hide"></div>
+          <div id="section-cre-finalizar" class="hide"></div>
+          <div id="section-cre-subirgifo" class="hide"></div>
+        </div>
+      </section>
+      <!-- Trendings -->
+      <section id="section-tre">
+        <div id="section-tre-tit">
+          <h2>Trending GIFOS</h2>
+          <p>Mira los últimos GIFOS de nuestra comunidad.</p>
+        </div>
+        <div id="section-tre-div">
+          <div id="trending-gif-slide-left"></div>
+          <div id="section-tre-car"></div>
+          <div id="trending-gif-slide-right"></div>
+        </div>
+      </section>
+    </main>
     <!-- Footer -->
     <footer>
       <div id="footer-div">
@@ -203,15 +223,15 @@
             <a
               href="https://www.facebook.com/sharer/sharer.php?u=https://gif-os-irw9cahlj.vercel.app/"
               target="_blank"
-              ><div alt="Compartí en Facebook" id="footer-com-ico-fb"></div
+              ><div id="footer-com-ico-fb"></div
             ></a>
             <a
               href="https://twitter.com/intent/tweet?url=https://gif-os-irw9cahlj.vercel.app/&text="
               target="_blank"
-              ><div alt="Compartí en Twitter" id="footer-com-ico-tw"></div
+              ><div id="footer-com-ico-tw"></div
             ></a>
-            <a href="#"><div alt="Compartí en Instagram" id="footer-com-ico-ig"></div>
-          </div></a>
+            <a href="#"><div id="footer-com-ico-ig"></div></a>
+          </div>
         </div>
         <div id="footer-cop">
           <p>© GIFOS 2021 All Rights Reserved.</p>

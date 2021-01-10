@@ -162,12 +162,16 @@ body {
     width: 100%;
     height: 100%;
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     @include centrarFlex(row, center, center);
 
     #overlay-gif-middle-div {
       @include centrarFlex(column, center, center);
       margin: 0 25px;
+
+      img {
+        width: 100%;
+      }
 
       #overlay-info {
         width: 100%;
@@ -224,16 +228,17 @@ body {
     #overlay-gif-left-div,
     #overlay-gif-right-div {
       @include centrarFlex(column, center, center);
+
       height: 70%;
       position: relative;
     }
 
     #overlay-gif-slide-right,
     #overlay-gif-slide-left {
+      display: none;
       cursor: pointer;
       width: 40px;
       height: 40px;
-      display: inline-block;
     }
 
     #overlay-gif-slide-right {
@@ -255,7 +260,7 @@ body {
     #overlay-close {
       cursor: pointer;
       position: absolute;
-      right: 0;
+      left: -35px;
       top: 0;
     }
   }
@@ -263,19 +268,80 @@ body {
   nav {
     border-top: 5px solid $light-col-pri;
 
-    #nav-ham {
-      display: none;
+    #nav-ham-div {
+      background: rgba(87, 46, 229, 0.9);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      border-top: 5px solid $light-col-pri;
+
+      #nav-ham-top {
+        width: 100%;
+        height: 110px;
+        padding: 30px 20px;
+        box-sizing: border-box;
+        background-color: white;
+        @include centrarFlex(row, space-between, center);
+
+        #logo-mobile {
+          cursor: pointer;
+          width: 53px;
+          height: 49px;
+          background-image: url("../img/logo-mobile.svg");
+        }
+
+        #nav-ham-close {
+          width: 14px;
+          height: 14px;
+          background-image: url("../img/close.svg");
+        }
+      }
+
+      ul {
+        margin-top: 20px;
+
+        li {
+          text-align: center;
+          padding: 20px 0;
+          position: relative;
+
+          a {
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: none;
+          }
+        }
+
+        li:before {
+          position: absolute;
+          content: "";
+          bottom: 0;
+          height: 1px;
+          width: 50px;
+          left: 50%;
+          margin-left: -25px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+      }
     }
 
     #nav-div {
-      @include centrarFlex(row, center, stretch);
+      @include centrarFlex(row, space-between, center);
       padding: 30px 20px;
+
+      #nav-ham {
+        width: 15px;
+        height: 15px;
+        background-image: url("../img/burger.svg");
+      }
 
       #logo {
         cursor: pointer;
-        width: 62px;
-        height: 59px;
-        background-image: url("../img/logo-desktop.svg");
+        width: 53px;
+        height: 49px;
+        background-image: url("../img/logo-mobile.svg");
       }
 
       #nav-elem {
@@ -437,9 +503,9 @@ body {
     &#section-tre {
       background-color: $light-gris;
 
-      #section-tit {
+      #section-tre-tit-div {
         line-height: $interlineado;
-        padding: 0 70px 30px 70px;
+        padding: 0 70px;
       }
 
       #section-tre-car {
@@ -477,7 +543,7 @@ body {
     }
 
     &#section-fav {
-      #section-tit {
+      #section-fav-tit-div {
         @include centrarFlex(column, center, center);
         #section-fav-icon {
           background-image: url("../img/icon-favoritos.svg");
@@ -491,7 +557,7 @@ body {
     &#section-mis {
       background-color: #ffffff;
 
-      #section-tit {
+      #section-mis-tit-div {
         @include centrarFlex(column, center, center);
         #section-mis-icon {
           background-image: url("../img/icon-mis-gifos.svg");
@@ -503,7 +569,7 @@ body {
       }
     }
 
-    #section-res-tit {
+    #section-res-tit-div {
       font-size: 36px;
       margin-bottom: 60px;
     }
@@ -535,18 +601,19 @@ body {
     #section-fav-gal,
     #section-tre-car,
     #section-mis-gal {
-      max-width: $anchomax;
+      max-width: 100%;
       margin: 50px auto;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       //grid-template-rows: 1fr 1fr 1fr;
-      gap: 25px;
+      gap: 15px;
       justify-content: center;
       align-content: center;
+      padding: 0 20px;
 
       .fetched-gif {
-        width: 260px;
-        height: 200px;
+        width: 100%;
+        height: 150px;
         background-size: cover;
         overflow: hidden;
         position: relative;
@@ -638,12 +705,18 @@ body {
       }
     }
 
+    #section-tre-car {
+      .fetched-gif {
+        width: 260px;
+        height: 200px;
+      }
+    }
+
     #section-tre-div {
       @include centrarFlex(row, center, center);
       #section-tre-car {
-        overflow-x: hidden;
         overflow-y: hidden;
-        margin: 50px 20px;
+        margin: 30px 20px 50px 20px;
         grid-template-columns: repeat(9, 1fr);
         grid-template-rows: 1fr;
         max-width: 830px;
@@ -655,7 +728,7 @@ body {
         cursor: pointer;
         width: 40px;
         height: 40px;
-        display: inline-block;
+        display: none;
       }
 
       #trending-gif-slide-right {
@@ -731,23 +804,50 @@ body {
   #section-cre {
     width: $anchomax;
     margin: 0 auto;
-    background-color: #ffffff;
+    //background-color: #ffffff;
 
     #section-cre-fila-1 {
       @include centrarFlex(row, center, center);
       #section-cre-fila-1-col-1 {
+        position: relative;
         @include centrarFlex(row, center, center);
         width: 20%;
-        #proyector {
-          width: 123px;
-          height: 162px;
-          background-image: url("../img/misgifos-camara.svg");
-        }
-        #luz {
-          width: 76px;
-          height: 128px;
-          background-image: url("../img/misgifos-camara-luz.svg");
-          margin-bottom: -2px;
+        #proyector-anim {
+          position: relative;
+          width: 181px;
+          #rollo-1 {
+            background-image: url("../img/element_cinta1.svg");
+            background-size: cover;
+            width: 45px;
+            height: 45px;
+            bottom: -10px;
+            position: absolute;
+          }
+          #rollo-2 {
+            background-image: url("../img/element_cinta2.svg");
+            background-size: cover;
+            width: 63px;
+            height: 63px;
+            bottom: -10px;
+            left: 45px;
+            position: absolute;
+          }
+          #proyector {
+            width: 123px;
+            height: 110px;
+            background-image: url("../img/element-camara.svg");
+            background-size: cover;
+            position: absolute;
+          }
+          #luz {
+            width: 76px;
+            height: 128px;
+            background-image: url("../img/misgifos-camara-luz.svg");
+            margin-bottom: -53px;
+            position: absolute;
+            right: -18px;
+            top: -37px;
+          }
         }
       }
       #section-cre-fila-1-col-2 {
@@ -792,8 +892,8 @@ body {
           border-bottom: 1px solid $dark-col-sec;
         }
 
-        #section-tit {
-          line-height: 1.8;
+        #section-cre-tit-div {
+          line-height: 1.6;
         }
       }
       #section-cre-fila-1-col-3 {
@@ -918,6 +1018,7 @@ body {
           width: 60%;
           background-color: $light-col-pri;
           border-radius: 6px;
+          border: none;
         }
       }
       #section-cre-fila-2-col-3 {
@@ -1038,9 +1139,30 @@ body.dark-mode {
     border-top-color: $dark-negro;
     background-color: $dark-gris;
 
+    #nav-ham-div {
+      background: rgba(0, 0, 0, 1);
+      border-top: 5px solid black;
+
+      #nav-ham-top {
+        background-color: $dark-gris;
+
+        #logo {
+          background-image: url("../img/logo-mobile-modo-noct.svg");
+        }
+
+        #nav-ham-close {
+          background-image: url("../img/close-noc.svg");
+        }
+      }
+    }
+
     #nav-div {
       #logo {
-        background-image: url("../img/logo-desktop-nocturno.svg");
+        background-image: url("../img/logo-mobile-modo-noct.svg");
+      }
+
+      #nav-ham {
+        background-image: url("../img/burger-modo-noct.svg");
       }
 
       #nav-elem {
@@ -1105,7 +1227,7 @@ body.dark-mode {
   }
 
   section {
-    background-color: $dark-gris-oscuro;
+    //background-color: $dark-gris-oscuro;
 
     &#section-tre {
       background-color: $dark-gris-oscuro;
@@ -1146,11 +1268,72 @@ body.dark-mode {
       }
     }
   }
+
+  #section-cre {
+    #section-cre-fila-1 {
+      #section-cre-fila-1-col-1 {
+        #proyector-anim {
+          #proyector {
+            background-image: url("../img/element-camara.svg");
+          }
+          #rollo-1 {
+            background-image: url("../img/element_cinta1-modo-noc.svg");
+          }
+          #rollo-2 {
+            background-image: url("../img/element_cinta2-modo-noc.svg");
+          }
+        }
+      }
+    }
+    #section-cre-fila-2 {
+      #section-cre-fila-2-col-2 {
+        ul {
+          li {
+            color: #ffffff;
+            border: 1px solid #ffffff;
+
+            &.active {
+              background-color: #ffffff;
+              color: $light-col-pri;
+            }
+          }
+        }
+
+        #info-container {
+          #info-timer {
+            color: #ffffff;
+          }
+          #info-div {
+            a {
+              color: #ffffff;
+            }
+          }
+        }
+      }
+      #section-cre-fila-2-col-3 {
+        #rollo {
+          background-image: url("../img/pelicula-modo-noc.svg");
+        }
+      }
+    }
+  }
 }
 
 /*  DESKTOP  */
 
 @media all and (min-width: 1024px) {
+  body.dark-mode {
+    nav {
+      #nav-div {
+        #logo {
+          background-image: url("../img/logo-desktop-nocturno.svg");
+          width: 63px;
+          height: 60px;
+        }
+      }
+    }
+  }
+
   body {
     h1 {
       font-size: 34px;
@@ -1170,16 +1353,34 @@ body.dark-mode {
       font-size: 16px;
     }
 
+    div#overlay {
+      #overlay-gif-slide-right,
+      #overlay-gif-slide-left {
+        display: inline-block;
+      }
+    }
+
     nav {
       position: fixed;
       width: 100%;
       background-color: #ffffff;
       z-index: 1;
 
+      #nav-ham-div {
+        display: none;
+      }
+
       #nav-div {
         max-width: $anchomax;
         margin: 0 auto;
         justify-content: space-between;
+
+        #logo {
+          width: 63px;
+          height: 60px;
+          background-image: url("../img/logo-desktop.svg");
+        }
+
         #nav-ham {
           display: none;
         }
@@ -1214,20 +1415,43 @@ body.dark-mode {
 
     section {
       &#section-tre {
-        #section-tit {
+        #section-tre-tit-div {
           padding: 30px 0 10px 0;
         }
 
         #section-tre-car {
+          overflow-x: hidden;
+          margin: 50px 20px;
           img {
             width: 360px;
             height: 275px;
           }
+        }
 
-          #section-res {
-            #section-res-gal {
-            }
-          }
+        #trending-gif-slide-right,
+        #trending-gif-slide-left {
+          display: inline-block;
+        }
+      }
+
+      #section-res-info,
+      #section-fav-info,
+      #section-mis-info {
+      }
+    }
+
+    #section-res {
+      #section-res-gal,
+      #section-fav-gal,
+      #section-tre-car,
+      #section-mis-gal {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        max-width: $anchomax;
+        gap: 25px;
+
+        .fetched-gif {
+          width: 260px;
+          height: 200px;
         }
       }
     }
@@ -1302,4 +1526,28 @@ body.dark-mode {
   -moz-animation: flickerAnimation 0.2s infinite;
   -o-animation: flickerAnimation 0.2s infinite;
   animation: flickerAnimation 0.2s infinite;
+}
+
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
 }
