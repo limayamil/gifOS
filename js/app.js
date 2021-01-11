@@ -74,9 +74,7 @@ const favoritosResultsGallery = document.getElementById("section-fav-gal");
 const favoritosResultsInfo = document.getElementById("section-fav-info");
 const favoritosViewMore = document.getElementById("section-fav-gal-more");
 const favoritosPagination = document.getElementById("section-fav-gal-pag");
-const favoritosPaginationList = document.getElementById(
-  "section-fav-gal-pag-list"
-);
+const favoritosPaginationList = document.getElementById("section-fav-gal-pag-list");
 // Mis GIFOS
 const misGIFOS = document.getElementById("section-mis");
 const misGIFOSResultsGallery = document.getElementById("section-mis-gal");
@@ -155,7 +153,7 @@ const changeSection = (section) => {
     favoritosViewMore.classList.add("hide");
     favoritosResultsInfo.classList.add("hide");
     favoritosResultsGallery.innerHTML = "";
-    favoritosPagination.innerHTML = "";
+    favoritosPagination.innerHTML = "<ul id='section-fav-gal-pag-list'></ul>";
   };
 
   const resetMisGIFOS = () => {
@@ -199,7 +197,7 @@ const changeSection = (section) => {
       misFavoritos.classList.remove("hide");
       favoritosResultsGallery.classList.remove("hide");
       favoritosPaginationList.classList.remove("hide");
-      fetchMisGIFOS();
+      fetchFavoriteGIFs();
       break;
     case "mis-gifos":
       hideAll();
@@ -573,6 +571,7 @@ const expandGifFavorite = (index, gifURL, usuario, titulo) => {
   overlayInfoActions.id = "overlay-info-actions";
   let overlayInfoActionsFavorite = document.createElement("div");
   overlayInfoActionsFavorite.id = "overlay-info-actions-favorite";
+  overlayInfoActionsFavorite.classList.add("active");
   let overlayInfoActionsDownload = document.createElement("div");
   overlayInfoActionsDownload.id = "overlay-info-actions-download";
   overlayInfoActions.appendChild(overlayInfoActionsFavorite);
@@ -606,17 +605,19 @@ const expandGifFavorite = (index, gifURL, usuario, titulo) => {
   };
 
   const unfavoriteExpanded = () => {
-    //gifsFavoritos.push({url: gifURL, usuario: usuario, titulo: titulo});
-    //localStorage.setItem("gifsFavoritos", JSON.stringify(gifsFavoritos));
-    //overlayInfoActionsFavorite.classList.add("active");
+    let index = gifsFavoritos.findIndex((x) => x.url == gifURL);
+    gifsFavoritos.splice(index, 1);
+    localStorage.setItem("gifsFavoritos", JSON.stringify(gifsFavoritos));
+    overlayDiv.remove();
+    changeSection("favoritos");
   };
 
   const downloadExpanded = async () => {
     let a = document.createElement("a");
-    let resp = await fetch(resultadosMemoria.data[index].images.downsized.url);
+    let resp = await fetch(gifsFavoritos[index].url);
     let file = await resp.blob();
 
-    a.download = resultadosMemoria.data[index].title + ".gif";
+    a.download = gifsFavoritos[index].titulo + ".gif";
     a.href = window.URL.createObjectURL(file);
     a.click();
     a.remove();
@@ -659,6 +660,19 @@ async function downloadGif(index, json) {
   let file = await resp.blob();
 
   a.download = json.data[index].title + ".gif";
+  a.href = window.URL.createObjectURL(file);
+  a.click();
+  a.remove();
+}
+
+// Descarga un gif favorito
+
+async function downloadGifFavorite(index, json) {
+  let a = document.createElement("a");
+  let resp = await fetch(gifsFavoritos[index].url);
+  let file = await resp.blob();
+
+  a.download = gifsFavoritos[index].titulo + ".gif";
   a.href = window.URL.createObjectURL(file);
   a.click();
   a.remove();
@@ -903,6 +917,7 @@ const fetchFavoriteGIFs = () => {
     let cantidadResultados = gifsFavoritos.length;
     let resultadosAMostrar = 12;
     let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
+    console.log(cantidadPaginas);
     let paginaActual = 1;
     let paginaIndex = 0;
 
@@ -939,6 +954,7 @@ const fetchFavoriteGIFs = () => {
           let fetchedGifTitle = document.createElement("p");
           fetchedGifTitle.classList.add("fetched-gif-title");
           let fetchedGifIndex = i;
+          console.log(cantidadPaginas);
 
           let gifURL = gifsFavoritos[i].url;
           let usuario = gifsFavoritos[i].usuario;
@@ -979,7 +995,7 @@ const fetchFavoriteGIFs = () => {
           };
 
           const downloadGifCallback = () => {
-            downloadGif(index);
+            downloadGifFavorite(fetchedGifIndex);
           };
 
           const expandGifCallback = () => {
@@ -1015,6 +1031,7 @@ const fetchFavoriteGIFs = () => {
       for (i = 0; i < cantidadPaginas; i++) {
         let linkPagina = document.createElement("li");
         linkPagina.textContent = i + 1;
+        console.log("Link: " + linkPagina);
         let indice = i;
 
         const clickLinkPagina = () => {
@@ -1023,6 +1040,7 @@ const fetchFavoriteGIFs = () => {
           if (cantidadResultados < indexHasta) {
             indexHasta = cantidadResultados;
           }
+
           paginaActual = indice + 1;
           paginaIndex = indice;
           listarResultadosFavoritos(indexDesde, indexHasta);
