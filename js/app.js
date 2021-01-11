@@ -624,23 +624,21 @@ const expandGifFavorite = (index, gifURL, usuario, titulo) => {
 
   overlayInfoActionsFavorite.addEventListener("click", unfavoriteExpanded);
   overlayInfoActionsDownload.addEventListener("click", downloadExpanded);
-
   overlayDivClose.addEventListener("click", closeOverlay);
 
   overlayDivColRight.appendChild(overlayDivClose);
   overlayDivColMid.appendChild(overlayGIF);
   overlayDivColMid.appendChild(overlayInfo);
 
-  if (index === 0 && resultadosMemoria.data.length > 1) {
+  if (index === 0 && (gifsFavoritos.length - 1) > 1) {
     overlayDivColRight.appendChild(overlayDivSlideRight);
     overlayDivSlideRight.addEventListener("click", slideRight);
   } else if (
-    index === resultadosMemoria.data.length &&
-    resultadosMemoria.data.length > 1
+    index === (gifsFavoritos.length - 1) && (gifsFavoritos.length - 1) > 1
   ) {
     overlayDivColLeft.appendChild(overlayDivSlideLeft);
     overlayDivSlideLeft.addEventListener("click", slideLeft);
-  } else if (index < resultadosMemoria.data.length && index > 0) {
+  } else if (index < (gifsFavoritos.length - 1) && index > 0) {
     overlayDivColRight.appendChild(overlayDivSlideRight);
     overlayDivSlideRight.addEventListener("click", slideRight);
     overlayDivColLeft.appendChild(overlayDivSlideLeft);
@@ -931,6 +929,7 @@ const fetchFavoriteGIFs = () => {
           divFetchedGifInfo.classList.add("fetched-gif-info");
           let fetchedGifOptionFavorite = document.createElement("div");
           fetchedGifOptionFavorite.classList.add("fetched-gif-option-fav");
+          fetchedGifOptionFavorite.classList.add("active");
           let fetchedGifOptionDownload = document.createElement("div");
           fetchedGifOptionDownload.classList.add("fetched-gif-option-down");
           let fetchedGifOptionView = document.createElement("div");
@@ -939,6 +938,7 @@ const fetchFavoriteGIFs = () => {
           fetchedGifUser.classList.add("fetched-gif-user");
           let fetchedGifTitle = document.createElement("p");
           fetchedGifTitle.classList.add("fetched-gif-title");
+          let fetchedGifIndex = i;
 
           let gifURL = gifsFavoritos[i].url;
           let usuario = gifsFavoritos[i].usuario;
@@ -957,7 +957,7 @@ const fetchFavoriteGIFs = () => {
 
           divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
           divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
-          //divFetchedGifOptions.appendChild(fetchedGifOptionView);
+          divFetchedGifOptions.appendChild(fetchedGifOptionView);
           divOverlay.appendChild(divFetchedGifOptions);
 
           fetchedGifUser.textContent = usuario;
@@ -983,19 +983,12 @@ const fetchFavoriteGIFs = () => {
           };
 
           const expandGifCallback = () => {
-            expandGifFavorite(i, gifURL, usuario, titulo);
+            expandGifFavorite(fetchedGifIndex, gifURL, usuario, titulo);
           };
 
-          //divOverlay.addEventListener("click", expandGifCallback);
-          fetchedGifOptionFavorite.addEventListener(
-            "click",
-            unfavoriteGifCallback
-          );
-          fetchedGifOptionDownload.addEventListener(
-            "click",
-            downloadGifCallback
-          );
-          //fetchedGifOptionView.addEventListener("click", expandGifCallback);
+          fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
+          fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
+          fetchedGifOptionView.addEventListener("click", expandGifCallback);
         } catch (e) {
           break;
         }
