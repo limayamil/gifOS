@@ -698,6 +698,13 @@ const unfavoriteGif = (gifURL) => {
   localStorage.setItem("gifsFavoritos", JSON.stringify(gifsFavoritos));
 };
 
+// Desfavoritea un gif
+const deleteGifMisGIFOS = (gifURL) => {
+  let index = misGIFOSArray.findIndex((x) => x.url == gifURL);
+  misGIFOSArray.splice(index, 1);
+  localStorage.setItem("myGIFOS", JSON.stringify(misGIFOSArray));
+};
+
 // Listar resultados
 const listarResultados = (
   desde,
@@ -1150,7 +1157,7 @@ const fetchMisGIFOS = () => {
           // divFetchedGifOptions.appendChild(fetchedGifOptionFavorite);
           // Se podría hacer que el botón elimine de favoritos?
           divFetchedGifOptions.appendChild(fetchedGifOptionDownload);
-          //divFetchedGifOptions.appendChild(fetchedGifOptionView);
+          divFetchedGifOptions.appendChild(fetchedGifOptionDelete);
           divOverlay.appendChild(divFetchedGifOptions);
 
           fetchedGifUser.textContent = usuario;
@@ -1175,12 +1182,15 @@ const fetchMisGIFOS = () => {
             expandGif(index, gifURL, usuario, titulo);
           };
 
+          const deleteGifCallback = () => {
+            deleteGifMisGIFOS(gifURL);
+            changeSection("mis-gifos");
+          };
+
           //divGif.addEventListener("click", expandGifCallback);
           //fetchedGifOptionFavorite.addEventListener("click", unfavoriteGifCallback);
-          fetchedGifOptionDownload.addEventListener(
-            "click",
-            downloadGifCallback
-          );
+          fetchedGifOptionDownload.addEventListener("click", downloadGifCallback);
+          fetchedGifOptionDelete.addEventListener("click", deleteGifCallback);
           //fetchedGifOptionView.addEventListener("click", expandGifCallback);
         } catch (e) {
           break;

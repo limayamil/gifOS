@@ -687,15 +687,19 @@ body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-opt
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete,
 body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
 body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
 body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete,
 body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-fav,
 body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-down,
-body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view {
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete {
   height: 32px;
   width: 32px;
 }
@@ -740,6 +744,18 @@ body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-opt
 body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover,
 body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-view:hover {
   background-image: url("../img/icon-max-hover.svg");
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete,
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete {
+  background-image: url("../img/icon-trash-normal.svg");
+}
+body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete:hover,
+body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete:hover,
+body section #section-tre-car .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete:hover,
+body section #section-mis-gal .fetched-gif .fetched-gif-overlay .fetched-gif-options .fetched-gif-option-delete:hover {
+  background-image: url("../img/icon-trash-hover.svg");
 }
 body section #section-res-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info,
 body section #section-fav-gal .fetched-gif .fetched-gif-overlay .fetched-gif-info,
@@ -842,7 +858,6 @@ body section #section-fav-gal-pag #arrow-right {
   width: 8px;
   height: 14px;
   display: inline-block;
-  cursor: pointer;
 }
 body section #section-res-gal-pag #arrow-left,
 body section #section-fav-gal-pag #arrow-left {
@@ -851,6 +866,7 @@ body section #section-fav-gal-pag #arrow-left {
 body section #section-res-gal-pag #arrow-left.active,
 body section #section-fav-gal-pag #arrow-left.active {
   background-image: url("../img/arrow-left-active.svg");
+  cursor: pointer;
 }
 body section #section-res-gal-pag #arrow-right,
 body section #section-fav-gal-pag #arrow-right {
@@ -859,6 +875,7 @@ body section #section-fav-gal-pag #arrow-right {
 body section #section-res-gal-pag #arrow-right.active,
 body section #section-fav-gal-pag #arrow-right.active {
   background-image: url("../img/arrow-right-active.svg");
+  cursor: pointer;
 }
 body section #section-res-gal-pag ul,
 body section #section-fav-gal-pag ul {
@@ -1405,6 +1422,18 @@ body.dark-mode section#section-tre #trending-gif-slide-left {
 }
 body.dark-mode section#section-tre #trending-gif-slide-left:hover {
   background-image: url("../img/button-slider-left-noc_hover.svg");
+}
+body.dark-mode section #section-res-gal-pag #arrow-left {
+  background-image: url("../img/arrow-left-gris.svg");
+}
+body.dark-mode section #section-res-gal-pag #arrow-left.active {
+  background-image: url("../img/arrow-left-gris.svg");
+}
+body.dark-mode section #section-res-gal-pag #arrow-right {
+  background-image: url("../img/arrow-right-gris.svg");
+}
+body.dark-mode section #section-res-gal-pag #arrow-right.active {
+  background-image: url("../img/arrow-right-gris.svg");
 }
 body.dark-mode section #section-res-gal-pag ul li.activo {
   background-color: #ffffff;

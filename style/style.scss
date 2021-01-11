@@ -644,7 +644,8 @@ body {
 
             .fetched-gif-option-fav,
             .fetched-gif-option-down,
-            .fetched-gif-option-view {
+            .fetched-gif-option-view,
+            .fetched-gif-option-delete {
               height: 32px;
               width: 32px;
             }
@@ -674,6 +675,14 @@ body {
 
               &:hover {
                 background-image: url("../img/icon-max-hover.svg");
+              }
+            }
+
+            .fetched-gif-option-delete {
+              background-image: url("../img/icon-trash-normal.svg");
+
+              &:hover {
+                background-image: url("../img/icon-trash-hover.svg");
               }
             }
           }
@@ -755,7 +764,6 @@ body {
         width: 8px;
         height: 14px;
         display: inline-block;
-        cursor: pointer;
       }
 
       #arrow-left {
@@ -763,6 +771,7 @@ body {
 
         &.active {
           background-image: url("../img/arrow-left-active.svg");
+          cursor: pointer;
         }
       }
 
@@ -771,6 +780,7 @@ body {
 
         &.active {
           background-image: url("../img/arrow-right-active.svg");
+          cursor: pointer;
         }
       }
 
@@ -1250,6 +1260,22 @@ body.dark-mode {
     }
 
     #section-res-gal-pag {
+      #arrow-left {
+        background-image: url("../img/arrow-left-gris.svg");
+
+        &.active {
+          background-image: url("../img/arrow-left-gris.svg");
+        }
+      }
+
+      #arrow-right {
+        background-image: url("../img/arrow-right-gris.svg");
+
+        &.active {
+          background-image: url("../img/arrow-right-gris.svg");
+        }
+      }
+
       ul {
         li {
           &.activo {
