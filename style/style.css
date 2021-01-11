@@ -550,9 +550,6 @@ body section#section-fav #section-fav-tit-div #section-fav-icon {
   height: 21px;
   margin-bottom: 10px;
 }
-body section#section-mis {
-  background-color: #ffffff;
-}
 body section#section-mis #section-mis-tit-div {
   display: -webkit-box;
   display: -ms-flexbox;

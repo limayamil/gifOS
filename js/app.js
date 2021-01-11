@@ -665,6 +665,19 @@ async function downloadGif(index, json) {
   a.remove();
 }
 
+// Descarga un gif de Mis Gifos
+
+async function downloadGifMisGIFOS(index, json) {
+  let a = document.createElement("a");
+  let resp = await fetch(misGIFOSArray[index].url);
+  let file = await resp.blob();
+
+  a.download = "miGIFOS.gif";
+  a.href = window.URL.createObjectURL(file);
+  a.click();
+  a.remove();
+}
+
 // Descarga un gif favorito
 
 async function downloadGifFavorite(index, json) {
@@ -1117,9 +1130,9 @@ const fetchMisGIFOS = () => {
           let fetchedGifTitle = document.createElement("p");
           fetchedGifTitle.classList.add("fetched-gif-title");
 
-          let gifURL =
-            "https://media2.giphy.com/media/" + misGIFOSArray[i] + "/giphy.gif";
-          console.log(gifURL);
+          let index = i;
+
+          let gifURL = misGIFOSArray[i].url;
           let usuario = misGIFOSArray[i].usuario;
           let titulo = misGIFOSArray[i].titulo;
 
@@ -1155,7 +1168,7 @@ const fetchMisGIFOS = () => {
           };
 
           const downloadGifCallback = () => {
-            downloadGif(index);
+            downloadGifMisGIFOS(index);
           };
 
           const expandGifCallback = () => {
@@ -1413,13 +1426,17 @@ const uploadStream = () => {
       crearGIFOSVideoOverlayActions.innerHTML = `
               <button class="gifo__btn" id="download_btn" onclick="downloadGIFO('${gifoID}')">
                   <img src="./img/icon-download-hover.svg" alt="Descargar">
-              </button>
-              <button class="gifo__btn" id="link_btn">
-                  <img src="./img/icon-link-hover.svg" alt="link">
               </button>`;
       crearGIFOSSubir.classList.add("hide");
 
-      misGIFOSArray.push(gifoID);
+      //misGIFOSArray.push(gifoID);
+      misGIFOSArray.push({
+      url: "https://media.giphy.com/media/" + gifo.data.id + "/giphy.gif",
+      usuario: "Usuario",
+      titulo: "Sin título" });
+
+      console.log(misGIFOSArray);
+
       misGIFOSArrayStringified = JSON.stringify(misGIFOSArray);
       localStorage.setItem("myGIFOS", misGIFOSArrayStringified);
     })
