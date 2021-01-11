@@ -45,6 +45,7 @@ const aMenuHamburguesa = document.getElementById("nav-ham");
 const aModoNocturnoMobile = document.getElementById("nav-ham-link-nocturno");
 const aMisFavoritosMobile = document.getElementById("nav-ham-link-favoritos");
 const aMisGIFOSMobile = document.getElementById("nav-ham-link-misgifos");
+const aCrearGIFOSMobile = document.getElementById("nav-ham-link-creargifos");
 const aMenuCloseMobile = document.getElementById("nav-ham-close");
 // Trending
 const trendingGIFs = document.getElementById("header-tre");
@@ -314,7 +315,7 @@ async function fetchTrendingGIFs(giphyAPI) {
 
 (async () => {
   json = await fetchTrendingGIFs(giphyTrendingGIFs);
-  console.log(json);
+  //console.log(json);
   for (i = 0; i < 9; i++) {
     fetchGif(json, trendingGIFsDiv, i);
   }
@@ -731,9 +732,9 @@ const listarResultados = (
 
   searchPaginationList.children[paginaIndex].classList.add("activo");
 
-  console.log("Pagina index: " + paginaIndex);
-  console.log("Cantidad de páginas: " + cantidadPaginas);
-  console.log("Cantidad de resultados: " + cantidadResultados);
+  //console.log("Pagina index: " + paginaIndex);
+  //console.log("Cantidad de páginas: " + cantidadPaginas);
+  //console.log("Cantidad de resultados: " + cantidadResultados);
 
   if (cantidadPaginas > 1) {
     switch (paginaIndex) {
@@ -768,10 +769,10 @@ const listarResultados = (
     paginaIndex--;
     let indexDesde = paginaIndex * resultadosAMostrar;
     let indexHasta = indexDesde + resultadosAMostrar;
-    console.log("Hacia Atrás");
-    console.log("Index desde: " + indexDesde);
-    console.log("Index hasta: " + indexHasta);
-    console.log("Pagina index: " + paginaIndex);
+    //console.log("Hacia Atrás");
+    //console.log("Index desde: " + indexDesde);
+    //console.log("Index hasta: " + indexHasta);
+    //console.log("Pagina index: " + paginaIndex);
     divArrowLeft.removeEventListener("click", clickLinkPaginaAnterior);
     listarResultados(
       indexDesde,
@@ -790,10 +791,10 @@ const listarResultados = (
     paginaIndex++;
     let indexDesde = paginaIndex * resultadosAMostrar;
     let indexHasta = indexDesde + resultadosAMostrar;
-    console.log("Hacia Delante");
-    console.log("Index desde: " + indexDesde);
-    console.log("Index hasta: " + indexHasta);
-    console.log("Pagina index: " + paginaIndex);
+    //console.log("Hacia Delante");
+    //console.log("Index desde: " + indexDesde);
+    //console.log("Index hasta: " + indexHasta);
+    //console.log("Pagina index: " + paginaIndex);
     divArrowRight.removeEventListener("click", clickLinkPaginaSiguiente);
     listarResultados(
       indexDesde,
@@ -820,7 +821,7 @@ const listarResultados = (
 const favoriteGif = (gifURL, usuario, titulo) => {
   gifsFavoritos.push({ url: gifURL, usuario: usuario, titulo: titulo });
   localStorage.setItem("gifsFavoritos", JSON.stringify(gifsFavoritos));
-  alert("Se añadió un gif a favoritos");
+  //alert("Se añadió un gif a favoritos");
 };
 
 // Trae GIFs cuyo término se haya buscado
@@ -937,7 +938,7 @@ const fetchFavoriteGIFs = () => {
     let cantidadResultados = gifsFavoritos.length;
     let resultadosAMostrar = 12;
     let cantidadPaginas = Math.ceil(cantidadResultados / resultadosAMostrar);
-    console.log(cantidadPaginas);
+    //console.log(cantidadPaginas);
     let paginaActual = 1;
     let paginaIndex = 0;
 
@@ -974,7 +975,7 @@ const fetchFavoriteGIFs = () => {
           let fetchedGifTitle = document.createElement("p");
           fetchedGifTitle.classList.add("fetched-gif-title");
           let fetchedGifIndex = i;
-          console.log(cantidadPaginas);
+          //console.log(cantidadPaginas);
 
           let gifURL = gifsFavoritos[i].url;
           let usuario = gifsFavoritos[i].usuario;
@@ -1051,7 +1052,7 @@ const fetchFavoriteGIFs = () => {
       for (i = 0; i < cantidadPaginas; i++) {
         let linkPagina = document.createElement("li");
         linkPagina.textContent = i + 1;
-        console.log("Link: " + linkPagina);
+        //console.log("Link: " + linkPagina);
         let indice = i;
 
         const clickLinkPagina = () => {
@@ -1445,7 +1446,7 @@ const uploadStream = () => {
       usuario: "Usuario",
       titulo: "Sin título" });
 
-      console.log(misGIFOSArray);
+      //console.log(misGIFOSArray);
 
       misGIFOSArrayStringified = JSON.stringify(misGIFOSArray);
       localStorage.setItem("myGIFOS", misGIFOSArrayStringified);
@@ -1500,6 +1501,13 @@ aMisGIFOSMobile.addEventListener("click", (e) => {
   e.stopPropagation;
   changeSection("mis-gifos");
   fetchMisGIFOS();
+});
+
+aCrearGIFOSMobile.addEventListener("click", (e) => {
+  menuHamburguesa.classList.toggle("hide");
+  e.preventDefault;
+  e.stopPropagation;
+  changeSection("crear-gifos");
 });
 
 aModoNocturnoMobile.addEventListener("click", (e) => {
